@@ -8,12 +8,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rigbod;
     private float xInput;
     private float yInput;
+    public float speed = 5;
     public float jumpForce = 4;
     public bool snip;
     public bool onGround;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         rigbod = GetComponent<Rigidbody>();
@@ -41,15 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
         //Movement
         if (snip == false) 
-            { 
-            transform.Translate(Vector3.right * 10 * Time.deltaTime * xInput);
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime * yInput);
+            {
+            MoveMode();
             }
 
         else if (snip == true)
             {
-            transform.Translate(Vector3.right * 10 * Time.deltaTime * yInput);
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime * xInput);
+            SnipMode();
             }
         
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && onGround == true)
@@ -57,6 +54,21 @@ public class PlayerMovement : MonoBehaviour
             rigbod.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
         }
+    }
+
+    // Movement mode
+    void MoveMode()
+    {
+        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * xInput);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime * yInput);
+    }
+
+
+    // Snip mode
+    void SnipMode()
+    {
+        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * yInput);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime * xInput);
     }
 
     // Ground Check
