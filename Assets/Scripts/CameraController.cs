@@ -6,10 +6,14 @@ public class CameraController : MonoBehaviour
 {
     public float rotationSpeed = 1;
     public Transform target, player;
-    float mouseX, mouseY;
+    float rsX, rsY; /* rs = right stick */
 
     public Transform obstruction;
-    float zoomSpeed = 2f;
+    public float zoomSpeed = 2f;
+    public float zoomSensitivity = 3f;
+    public float maxDistance = 4.5f;
+    public float minDistance = 1.5f;
+
     void Start()
     {
         obstruction = target;
@@ -24,28 +28,28 @@ public class CameraController : MonoBehaviour
 
     void CamControl()
     {
-        mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
-        mouseY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        mouseY = Mathf.Clamp(mouseY, -35, 60);
+        rsX += Input.GetAxis("RStick Horizontal") * rotationSpeed;
+        rsY -= Input.GetAxis("RStick Vertical") * rotationSpeed;
+        rsY = Mathf.Clamp(rsY, -35, 60);
 
         transform.LookAt(target);
 
-        target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
+        target.rotation = Quaternion.Euler(rsY, rsX, 0);
     }
 
     void ViewObstructed()
     {
-        obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+     //obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, target.position - transform.position, out hit, 4.5f))
+        if (Physics.Raycast(transform.position, target.position - transform.position, out hit, maxDistance))
         {
             if(hit.collider.gameObject.tag == "Environment")
             {
                 obstruction = hit.transform;
-                obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                //obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
-                if(Vector3.Distance(obstruction.position, transform.position) >= 3f && Vector3.Distance(transform.position, target.position) >= 1.5f)
+                if(Vector3.Distance(obstruction.position, transform.position) >= zoomSensitivity && Vector3.Distance(transform.position, target.position) >= minDistance)
                 {
                     transform.Translate(Vector3.forward * zoomSpeed * Time.deltaTime);
                 }
@@ -53,8 +57,8 @@ public class CameraController : MonoBehaviour
 
             else
             {
-                obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-                if(Vector3.Distance(transform.position, target.position) < 4.5f)
+                //obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                if(Vector3.Distance(transform.position, target.position) < maxDistance)
                 {
                     transform.Translate(Vector3.back * zoomSpeed * Time.deltaTime);        
                 }
