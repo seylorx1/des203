@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 [CustomEditor(typeof(SingletonManager))]
 public class SingletonManagerEditor : Editor {
@@ -28,6 +29,7 @@ public class SingletonManagerEditor : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
+        Event evt = Event.current;
 
         #region ClassTypeReference List Foldout
 
@@ -60,9 +62,33 @@ public class SingletonManagerEditor : Editor {
                     if (typeof(ISingletonData).IsAssignableFrom(singletonBase.DataType.Type)) {
 
                         //Create foldout and update foldout variable.
-                        ((ISingletonData)singletonBase.Data).Foldout = EditorGUILayout.Foldout(
+                        GUIStyle singletonBaseFoldoutLabelStyle = new GUIStyle(EditorStyles.foldoutHeader);
+                        GUIContent singletonBaseFoldoutContent = new GUIContent(singletonBase.SingletonType.Type.Name + " ↪");
+                        Rect singletonBaseFoldoutArea = GUILayoutUtility.GetRect(singletonBaseFoldoutContent, singletonBaseFoldoutLabelStyle);
+                        ((ISingletonData)singletonBase.Data).Foldout = EditorGUI.Foldout(
+                            singletonBaseFoldoutArea,
                             ((ISingletonData)singletonBase.Data).Foldout,
-                            singletonBase.SingletonType.Type.Name);
+                            singletonBaseFoldoutContent,
+                            singletonBaseFoldoutLabelStyle);
+
+                        switch(evt.type) {
+                            case EventType.MouseDown:
+                                if(singletonBaseFoldoutArea.Contains(evt.mousePosition)) {
+
+                                    string[] guids = AssetDatabase.FindAssets("t:script " + singletonBase.SingletonType.Type.Name);
+                                    if(guids != null) {
+                                        foreach(string guid in guids) {
+                                            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                                            if(Path.GetFileNameWithoutExtension(assetPath) == singletonBase.SingletonType.Type.Name) {
+                                                EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object)));
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                }
+                                break;
+                        }
                     }
                     else {
                         EditorGUILayout.LabelField(singletonBase.GetType().Name + " (Error)");
@@ -115,9 +141,8 @@ public class SingletonManagerEditor : Editor {
         EditorGUILayout.Space();
 
         #region Drag and Drop Singleton
-        Event evt = Event.current;
         Rect dropArea = GUILayoutUtility.GetRect(0.0f, 25.0f, GUILayout.ExpandWidth(true));
-        GUI.Box(dropArea, "Drag and Drop SingletonBase Class");
+        GUI.Box(dropArea, $"Drag and Drop {typeof(SingletonBase).Name} Script");
 
         switch (evt.type) {
             case EventType.DragUpdated:
@@ -129,6 +154,7 @@ public class SingletonManagerEditor : Editor {
                 if (!dropArea.Contains(evt.mousePosition)) {
                     return;
                 }
+
 
                 //Set the visual mode to link
                 DragAndDrop.visualMode = DragAndDropVisualMode.Link;

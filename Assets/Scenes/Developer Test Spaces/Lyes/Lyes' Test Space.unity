@@ -158,8 +158,8 @@ MonoBehaviour:
       _classRef: GameManager, Assembly-CSharp
     m_dataType:
       _classRef: GameManagerData, Assembly-CSharp
-    m_data: {fileID: 1764593554}
-    _rawData: '{"hello":"Hello world!","v3":{"x":1.0,"y":2.0,"z":3.0}}'
+    m_data: {fileID: 2081702967}
+    _rawData: '{"hello":"hello","v3":{"x":1.0,"y":2.0,"z":3.0}}'
 --- !u!4 &610635375
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1764593554
+--- !u!114 &2081702967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,5 +362,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7203b1f27173834cbb067c13874238a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hello: Hello world!
+  hello: hello
   v3: {x: 1, y: 2, z: 3}
