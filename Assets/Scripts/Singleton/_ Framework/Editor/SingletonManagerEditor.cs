@@ -3,6 +3,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEditorInternal;
 
 [CustomEditor(typeof(SingletonManager))]
 public class SingletonManagerEditor : Editor {
@@ -95,7 +96,7 @@ public class SingletonManagerEditor : Editor {
                         Debug.LogError($"Singleton Data class {singletonBase.DataType.Type.Name} does not implement ISingletonData!");
                     }
 
-                    Rect remove_buttonArea = GUILayoutUtility.GetRect(25.0f, 25.0f);
+                    Rect remove_buttonArea = GUILayoutUtility.GetRect(75.0f, 30.0f, GUILayout.MaxWidth(75.0f));
                     if (GUI.Button(remove_buttonArea, "Remove")) {
                         markRemovePair = singletonBase;
                     }
@@ -110,10 +111,65 @@ public class SingletonManagerEditor : Editor {
                         _iterator.NextVisible(true);
                         _iterator.NextVisible(true);
 
+                        SerializedProperty lastArrayProperty = null;
+                        int arrayLeft = 0;
+
+                        //Used to remove an array item after iteration.
+                        KeyValuePair<SerializedProperty, int> markRemoveArrayElement = new KeyValuePair<SerializedProperty, int>();
+
                         do {
-                            EditorGUILayout.PropertyField(_iterator);
+
+                            if (_iterator.isArray) {
+                                EditorGUILayout.Space();
+                                EditorGUILayout.BeginHorizontal();
+                                EditorGUILayout.LabelField(_iterator.displayName + $" ({_iterator.arraySize})", new GUIStyle(EditorStyles.boldLabel));
+                                
+                                Rect add_arrayElementButton = GUILayoutUtility.GetRect(75.0f, 20.0f, GUILayout.MaxWidth(75.0f));
+                                if (GUI.Button(add_arrayElementButton, "Add")) {
+                                    _iterator.InsertArrayElementAtIndex(_iterator.arraySize);
+                                }
+
+                                lastArrayProperty = _iterator.Copy();
+                                arrayLeft = _iterator.arraySize;
+
+                                EditorGUILayout.EndHorizontal();
+
+                                EditorGUI.indentLevel++;
+
+                                //Skip over 'size' parameter.
+                                _iterator.NextVisible(true);
+                            }
+                            else {
+
+                                if (arrayLeft > 0) {
+                                    //Inside of array.
+                                    EditorGUILayout.BeginHorizontal();
+                                    EditorGUILayout.PropertyField(_iterator);
+
+                                    Rect remove_arrayElementButton = GUILayoutUtility.GetRect(75.0f, 20.0f, GUILayout.MaxWidth(75.0f));
+                                    if(GUI.Button(remove_arrayElementButton, "Remove")) {
+                                        markRemoveArrayElement = new KeyValuePair<SerializedProperty, int>(lastArrayProperty.Copy(), lastArrayProperty.arraySize - arrayLeft);
+                                    }
+                                    EditorGUILayout.EndHorizontal();
+
+                                    arrayLeft--;
+                                    if(arrayLeft == 0) {
+                                        EditorGUI.indentLevel--;
+                                    }
+                                }
+                                else {
+                                    EditorGUILayout.PropertyField(_iterator);
+
+                                }
+                            }
                         }
-                        while (_iterator.NextVisible(false));
+                        while (_iterator.NextVisible(_iterator.isArray));
+
+                        //Remove array item.
+                        if(markRemoveArrayElement.Key != null) {
+                            markRemoveArrayElement.Key.DeleteArrayElementAtIndex(markRemoveArrayElement.Value);
+                        }
+
                         singletonSerializedData.ApplyModifiedProperties();
 
                         ///
@@ -122,6 +178,7 @@ public class SingletonManagerEditor : Editor {
                         EditorGUI.indentLevel--;
                     }
 
+                    EditorGUILayout.Space();
                 });
 
                 //Remove the marked pair from the list.
