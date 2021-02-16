@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5663456055598001394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5663456055598001392}
+  - component: {fileID: 5663456055598001393}
+  m_Layer: 0
+  m_Name: P_Singletons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5663456055598001392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5663456055598001394}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5663456055598001393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5663456055598001394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c51e8084ea23be498ddb45e42f020ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foldoutSingletonClasses: 1
+  SingletonBases:
+  - m_singletonType:
+      _classRef: GameLocalisation, Assembly-CSharp
+    m_dataType:
+      _classRef: GameLocalisationData, Assembly-CSharp
+    m_data: {fileID: 0}
+    _rawData: "{\"Languages\":[{\"LanguageName\":\"English (US)\",\"GameName\":\"Crab
+      Crab Revolution (WIP)\",\"Menu\":{\"Play\":\"Play Game\"}},{\"LanguageName\":\"English
+      (UK)\",\"GameName\":\"Crab Crab Revolution (WIP)\",\"Menu\":{\"Play\":\"Play
+      Game\"}},{\"LanguageName\":\"G\xE0idhlig\",\"GameName\":\"Teicheadh Cr\xF9bag
+      \",\"Menu\":{\"Play\":\"T\xF2iseachadh Geama\"}}]}"
+  - m_singletonType:
+      _classRef: GameManager, Assembly-CSharp
+    m_dataType:
+      _classRef: GameManagerData, Assembly-CSharp
+    m_data: {fileID: 0}
+    _rawData: '{"CurrentPhase":1}'
