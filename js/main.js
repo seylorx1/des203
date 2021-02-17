@@ -2,6 +2,7 @@ let navItems = document.getElementsByClassName('splash__nav-item');
 if(navItems !== null && navItems.length > 0) {
     for(i = 0; i < navItems.length; i++) {
         let navItem = navItems.item(i);
+
         if(navItem.children !== null && navItem.children.length > 0) {
             for(j = 0; j < navItem.children.length; j++) {
                 let navItemChild = navItem.children.item(j);
@@ -17,6 +18,9 @@ if(navItems !== null && navItems.length > 0) {
                         }
                     });
                     if(navItem.hasAttribute("href")) {
+
+                        navItem.style.cursor = "pointer";
+
                         navItem.addEventListener("click", function() {
                             window.open(navItem.getAttribute("href"), "_blank");
                         });
