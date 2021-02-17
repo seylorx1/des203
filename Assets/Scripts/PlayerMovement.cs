@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     // Variables 
     private Rigidbody rigbod;
+    public GameObject thirdCam;
+    public GameObject firstCam;
     private float xInput;
     private float yInput;
     public float speed = 5;
@@ -42,11 +44,15 @@ public class PlayerMovement : MonoBehaviour
         if (snip == false) 
             {
             MoveMode();
-            }
+            thirdCam.gameObject.SetActive(true);
+            firstCam.gameObject.SetActive(false);
+        }
 
         else if (snip == true)
             {
             SnipMode();
+            firstCam.gameObject.SetActive(true);
+            thirdCam.gameObject.SetActive(false);
             }
         
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && onGround == true)
