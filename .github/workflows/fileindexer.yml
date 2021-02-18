@@ -12,7 +12,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Exporting list of files in branch
-      - run: |
+        run: |
           git ls-tree -r --name-only website &> allfiles.txt
       - name: Commit files
         run: |
