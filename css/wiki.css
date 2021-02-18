@@ -1,0 +1,18 @@
+.title-bar {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content:space-evenly;   
+}
+
+.title-bar__title {
+    font-family: 'Bree Serif', serif;
+}
+
+#sourceTA {
+    display: block;
+}
+#targetDiv {
+  border: 1px dashed #333333;
+  width: 600px;
+  height: 400px;
+}

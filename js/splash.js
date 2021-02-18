@@ -22,7 +22,7 @@ if(navItems !== null && navItems.length > 0) {
                         navItem.style.cursor = "pointer";
 
                         navItem.addEventListener("click", function() {
-                            window.open(navItem.getAttribute("href"), "_blank");
+                            window.open(navItem.getAttribute("href"), "_self");
                         });
                     }
                     break;

@@ -1,16 +1,8 @@
-body {
-    margin: 0;
-    padding: 0;
-
-    font-family: 'Ubuntu Mono', sans-serif;
-    font-size: 0.6cm;
-
-}
-
 .splash {
+
     background:
     linear-gradient(0deg, rgba(244, 179, 80, 0.75), rgba(242, 120, 75, 0.75)), 
-    url("content/splash_background.png");
+    url("/media/splash_background.png");
 
     background-repeat: no-repeat;
     background-position: center;
@@ -78,7 +70,7 @@ body {
     right: 0;
     margin-bottom: 1vh;
     margin-right:1vw;
-}
+}   
 
 .splash--footer a {
     color: rgb(95, 90, 76);
@@ -103,10 +95,4 @@ body {
     opacity: 1.0;
     transform: rotate(10deg);
     scale: 2.2;
-}
-
-.no-interact {
-    /*Disable interactions with title text.*/
-    pointer-events: none;
-    user-select: none;
 }
