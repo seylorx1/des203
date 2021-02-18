@@ -1,6 +1,13 @@
-- name: Create File
-  uses: finnp/create-file-action@1.0.0
-
-  env:
-    FILE_NAME: "dir/filename.txt"
-    FILE_DATA: "file content"
+name: Create index for wiki.
+on:
+  push:
+    branches:
+      - website
+jobs:
+  create_file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: finnp/create-file-action@1.0.0
+        env:
+          FILE_NAME: "dir/filename.txt"
+          FILE_DATA: "file content"
