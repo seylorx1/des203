@@ -1,4 +1,4 @@
-/*function xhttpSuccess(xhttp) {
+function xhttpSuccess(xhttp) {
     return xhttp.readyState == 4 && xhttp.status == 200;
 }
 
@@ -6,17 +6,26 @@ function getFilesFromGitHub() {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if(xhttpSuccess(xhttp)) {
-            let latestCommit = JSON.parse(this.responseText);
-            console.log(latestCommit);
+
+            let wikiFilesArray = [];
+            this.responseText.replace(/\r/g, "").split("\n").forEach(filePath => {
+                if(new RegExp("(^wiki/)?(md$)").test(filePath)) {
+                    wikiFilesArray.push(filePath);
+                }
+            });
+
+            console.log(wikiFilesArray);
+            //document.getElementById("targetDiv").textContent 
         }
     }
-    xhttp.open("GET", REPO_API + "commits/website", true);
+    xhttp.open("GET", "/allfiles.txt", true);
     xhttp.send();
 }
 
+getFilesFromGitHub();
+
 function run() {
 
-    getFilesFromGitHub();
     //getMarkdownContent("/wiki/content/test.md");
 
     /*var text = doGET("/wiki/content/test.md"),
@@ -24,5 +33,5 @@ function run() {
         converter = new showdown.Converter(),
         html = converter.makeHtml(text);
       
-      target.innerHTML = html;
-}*/
+      target.innerHTML = html;*/
+}
