@@ -11,11 +11,9 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Autogenerating files
-        uses: finnp/create-file-action@1.0.0
-        env:
-          FILE_NAME: "filename.txt"
-          FILE_DATA: "file content"
+      - name: Exporting list of files in branch
+      - run: |
+          git ls-tree -r --name-only website &> allfiles.txt
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
