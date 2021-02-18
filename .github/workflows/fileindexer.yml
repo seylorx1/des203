@@ -7,7 +7,23 @@ jobs:
   create_file:
     runs-on: ubuntu-latest
     steps:
-      - uses: finnp/create-file-action@1.0.0
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Autogenerating files
+        uses: finnp/create-file-action@1.0.0
         env:
           FILE_NAME: "filename.txt"
           FILE_DATA: "file content"
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Auto applying generated changes."
+      - name: Push files
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: website
