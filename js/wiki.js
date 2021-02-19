@@ -18,7 +18,7 @@ function getFilesFromGitHub() {
             //document.getElementById("targetDiv").textContent 
         }
     }
-    xhttp.open("GET", "allfiles.txt", true);
+    xhttp.open("GET", "../allfiles.txt", true);
     xhttp.send();
 }
 
