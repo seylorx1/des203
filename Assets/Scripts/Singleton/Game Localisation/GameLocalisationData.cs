@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameLocalisationData : ScriptableObject, ISingletonData {
@@ -10,5 +8,13 @@ public class GameLocalisationData : ScriptableObject, ISingletonData {
 
 [System.Serializable]
 public class LanguageLocalisationStruct {
-    public string languageName;
+    public string LanguageName;
+    public string GameName;
+
+    [System.Serializable]
+    public struct MenuStrings {
+        public string Play;
+        public string Quit;
+    }
+    public MenuStrings Menu;
 }
