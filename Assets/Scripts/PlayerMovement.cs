@@ -8,16 +8,28 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rigbod;
     public GameObject thirdCam;
     public GameObject firstCam;
+    public GameObject leftLegs;
+    public GameObject rightLegs;
+    public GameObject leftClaw;
+    public GameObject rightClaw;
     private float xInput;
     private float yInput;
+    private float rTrigger;
+    private float lTrigger;
     public float speed = 5;
     public float jumpForce = 4;
+    public float clawSpeed = 5;
+    public float resetSpeed = 0.1f;
     public bool snip;
     public bool onGround;
+    private bool hasExecuted = false;
+    private Quaternion rClawDefault;
+    public Quaternion lClawDefault;
 
     void Start()
     {
         rigbod = GetComponent<Rigidbody>();
+        Invoke("DefaultSnipRotation", 1);
     }
 
     // Update is called once per frame
@@ -39,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         // Get input
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
+        rTrigger = Input.GetAxis("Right Trigger");
+        lTrigger = Input.GetAxis("Left Trigger");
 
         //Movement
         if (snip == false) 
@@ -67,20 +81,44 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * xInput);
         transform.Translate(Vector3.forward * speed * Time.deltaTime * yInput);
+
+        if (hasExecuted == true)
+        {
+            leftClaw.transform.Rotate(Vector3.up * Time.deltaTime * clawSpeed * lTrigger);
+            rightClaw.transform.Rotate(Vector3.down * Time.deltaTime * clawSpeed * rTrigger);
+
+
+            if (lTrigger <= 0.1)
+            {
+                leftClaw.transform.rotation = Quaternion.Slerp(transform.rotation, lClawDefault, resetSpeed * Time.time);
+            }
+
+            if (rTrigger <= 0.1)
+            {
+                rightClaw.transform.rotation = Quaternion.Slerp(transform.rotation, rClawDefault, resetSpeed * Time.time);
+            }
+
+        }        
     }
 
 
     // Snip mode
     void SnipMode()
     {
-        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * yInput);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * xInput);
+        
+        
     }
 
     // Ground Check
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         onGround = true;
     }
 
+    void DefaultSnipRotation()
+    {
+        rClawDefault = rightClaw.transform.rotation;
+        lClawDefault = leftClaw.transform.rotation;
+        hasExecuted = true;
+    }
 }
