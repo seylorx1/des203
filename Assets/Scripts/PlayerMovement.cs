@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
     void Awake() {
-        //Convert euler angles to quaternion.
+        //Convert euler angles to quaternion before anything else.
         //(Saves a bit of processing.)
         lClawStart = Quaternion.Euler(lClawEulerStart);
         rClawStart = Quaternion.Euler(rClawEulerStart);
@@ -50,9 +50,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start() {
         crabRigidbody = GetComponent<Rigidbody>();
-
-        //lClawStart = leftClaw.transform.rotation;
-        //rClawStart = rightClaw.transform.rotation;
     }
 
     // Update is called once per frame
@@ -82,24 +79,38 @@ public class PlayerMovement : MonoBehaviour {
 
         #region Crab Claw Controls
 
-        lCloseAmount = (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f * (snip ? 0.05f : 0.2f);
+        //Set the left close amount to a sine sway.
+        //Values between 0 and 1.
+        lCloseAmount =
+            (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a sine wave between 0 and 1
+            (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+
+        //Get the value of the left trigger.
         float lTrigger = Input.GetAxis("Left Trigger");
+        //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (lTrigger > 0.0f) {
             lCloseAmount = lTrigger;
         }
 
-        rCloseAmount = (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f * (snip ? 0.05f : 0.2f);
+        //Set the right close amount to a cosine sway. (Same as sine wave, but with a half-interval offset. Makes it look more interesting.)
+        //Values between 0 and 1.
+        rCloseAmount =
+            (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a cosine wave between 0 and 1
+            (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+
+        //Get the value of the left trigger.
         float rTrigger = Input.GetAxis("Right Trigger");
+        //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (rTrigger > 0.0f) {
             rCloseAmount = rTrigger;
         }
 
+        //Interpolate between start and end rotations based on the close amounts.
 
         leftClaw.transform.localRotation = Quaternion.Lerp(
             lClawStart,
             lClawEnd,
             lCloseAmount);
-
         rightClaw.transform.localRotation = Quaternion.Lerp(
             rClawStart,
             rClawEnd,
