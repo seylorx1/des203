@@ -1008,8 +1008,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thirdCam: {fileID: 594853607}
   firstCam: {fileID: 35936503}
-  leftLegs: {fileID: 0}
-  rightLegs: {fileID: 0}
   leftClaw: {fileID: 909820790281214532}
   rightClaw: {fileID: 7550960235228058061}
   speed: 5
@@ -1018,7 +1016,10 @@ MonoBehaviour:
   resetSpeed: 0.1
   snip: 0
   onGround: 1
-  lClawDefault: {x: 0, y: 0, z: 0, w: 0}
+  lClawEulerStart: {x: 350.5436, y: 281.66016, z: 334.7777}
+  rClawEulerStart: {x: 1.6842829, y: 89.49627, z: 337.41974}
+  lClawEulerEnd: {x: 352.56445, y: 338.97003, z: 356.95532}
+  rClawEulerEnd: {x: 2.6433244, y: 16.993876, z: 358.66577}
 --- !u!54 &766042633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1089,6 +1090,30 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f4ebf7b550d744148af654ab31202518, type: 3}
       propertyPath: m_Name
       value: Crab_Rigged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176456174504950125, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176456174504950125, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 16.994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176456174504950125, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793700600313653563, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -7.436
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793700600313653563, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -21.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793700600313653563, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -3.045
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ebf7b550d744148af654ab31202518, type: 3}

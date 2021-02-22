@@ -2,123 +2,144 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     // Variables 
-    private Rigidbody rigbod;
-    public GameObject thirdCam;
-    public GameObject firstCam;
-    public GameObject leftLegs;
-    public GameObject rightLegs;
-    public GameObject leftClaw;
-    public GameObject rightClaw;
+    private Rigidbody crabRigidbody;
+
+    public GameObject
+        thirdCam,
+        firstCam,
+        //leftLegs,
+        //rightLegs,
+        leftClaw,
+        rightClaw;
+
     private float xInput;
     private float yInput;
-    private float rTrigger;
-    private float lTrigger;
+    private float rCloseAmount;
+    private float lCloseAmount;
+
     public float speed = 5;
     public float jumpForce = 4;
     public float clawSpeed = 5;
     public float resetSpeed = 0.1f;
     public bool snip;
     public bool onGround;
-    private bool hasExecuted = false;
-    private Quaternion rClawDefault;
-    public Quaternion lClawDefault;
 
-    void Start()
-    {
-        rigbod = GetComponent<Rigidbody>();
-        Invoke("DefaultSnipRotation", 1);
+    public Vector3
+        lClawEulerStart,
+        rClawEulerStart,
+        lClawEulerEnd,
+        rClawEulerEnd;
+
+    private Quaternion
+        lClawStart,
+        rClawStart,
+        lClawEnd,
+        rClawEnd;
+
+
+    void Awake() {
+        //Convert euler angles to quaternion.
+        //(Saves a bit of processing.)
+        lClawStart = Quaternion.Euler(lClawEulerStart);
+        rClawStart = Quaternion.Euler(rClawEulerStart);
+        lClawEnd = Quaternion.Euler(lClawEulerEnd);
+        rClawEnd = Quaternion.Euler(rClawEulerEnd);
+    }
+
+    void Start() {
+        crabRigidbody = GetComponent<Rigidbody>();
+
+        //lClawStart = leftClaw.transform.rotation;
+        //rClawStart = rightClaw.transform.rotation;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        // Control switch
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) && snip == false)
-        { 
-            snip = true;
-            Debug.Log("Snip");
+    void Update() {
+        #region Handle Inputs
+        //Toggle snip mode on "Joystick1Button2".
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2)) {
+            snip = !snip;
+            Debug.Log(snip ? "Snip Mode" : "Move Mode");
         }
 
-        else if (Input.GetKeyDown(KeyCode.JoystickButton2) && snip == true)
-        {
-            snip = false;
-            Debug.Log("NoSnip");
-        }
- 
-        // Get input
+        //Get inputs
+        //TODO -- input manager.
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
-        rTrigger = Input.GetAxis("Right Trigger");
-        lTrigger = Input.GetAxis("Left Trigger");
+        #endregion
 
-        //Movement
-        if (snip == false) 
-            {
+        if (snip) {
+            SnipMode();
+        }
+        else {
             MoveMode();
-            thirdCam.gameObject.SetActive(true);
-            firstCam.gameObject.SetActive(false);
         }
 
-        else if (snip == true)
-            {
-            SnipMode();
-            firstCam.gameObject.SetActive(true);
-            thirdCam.gameObject.SetActive(false);
-            }
+        firstCam.gameObject.SetActive(snip);
+        thirdCam.gameObject.SetActive(!snip);
+
+        #region Crab Claw Controls
+
+        lCloseAmount = (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f * (snip ? 0.05f : 0.2f);
+        float lTrigger = Input.GetAxis("Left Trigger");
+        if (lTrigger > 0.0f) {
+            lCloseAmount = lTrigger;
+        }
+
+        rCloseAmount = (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f * (snip ? 0.05f : 0.2f);
+        float rTrigger = Input.GetAxis("Right Trigger");
+        if (rTrigger > 0.0f) {
+            rCloseAmount = rTrigger;
+        }
+
+
+        leftClaw.transform.localRotation = Quaternion.Lerp(
+            lClawStart,
+            lClawEnd,
+            lCloseAmount);
+
+        rightClaw.transform.localRotation = Quaternion.Lerp(
+            rClawStart,
+            rClawEnd,
+            rCloseAmount);
         
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && onGround == true)
-        {
-            rigbod.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        #endregion
+    }
+
+    // Movement mode
+    void MoveMode() {
+        //Apply force.
+        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * xInput);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime * yInput);
+
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && onGround == true) {
+            crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
         }
     }
 
-    // Movement mode
-    void MoveMode()
-    {
-        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * xInput);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * yInput);
-
-        if (hasExecuted == true)
-        {
-            leftClaw.transform.Rotate(Vector3.up * Time.deltaTime * clawSpeed * lTrigger);
-            rightClaw.transform.Rotate(Vector3.down * Time.deltaTime * clawSpeed * rTrigger);
-
-
-            if (lTrigger <= 0.1)
-            {
-                leftClaw.transform.rotation = Quaternion.Slerp(transform.rotation, lClawDefault, resetSpeed * Time.time);
-            }
-
-            if (rTrigger <= 0.1)
-            {
-                rightClaw.transform.rotation = Quaternion.Slerp(transform.rotation, rClawDefault, resetSpeed * Time.time);
-            }
-
-        }        
-    }
-
 
     // Snip mode
-    void SnipMode()
-    {
-        
-        
+    void SnipMode() {
+
     }
 
-    // Ground Check
-    void OnCollisionEnter(Collision collision)
-    {
+
+    void OnCollisionEnter(Collision collision) {
+
+        //TODO check collision *starts on* ground
+
         onGround = true;
     }
 
-    void DefaultSnipRotation()
-    {
-        rClawDefault = rightClaw.transform.rotation;
-        lClawDefault = leftClaw.transform.rotation;
-        hasExecuted = true;
+    void OnCollisionExit(Collision collision) {
+
+        //TODO check collision *left* ground
+
+        onGround = false;
     }
+
 }
