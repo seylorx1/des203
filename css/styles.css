@@ -2,10 +2,10 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: 'Ubuntu Mono', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 0.6cm;
 
-    background-color: rgb(255, 251, 231);
+    background-color: rgb(243, 240, 234);
     color: darkgray;
     text-emphasis-color: rgb(255, 196, 85);
     
@@ -15,4 +15,13 @@ body {
     /*Disable interactions with title text.*/
     pointer-events: none;
     user-select: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.025em;
+    font-family: 'Bree Serif', serif;
+}
+
+.boldkerning{
+    letter-spacing: 0.05em;
 }

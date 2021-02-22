@@ -2,6 +2,79 @@ function xhttpSuccess(xhttp) {
     return xhttp.readyState == 4 && xhttp.status == 200;
 }
 
+class wikiPage {
+    constructor(sidebarElement, readableName, filePath) {
+        this.sidebarElement = sidebarElement;
+        this.readableName = readableName;
+        this.filePath = filePath;
+
+        let that = this;
+        this.sidebarElement.onclick = function() {
+            selectWikiPage(that);
+        }
+    }
+
+    //Returns: selected.
+    updateSidebarElement(selected) {
+        if(selected) {
+            //Add no-interact if it's not already available.
+            if(!this.sidebarElement.classList.contains("no-interact")) {
+                this.sidebarElement.classList.add("no-interact");
+            }
+
+            //Don't render as link.
+            if(this.sidebarElement.hasAttribute("href")) {
+            this.sidebarElement.removeAttribute("href");
+            }
+
+            //Update and bolden the content of the sidebar element to the name of the wiki page.
+            this.sidebarElement.innerHTML = "<b class=\"boldkerning\">"+ this.readableName +"</b>";
+        }
+        else {
+            //Remove no-interact if it's available.
+            if(this.sidebarElement.classList.contains("no-interact")) {
+                this.sidebarElement.classList.remove("no-interact");
+            }
+
+            //Render as link.
+            if(!this.sidebarElement.hasAttribute("href")) {
+                this.sidebarElement.setAttribute("href", "javascript:void(0)");
+            }
+
+            //Update the content of the sidebar element to the name of the wiki page.
+            this.sidebarElement.innerHTML = this.readableName;
+        }
+
+        return selected;
+    }
+}
+
+var wikiPages = []
+
+function selectWikiPage(page) {
+
+    for(i = 0; i < wikiPages.length; i++) {
+        if(wikiPages[i].updateSidebarElement(wikiPages[i].filePath == page.filePath)) {
+            updateReader(wikiPages[i].filePath);
+        }
+    }
+}
+
+function updateReader(filePath) {
+    //Get content of .md file.
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if(xhttpSuccess(xhttp)) {
+            let reader = document.getElementById("reader");
+            let conv = new showdown.Converter();
+            conv.setFlavor('github');
+            reader.innerHTML = conv.makeHtml(xhttp.responseText);
+        }
+    }
+    xhttp.open("GET", "../" + filePath);
+    xhttp.send()
+}
+
 function populateSidebar() {
     let sidebar = document.getElementById("sidebar-content");
 
@@ -9,11 +82,9 @@ function populateSidebar() {
     xhttp.onreadystatechange = function() {
         if(xhttpSuccess(xhttp)) {
 
-            let wikiFilesArray = [];
-            let wikiFilesArrayIndex = 0;
             this.responseText.replace(/\r/g, "").split("\n").forEach(filePath => {
                 if(new RegExp("(^wiki/)?(md$)").test(filePath)) {
-                    wikiFilesArray.push(filePath);
+
 
                     let dirLength = filePath.lastIndexOf('/')+1;
 
@@ -24,25 +95,12 @@ function populateSidebar() {
 
                     let sidebarElement = document.createElement("a");
 
-                    if(wikiFilesArrayIndex == 0) {
-                        sidebarElement.classList.add("no-interact");
-                        sidebarElement.innerHTML = "<b class=\"boldkerning\">"+readableName+"</b>"
-                    }
-                    else {
-                        sidebarElement.innerHTML = readableName;
-                        sidebarElement.href = "javascript:void(0)";
-                        sidebarElement.onclick = function() {
-                            alert(filePath);
-                        };
-                    }
+                    wikiPages.push(new wikiPage(sidebarElement, readableName, filePath));
 
                     sidebar.append(sidebarElement);
-                    wikiFilesArrayIndex++;
                 }
             });
-
-            console.log(wikiFilesArray);
-            //document.getElementById("targetDiv").textContent 
+            selectWikiPage(wikiPages[0]);
         }
     }
     xhttp.open("GET", "../allfiles.txt", true);
@@ -51,14 +109,8 @@ function populateSidebar() {
 
 populateSidebar();
 
-function run() {
 
-    //getMarkdownContent("/wiki/content/test.md");
+let sidebarElement = document.getElementById("sidebar");
+let sidebarInner = sidebarElement.offsetWidth - sidebarElement.clientWidth;
 
-    /*var text = doGET("/wiki/content/test.md"),
-        target = document.getElementById('targetDiv'),
-        converter = new showdown.Converter(),
-        html = converter.makeHtml(text);
-      
-      target.innerHTML = html;*/
-}
+document.getElementById("sidebar__footer").setAttribute("style", "width: calc(12.5em - " + sidebarInner + "px)");
