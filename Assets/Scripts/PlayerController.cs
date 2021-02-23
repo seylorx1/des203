@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour {
     public GameObject
         thirdCam,
         firstCam,
-        //leftLegs,
-        //rightLegs,
         leftClaw,
         rightClaw;
+
+    private GameObject currentCamera;
 
     private float xInput;
     private float yInput;
@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour {
     private float lCloseAmount;
 
     public float speed = 5;
+    public float maxSpeedChange = 5;
+
+    public float rotateSpeed = 20.0f;
+
     public float jumpForce = 4;
     public float clawSpeed = 5;
     public float resetSpeed = 0.1f;
-    public bool snip;
-    public bool onGround;
 
     public Vector3
         lClawEulerStart,
@@ -37,6 +39,11 @@ public class PlayerController : MonoBehaviour {
         rClawStart,
         lClawEnd,
         rClawEnd;
+
+    private bool
+        jumpAttempt = false,
+        snip = false,
+        onGround = false;
 
 
     void Awake() {
@@ -55,23 +62,26 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         #region Handle Inputs
+
         //Toggle snip mode on "Joystick1Button2".
         if (Input.GetKeyDown(KeyCode.Joystick1Button2)) {
             snip = !snip;
-            Debug.Log(snip ? "Snip Mode" : "Move Mode");
+        }
+
+        //Check if player attempted to jump
+        if (!jumpAttempt && onGround) {
+            jumpAttempt = Input.GetKeyDown(KeyCode.Joystick1Button0);
         }
 
         //Get inputs
         //TODO -- input manager.
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
+
         #endregion
 
         if (snip) {
             SnipMode();
-        }
-        else {
-            MoveMode();
         }
 
         firstCam.gameObject.SetActive(snip);
@@ -115,25 +125,54 @@ public class PlayerController : MonoBehaviour {
             rClawStart,
             rClawEnd,
             rCloseAmount);
-        
+
         #endregion
+  
     }
 
-    // Movement mode
+    void FixedUpdate() {
+        if (!snip) {
+            MoveMode();
+        }
+    }
+
+    /// <summary>
+    /// Called on the physics step via FixedUpdate()
+    /// </summary>
     void MoveMode() {
         //Apply force.
-        transform.Translate(Vector3.right * speed * 2 * Time.deltaTime * xInput);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * yInput);
+
+        //XInput is active.
+        if (Mathf.Abs(xInput) > 0.1f) { //Accomodate for stick-drift
+            Vector3 targetVelocity = transform.right * -xInput * speed;
+
+            Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
+            velocityChange.x = Mathf.Clamp(targetVelocity.x, -maxSpeedChange, maxSpeedChange);
+            velocityChange.z = Mathf.Clamp(targetVelocity.z, -maxSpeedChange, maxSpeedChange);
+            velocityChange.y = 0;
+
+            crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+        }
+
+        //YInput is active
+        if (yInput != 0) {
+            crabRigidbody.rotation = Quaternion.Euler(
+                crabRigidbody.rotation.eulerAngles.x,
+                crabRigidbody.rotation.eulerAngles.y + yInput * Time.fixedDeltaTime * rotateSpeed,
+                crabRigidbody.rotation.eulerAngles.z);
+        }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && onGround == true) {
+        if (jumpAttempt && onGround) {
+            
             crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            jumpAttempt = false;
             onGround = false;
         }
     }
 
 
-    // Snip mode
     void SnipMode() {
 
     }
