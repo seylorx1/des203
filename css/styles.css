@@ -7,7 +7,7 @@ body {
 
     background-color: rgb(243, 240, 234);
     color: darkgray;
-    text-emphasis-color: rgb(255, 196, 85);
+    text-emphasis-color: rgb(255, 176, 72);
     
 }
 
@@ -20,8 +20,15 @@ body {
 h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.025em;
     font-family: 'Bree Serif', serif;
+    pointer-events: none;
+    user-select: none;
 }
 
 .boldkerning{
     letter-spacing: 0.05em;
+}
+
+li {
+    font-family: 'Bree Serif', serif;
+    color: rgb(255, 176, 72);
 }

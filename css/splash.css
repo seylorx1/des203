@@ -1,4 +1,4 @@
-.splash {
+#splash {
 
     background:
     linear-gradient(0deg, rgba(244, 179, 80, 0.75), rgba(242, 120, 75, 0.75)), 
@@ -24,7 +24,7 @@
     height: 50%;
 }
 
-.splash__title {
+#splash__title {
     font-family: 'Bree Serif', serif;
     font-size:6vw;
 
@@ -48,7 +48,7 @@
     }
 }
 
-.splash__nav {
+#splash__nav {
     display: inline-flex;
     justify-content: space-evenly;
     align-self: flex-start;
@@ -62,18 +62,6 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-}
-
-.splash--footer {
-    position:absolute;
-    bottom: 0;
-    right: 0;
-    margin-bottom: 1vh;
-    margin-right:1vw;
-}   
-
-.splash--footer a {
-    color: rgb(95, 90, 76);
 }
 
 .splash__nav--icon {
@@ -95,4 +83,18 @@
     opacity: 1.0;
     transform: rotate(10deg);
     scale: 2.2;
+}
+
+#splash--footer {
+    position:fixed;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    bottom: 0;
+    margin: 1em 1em;
+    width: calc(100% - 2em);
+}
+
+#splash--footer p {
+    margin: 0;
 }
