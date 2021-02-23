@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     // Variables 
     private Rigidbody crabRigidbody;
 
@@ -151,6 +151,15 @@ public class PlayerMovement : MonoBehaviour {
         //TODO check collision *left* ground
 
         onGround = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Collectable")
+        {
+            Debug.Log("Item Picked Up");
+            Destroy(other.gameObject);
+        }
     }
 
 }
