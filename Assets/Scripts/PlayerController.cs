@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour {
         thirdCam,
         firstCam,
         leftClaw,
-        rightClaw;
+        rightClaw,
+        lClawTarget,
+        rClawTarget;
 
     private GameObject currentCamera;
 
@@ -174,7 +176,8 @@ public class PlayerController : MonoBehaviour {
 
 
     void SnipMode() {
-
+        rClawTarget.transform.localPosition += transform.right * Input.GetAxis("RStick Horizontal") * clawSpeed * Time.deltaTime;
+        rClawTarget.transform.localPosition += transform.up * Input.GetAxis("RStick Vertical") * clawSpeed * Time.deltaTime;
     }
 
 
