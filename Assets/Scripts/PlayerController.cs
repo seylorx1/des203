@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour {
         firstCam,
         leftClaw,
         rightClaw,
-        lClawTarget,
-        rClawTarget;
+        lClawIKTarget,
+        rClawIKTarget;
 
-    private GameObject currentCamera;
+    private Vector2
+        inputLS,
+        inputRS;
 
-    private float xInput;
-    private float yInput;
+    //private float xInput;
+    //private float yInput;
+
     private float rCloseAmount;
     private float lCloseAmount;
 
@@ -36,11 +39,20 @@ public class PlayerController : MonoBehaviour {
         lClawEulerEnd,
         rClawEulerEnd;
 
+    public Vector2
+        lClawIKMin,
+        lClawIKMax,
+        rClawIKMin,
+        rClawIKMax;
+    public float
+        lClawIK_Z,
+        rClawIK_Z;
+
     private Quaternion
-        lClawStart,
-        rClawStart,
-        lClawEnd,
-        rClawEnd;
+        lClawQuatStart,
+        rClawQuatStart,
+        lClawQuatEnd,
+        rClawQuatEnd;
 
     private bool
         jumpAttempt = false,
@@ -51,10 +63,10 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
         //Convert euler angles to quaternion before anything else.
         //(Saves a bit of processing.)
-        lClawStart = Quaternion.Euler(lClawEulerStart);
-        rClawStart = Quaternion.Euler(rClawEulerStart);
-        lClawEnd = Quaternion.Euler(lClawEulerEnd);
-        rClawEnd = Quaternion.Euler(rClawEulerEnd);
+        lClawQuatStart = Quaternion.Euler(lClawEulerStart);
+        rClawQuatStart = Quaternion.Euler(rClawEulerStart);
+        lClawQuatEnd = Quaternion.Euler(lClawEulerEnd);
+        rClawQuatEnd = Quaternion.Euler(rClawEulerEnd);
     }
 
     void Start() {
@@ -77,8 +89,8 @@ public class PlayerController : MonoBehaviour {
 
         //Get inputs
         //TODO -- input manager.
-        xInput = Input.GetAxis("Horizontal");
-        yInput = Input.GetAxis("Vertical");
+        inputLS = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        inputRS = new Vector2(Input.GetAxis("RStick Horizontal"), Input.GetAxis("RStick Vertical"));
 
         #endregion
 
@@ -120,12 +132,12 @@ public class PlayerController : MonoBehaviour {
         //Interpolate between start and end rotations based on the close amounts.
 
         leftClaw.transform.localRotation = Quaternion.Lerp(
-            lClawStart,
-            lClawEnd,
+            lClawQuatStart,
+            lClawQuatEnd,
             lCloseAmount);
         rightClaw.transform.localRotation = Quaternion.Lerp(
-            rClawStart,
-            rClawEnd,
+            rClawQuatStart,
+            rClawQuatEnd,
             rCloseAmount);
 
         #endregion
@@ -145,8 +157,8 @@ public class PlayerController : MonoBehaviour {
         //Apply force.
 
         //XInput is active.
-        if (Mathf.Abs(xInput) > 0.1f) { //Accomodate for stick-drift
-            Vector3 targetVelocity = transform.right * -xInput * speed;
+        if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
+            Vector3 targetVelocity = transform.right * -inputLS.x * speed;
 
             Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
             velocityChange.x = Mathf.Clamp(targetVelocity.x, -maxSpeedChange, maxSpeedChange);
@@ -157,10 +169,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         //YInput is active
-        if (yInput != 0) {
+        if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
             crabRigidbody.rotation = Quaternion.Euler(
                 crabRigidbody.rotation.eulerAngles.x,
-                crabRigidbody.rotation.eulerAngles.y + yInput * Time.fixedDeltaTime * rotateSpeed,
+                crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
                 crabRigidbody.rotation.eulerAngles.z);
         }
 
@@ -176,8 +188,34 @@ public class PlayerController : MonoBehaviour {
 
 
     void SnipMode() {
-        rClawTarget.transform.localPosition += transform.right * Input.GetAxis("RStick Horizontal") * clawSpeed * Time.deltaTime;
-        rClawTarget.transform.localPosition += transform.up * Input.GetAxis("RStick Vertical") * clawSpeed * Time.deltaTime;
+
+        //TODO Arms appear to have collisions enabled. Consider calling this from FixedUpdate() if this is intentional.
+
+        if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
+            lClawIKTarget.transform.position +=
+            ((Camera.main.transform.right * inputLS.x) +
+            (Camera.main.transform.up * -inputLS.y)) *
+            clawSpeed * Time.deltaTime;
+
+            lClawIKTarget.transform.localPosition = new Vector3(
+                Mathf.Clamp(lClawIKTarget.transform.localPosition.x, lClawIKMin.x, lClawIKMax.x),
+                Mathf.Clamp(lClawIKTarget.transform.localPosition.y, lClawIKMin.y, lClawIKMax.y),
+                lClawIK_Z
+                );
+        }
+
+        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
+            rClawIKTarget.transform.position +=
+            ((Camera.main.transform.right * inputRS.x) +
+            (Camera.main.transform.up * -inputRS.y)) *
+            clawSpeed * Time.deltaTime;
+
+            rClawIKTarget.transform.localPosition = new Vector3(
+                Mathf.Clamp(rClawIKTarget.transform.localPosition.x, rClawIKMin.x, rClawIKMax.x),
+                Mathf.Clamp(rClawIKTarget.transform.localPosition.y, rClawIKMin.y, rClawIKMax.y),
+                rClawIK_Z
+                );
+        }
     }
 
 
