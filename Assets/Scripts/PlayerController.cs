@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     // Variables 
@@ -77,20 +78,26 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         #region Handle Inputs
 
+        Gamepad gamepad = Gamepad.current;
+        if(gamepad == null) {
+            Debug.LogError("No gamepad detected!");
+            return;
+        }
+
         //Toggle snip mode on "Joystick1Button2".
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2)) {
+        if (gamepad.buttonWest.wasPressedThisFrame) {
             snip = !snip;
         }
 
         //Check if player attempted to jump
         if (!jumpAttempt && onGround) {
-            jumpAttempt = Input.GetKeyDown(KeyCode.Joystick1Button0);
+            jumpAttempt = gamepad.buttonSouth.wasPressedThisFrame;
         }
 
         //Get inputs
         //TODO -- input manager.
-        inputLS = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        inputRS = new Vector2(Input.GetAxis("RStick Horizontal"), Input.GetAxis("RStick Vertical"));
+        inputLS = gamepad.leftStick.ReadValue();
+        inputRS = gamepad.rightStick.ReadValue();
 
         #endregion
 
@@ -110,7 +117,7 @@ public class PlayerController : MonoBehaviour {
             (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
         //Get the value of the left trigger.
-        float lTrigger = Input.GetAxis("Left Trigger");
+        float lTrigger = gamepad.leftTrigger.ReadValue();
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (lTrigger > 0.0f) {
             lCloseAmount = lTrigger;
@@ -123,7 +130,7 @@ public class PlayerController : MonoBehaviour {
             (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
         //Get the value of the left trigger.
-        float rTrigger = Input.GetAxis("Right Trigger");
+        float rTrigger = gamepad.rightTrigger.ReadValue();
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (rTrigger > 0.0f) {
             rCloseAmount = rTrigger;
@@ -141,7 +148,7 @@ public class PlayerController : MonoBehaviour {
             rCloseAmount);
 
         #endregion
-  
+
     }
 
     void FixedUpdate() {
@@ -178,7 +185,7 @@ public class PlayerController : MonoBehaviour {
 
         //Jump
         if (jumpAttempt && onGround) {
-            
+
             crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
             jumpAttempt = false;
@@ -194,7 +201,7 @@ public class PlayerController : MonoBehaviour {
         if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
             lClawIKTarget.transform.position +=
             ((Camera.main.transform.right * inputLS.x) +
-            (Camera.main.transform.up * -inputLS.y)) *
+            (Camera.main.transform.up * inputLS.y)) *
             clawSpeed * Time.deltaTime;
 
             lClawIKTarget.transform.localPosition = new Vector3(
@@ -204,10 +211,10 @@ public class PlayerController : MonoBehaviour {
                 );
         }
 
-        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
+        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.       Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
             rClawIKTarget.transform.position +=
             ((Camera.main.transform.right * inputRS.x) +
-            (Camera.main.transform.up * -inputRS.y)) *
+            (Camera.main.transform.up * inputRS.y)) *
             clawSpeed * Time.deltaTime;
 
             rClawIKTarget.transform.localPosition = new Vector3(
@@ -233,13 +240,10 @@ public class PlayerController : MonoBehaviour {
         onGround = false;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Collectable")
-        {
+    void OnTriggerEnter(Collider other) {
+        if (other.tag == "Collectable") {
             Debug.Log("Item Picked Up");
             Destroy(other.gameObject);
         }
     }
-
 }
