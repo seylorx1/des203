@@ -10,6 +10,12 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour, ISingletonInsta
         private set;
     }
 
+    public static bool IsLoaded {
+        get {
+            return Instance != null;
+        }
+    }
+
     public SingletonBase SingletonBaseRef { get; set; } = null;
 
     protected virtual void Awake() {

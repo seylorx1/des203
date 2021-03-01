@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour {
         inputLS,
         inputRS;
 
-    //private float xInput;
-    //private float yInput;
-
-    private float rCloseAmount;
-    private float lCloseAmount;
+    private float
+        lTrigger,
+        rTrigger,
+        lCloseAmount,
+        rCloseAmount;
 
     public float speed = 5;
     public float maxSpeedChange = 5;
@@ -60,6 +60,15 @@ public class PlayerController : MonoBehaviour {
         snip = false,
         onGround = false;
 
+    public Vector2 LookAxis {
+        get {
+            if (!snip) {
+                return inputRS;
+            }
+            return Vector2.zero;
+        }
+    }
+
 
     void Awake() {
         //Convert euler angles to quaternion before anything else.
@@ -72,34 +81,35 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         crabRigidbody = GetComponent<Rigidbody>();
+
+        if (!InputManager.IsLoaded) {
+            Debug.LogError("Please ensure a singleton asset is in the scene, with an InputManager attached!");
+            return;
+        }
+
+        InputManagerData data = (InputManagerData)InputManager.Instance.SingletonBaseRef.Data;
+
+        data.movement.performed += onInputMovement;
+        data.movement.canceled += onInputMovement;
+
+        data.look.performed += onInputLook;
+        data.look.canceled += onInputLook;
+
+        data.jump.performed += onInputJump;
+        data.jump.canceled += onInputJump;
+
+        data.snipModeToggle.performed += onInputSnipModeToggle;
+        data.snipModeToggle.canceled += onInputSnipModeToggle;
+
+        data.leftCrabClaw.performed += onInputLeftCrabClaw;
+        data.leftCrabClaw.canceled += onInputLeftCrabClaw;
+
+        data.rightCrabClaw.performed += onInputRightCrabClaw;
+        data.rightCrabClaw.canceled += onInputRightCrabClaw;
     }
 
     // Update is called once per frame
     void Update() {
-        #region Handle Inputs
-
-        Gamepad gamepad = Gamepad.current;
-        if(gamepad == null) {
-            Debug.LogError("No gamepad detected!");
-            return;
-        }
-
-        //Toggle snip mode on "Joystick1Button2".
-        if (gamepad.buttonWest.wasPressedThisFrame) {
-            snip = !snip;
-        }
-
-        //Check if player attempted to jump
-        if (!jumpAttempt && onGround) {
-            jumpAttempt = gamepad.buttonSouth.wasPressedThisFrame;
-        }
-
-        //Get inputs
-        //TODO -- input manager.
-        inputLS = gamepad.leftStick.ReadValue();
-        inputRS = gamepad.rightStick.ReadValue();
-
-        #endregion
 
         if (snip) {
             SnipMode();
@@ -116,8 +126,6 @@ public class PlayerController : MonoBehaviour {
             (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a sine wave between 0 and 1
             (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
-        //Get the value of the left trigger.
-        float lTrigger = gamepad.leftTrigger.ReadValue();
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (lTrigger > 0.0f) {
             lCloseAmount = lTrigger;
@@ -129,15 +137,12 @@ public class PlayerController : MonoBehaviour {
             (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a cosine wave between 0 and 1
             (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
-        //Get the value of the left trigger.
-        float rTrigger = gamepad.rightTrigger.ReadValue();
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (rTrigger > 0.0f) {
             rCloseAmount = rTrigger;
         }
 
         //Interpolate between start and end rotations based on the close amounts.
-
         leftClaw.transform.localRotation = Quaternion.Lerp(
             lClawQuatStart,
             lClawQuatEnd,
@@ -211,7 +216,7 @@ public class PlayerController : MonoBehaviour {
                 );
         }
 
-        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.       Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
+        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
             rClawIKTarget.transform.position +=
             ((Camera.main.transform.right * inputRS.x) +
             (Camera.main.transform.up * inputRS.y)) *
@@ -246,4 +251,39 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject);
         }
     }
+
+    #region Handle Inputs
+
+    private void onInputMovement(InputAction.CallbackContext ctx) {
+        inputLS = ctx.ReadValue<Vector2>();
+    }
+
+    private void onInputLook(InputAction.CallbackContext ctx) {
+        inputRS = ctx.ReadValue<Vector2>();
+    }
+
+    private void onInputJump(InputAction.CallbackContext ctx) {
+        //Check if player attempted to jump.
+        //Player must be out of snip mode and touching the ground
+        if (!snip && !jumpAttempt && onGround) {
+            jumpAttempt = ctx.ReadValueAsButton();
+        }
+    }
+
+    private void onInputSnipModeToggle(InputAction.CallbackContext ctx) {
+        //Toggle snip mode on "Joystick1Button2".
+        if (ctx.ReadValueAsButton()) {
+            snip = !snip;
+        }
+    }
+
+    private void onInputLeftCrabClaw(InputAction.CallbackContext ctx) {
+        lTrigger = ctx.ReadValue<float>();
+    }
+
+    private void onInputRightCrabClaw(InputAction.CallbackContext ctx) {
+        rTrigger = ctx.ReadValue<float>();
+    }
+
+    #endregion
 }
