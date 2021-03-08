@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody crabRigidbody;
 
     public GameObject
+        //crabModel,
         thirdCam,
         firstCam,
         leftClaw,
