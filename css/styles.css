@@ -6,7 +6,7 @@ body {
     font-size: 0.6cm;
 
     background-color: rgb(243, 240, 234);
-    color: darkgray;
+    color: rgb(136, 127, 118);
     text-emphasis-color: rgb(255, 176, 72);
     
 }
@@ -31,4 +31,18 @@ h1, h2, h3, h4, h5, h6 {
 li {
     font-family: 'Bree Serif', serif;
     color: rgb(255, 176, 72);
+}
+
+a {
+    color:rgb(255, 176, 72);
+    text-decoration: none;
+    user-select: none;
+}
+
+a:link {
+    color:darkgray;
+}
+
+a:hover {
+    text-decoration: underline;
 }
