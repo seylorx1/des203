@@ -239,7 +239,7 @@ namespace DitzelGames.FastIK
             {
                 var scale = Vector3.Distance(current.position, current.parent.position) * 0.1f;
                 Handles.matrix = Matrix4x4.TRS(current.position, Quaternion.FromToRotation(Vector3.up, current.parent.position - current.position), new Vector3(scale, Vector3.Distance(current.parent.position, current.position), scale));
-                Handles.color = Color.green;
+                Handles.color = Color.magenta;
                 Handles.DrawWireCube(Vector3.up * 0.5f, Vector3.one);
                 current = current.parent;
             }

@@ -2,60 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IK_MoveTarget : MonoBehaviour
-{
-    public float yPos;
-    
+public class IK_MoveTarget : MonoBehaviour {
     public float rayLength = 1f;
 
-    
-    public Transform currentTarget; /* The target the leg snaps to */
-    public Transform desiredTarget; /* Where the leg snap target should move towards */
-
-    public float dist;
-    public float timer;
+    public float MaxDistance;
     public float speed = 5f;
+    public float DistanceSpeedMod = 2.0f;
 
     public AnimationCurve curve;
 
-    void Start()
-    {
-        yPos = transform.position.y;
+    public Transform CrabTransform;
 
+    private Vector3 targetOffset;
+    private Vector3 targetPosition;
+
+    private bool snapLeg = false;
+
+    void Start() {
+        targetOffset = transform.position - CrabTransform.position;
+        targetPosition = transform.position;
     }
 
-    void Update()
-    {
+    void Update() {
         // Future raycast
-
         RaycastHit hit;
-        Debug.DrawRay(transform.position, Vector3.down, Color.green);
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
-        {
-            Debug.Log("hit");
-            yPos = hit.point.y;
-            desiredTarget.position = new Vector3(transform.position.x, yPos, transform.position.z);
+        targetPosition = CrabTransform.position + CrabTransform.TransformDirection(targetOffset);
 
+        Debug.DrawRay(targetPosition + Vector3.up, Vector3.down, Color.green);
+        if (Physics.Raycast(targetPosition + Vector3.up, Vector3.down, out hit, rayLength)) {
+            targetPosition.y = hit.point.y;
         }
 
-        
-        
-        /*else
-        {
-            yPos = transform.position.y; 
-        }*/
 
 
-        // Animate legs
-        dist = Vector3.Distance(currentTarget.position, desiredTarget.position);
-
-        if (dist > 0.13f)
-        {
-            timer = 0;
-            timer += Time.deltaTime;
-
-            currentTarget.position = Vector3.MoveTowards(desiredTarget.position, new Vector3(desiredTarget.position.x, desiredTarget.position.y /*+ curve.Evaluate(timer)*/, desiredTarget.position.z), speed * Time.deltaTime);
+        // TODO check the rotation of the crab is correct -- don't want to attempt IK if she's flipped!
+        float targetDistance = Vector3.Distance(transform.position, targetPosition);
+        if (targetDistance > MaxDistance) {
+            snapLeg = true;
         }
-        
+
+        if(snapLeg) {
+            // Animate legs
+            //dist = Vector3.Distance(transform.position, targetPosition);
+            Debug.Log(Mathf.Max(speed, targetDistance * DistanceSpeedMod));
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * Mathf.Max(speed, targetDistance * DistanceSpeedMod));
+
+            if(transform.position == targetPosition) {
+                snapLeg = false;
+            }
+        }
+
     }
 }

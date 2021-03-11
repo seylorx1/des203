@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
         crabRigidbody = GetComponent<Rigidbody>();
 
         if (!InputManager.IsLoaded) {
-            Debug.LogError("Please ensure a singleton asset is in the scene, with an InputManager attached!");
+            Debug.LogError("Please ensure a singleton asset is in the scene with an InputManager attached!");
             return;
         }
 
