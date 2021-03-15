@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour {
     #endregion
     #endregion
 
+    public CapsuleCollider
+        lClawCollider,
+        rClawCollider;
+
+
     public Vector2 LookAxis {
         get {
             if (!snip) {
@@ -262,6 +267,16 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Grabbable" && rTrigger > 0.1f)
+        {
+            Debug.Log("grabbed");
+            other.transform.parent = rightClaw.gameObject.transform;
+        }
+    }
+
 
     #region Handle Inputs
 
