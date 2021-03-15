@@ -182,14 +182,19 @@ public class PlayerController : MonoBehaviour {
             if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
 
                 //Invert the x input based on whether the camera is facing the front or the back of the crab.
-                bool invert = Vector3.Dot(Camera.main.transform.forward, transform.forward) > 0.0f;
+                bool invert = Vector3.Dot(
+                    new Vector3(Camera.main.transform.forward.x, 0.0f, Camera.main.transform.forward.z),
+                    new Vector3(transform.forward.x, 0.0f, transform.forward.z)
+                    ) > 0.0f;
 
                 Vector3 targetVelocity = transform.right * inputLS.x * Acceleration * (invert ? 1.0f : -1.0f);
 
                 Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
-                velocityChange.x = Mathf.Clamp(targetVelocity.x, -MaxVelocity, MaxVelocity);
-                velocityChange.z = Mathf.Clamp(targetVelocity.z, -MaxVelocity, MaxVelocity);
+                velocityChange.x = Mathf.Clamp(velocityChange.x, -MaxVelocity, MaxVelocity);
+                velocityChange.z = Mathf.Clamp(velocityChange.z, -MaxVelocity, MaxVelocity);
                 velocityChange.y = 0;
+
+                Debug.Log(velocityChange);
 
                 crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
             }
