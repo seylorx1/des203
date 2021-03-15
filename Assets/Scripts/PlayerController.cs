@@ -4,27 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
-    // Variables 
-    private Rigidbody crabRigidbody;
-
+    // Variables
+    #region Variables
+    #region Public
     public GameObject
-        //crabModel,
         thirdCam,
         firstCam,
         leftClaw,
         rightClaw,
         lClawIKTarget,
         rClawIKTarget;
-
-    private Vector2
-        inputLS,
-        inputRS;
-
-    private float
-        lTrigger,
-        rTrigger,
-        lCloseAmount,
-        rCloseAmount;
 
     public float speed = 5;
     public float maxSpeedChange = 5;
@@ -49,17 +38,36 @@ public class PlayerController : MonoBehaviour {
     public float
         lClawIK_Z,
         rClawIK_Z;
+    #endregion
+
+    #region Private
+    private Collider crabCollider;
+    private Rigidbody crabRigidbody;
 
     private Quaternion
-        lClawQuatStart,
-        rClawQuatStart,
-        lClawQuatEnd,
-        rClawQuatEnd;
+    lClawQuatStart,
+    rClawQuatStart,
+    lClawQuatEnd,
+    rClawQuatEnd;
+
+    private Vector2
+    inputLS,
+    inputRS;
+
+    private float
+        lTrigger,
+        rTrigger,
+        lCloseAmount,
+        rCloseAmount;
+
+    private int layerMask_Player;
 
     private bool
         jumpAttempt = false,
         snip = false,
         onGround = false;
+    #endregion
+    #endregion
 
     public CapsuleCollider
         lClawCollider,
@@ -86,32 +94,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
+        crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
+
+        layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
         if (!InputManager.IsLoaded) {
             Debug.LogError("Please ensure a singleton asset is in the scene with an InputManager attached!");
             return;
         }
 
-        InputManagerData data = (InputManagerData)InputManager.Instance.SingletonBaseRef.Data;
-
-        data.movement.performed += onInputMovement;
-        data.movement.canceled += onInputMovement;
-
-        data.look.performed += onInputLook;
-        data.look.canceled += onInputLook;
-
-        data.jump.performed += onInputJump;
-        data.jump.canceled += onInputJump;
-
-        data.snipModeToggle.performed += onInputSnipModeToggle;
-        data.snipModeToggle.canceled += onInputSnipModeToggle;
-
-        data.leftCrabClaw.performed += onInputLeftCrabClaw;
-        data.leftCrabClaw.canceled += onInputLeftCrabClaw;
-
-        data.rightCrabClaw.performed += onInputRightCrabClaw;
-        data.rightCrabClaw.canceled += onInputRightCrabClaw;
+        registerInputEvents();
     }
 
     // Update is called once per frame
@@ -153,6 +146,7 @@ public class PlayerController : MonoBehaviour {
             lClawQuatStart,
             lClawQuatEnd,
             lCloseAmount);
+
         rightClaw.transform.localRotation = Quaternion.Lerp(
             rClawQuatStart,
             rClawQuatEnd,
@@ -163,6 +157,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        //Shoot a very short spehere cast from the centre of the collider to just outside the collider's bounds to test if the crab is on a surface.
+        onGround = Physics.SphereCast(
+            new Ray(crabCollider.bounds.center, Vector3.down),
+            0.1f,
+            crabCollider.bounds.extents.y + 0.1f,
+            ~layerMask_Player //The tilde inverts the integer bits, meaning that it will collide against everything BUT the player character :)
+            );
+
         if (!snip) {
             MoveMode();
         }
@@ -172,35 +174,43 @@ public class PlayerController : MonoBehaviour {
     /// Called on the physics step via FixedUpdate()
     /// </summary>
     void MoveMode() {
-        //Apply force.
 
-        //XInput is active.
-        if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
-            Vector3 targetVelocity = transform.right * -inputLS.x * speed;
+        if (onGround) {
 
-            Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
-            velocityChange.x = Mathf.Clamp(targetVelocity.x, -maxSpeedChange, maxSpeedChange);
-            velocityChange.z = Mathf.Clamp(targetVelocity.z, -maxSpeedChange, maxSpeedChange);
-            velocityChange.y = 0;
+            //Apply force.
+            //XInput is active.
+            if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
 
-            crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-        }
+                //Invert the x input based on whether the camera is facing the front or the back of the crab.
+                bool invert = Vector3.Dot(Camera.main.transform.forward, transform.forward) > 0.0f;
 
-        //YInput is active
-        if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
-            crabRigidbody.rotation = Quaternion.Euler(
-                crabRigidbody.rotation.eulerAngles.x,
-                crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
-                crabRigidbody.rotation.eulerAngles.z);
-        }
+                Vector3 targetVelocity = transform.right * inputLS.x * speed * (invert ? 1.0f : -1.0f);
 
-        //Jump
-        if (jumpAttempt && onGround) {
+                Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
+                velocityChange.x = Mathf.Clamp(targetVelocity.x, -maxSpeedChange, maxSpeedChange);
+                velocityChange.z = Mathf.Clamp(targetVelocity.z, -maxSpeedChange, maxSpeedChange);
+                velocityChange.y = 0;
 
-            crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+            }
 
-            jumpAttempt = false;
-            onGround = false;
+            //Rotate
+            //YInput is active
+            if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
+                crabRigidbody.rotation = Quaternion.Euler(
+                    crabRigidbody.rotation.eulerAngles.x,
+                    crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
+                    crabRigidbody.rotation.eulerAngles.z);
+            }
+
+            //Jump
+            if (jumpAttempt) {
+
+                crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+                jumpAttempt = false;
+                onGround = false;
+            }
         }
     }
 
@@ -237,7 +247,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void OnCollisionEnter(Collision collision) {
+    /*void OnCollisionEnter(Collision collision) {
 
         //TODO check collision *starts on* ground
 
@@ -249,7 +259,7 @@ public class PlayerController : MonoBehaviour {
         //TODO check collision *left* ground
 
         onGround = false;
-    }
+    }*/
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {
@@ -269,6 +279,28 @@ public class PlayerController : MonoBehaviour {
 
 
     #region Handle Inputs
+
+    private void registerInputEvents() {
+        InputManagerData data = (InputManagerData)InputManager.Instance.SingletonBaseRef.Data;
+
+        data.movement.performed += onInputMovement;
+        data.movement.canceled += onInputMovement;
+        
+        data.look.performed += onInputLook;
+        data.look.canceled += onInputLook;
+        
+        data.jump.performed += onInputJump;
+        data.jump.canceled += onInputJump;
+        
+        data.snipModeToggle.performed += onInputSnipModeToggle;
+        data.snipModeToggle.canceled += onInputSnipModeToggle;
+        
+        data.leftCrabClaw.performed += onInputLeftCrabClaw;
+        data.leftCrabClaw.canceled += onInputLeftCrabClaw;
+        
+        data.rightCrabClaw.performed += onInputRightCrabClaw;
+        data.rightCrabClaw.canceled += onInputRightCrabClaw;
+    }
 
     private void onInputMovement(InputAction.CallbackContext ctx) {
         inputLS = ctx.ReadValue<Vector2>();

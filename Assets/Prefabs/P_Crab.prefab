@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 154298327}
   - component: {fileID: 154298326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.018528093, y: -0.43351683, z: 0.008915687, w: 0.9009109}
+  m_LocalRotation: {x: 0.018400079, y: 0.44622138, z: -0.009176967, w: 0.8946864}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 280312914}
   - component: {fileID: 280312913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.03486888, y: -0.43328375, z: 0.016778847, w: 0.9004265}
+  m_LocalRotation: {x: 0.034627963, y: 0.44598147, z: -0.017270561, w: 0.8942054}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 896856948}
   - component: {fileID: 7709064873991346694}
   - component: {fileID: 7709064873991346693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900109729}
   - component: {fileID: 900109728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.05124141, y: -0.43290687, z: 0.02465728, w: 0.8996433}
+  m_LocalRotation: {x: 0.050887372, y: 0.44559354, z: -0.02537988, w: 0.89342755}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5983552636627732431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_R_A_Digit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 821184417138332967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8239920955334534881}
   - component: {fileID: 7709064874211758790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_R_A_Palm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7659215895898234161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1075489522763112839}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_1_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2854916479343497932}
   - component: {fileID: 7709064874521860692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_1_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6891151275016898092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_3_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9045679289963119678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_1_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7856002014613574332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211283574099857294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4313173617246846213}
   - component: {fileID: 2708288310397727832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: 681535990fa4fa14dbd3350d13accd80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -849,7 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 639753592604832823}
   - component: {fileID: 7598039676931949272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +889,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: 5dfee76b731ea264d8bcd04e073b8f2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -954,7 +954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6846763688855796460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151415331076541191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1016,7 +1016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8499477753881987107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 83367150388304852}
   - component: {fileID: 7709064874623549771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_2_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 392433710782906041}
   - component: {fileID: 4243381668269258104}
   - component: {fileID: 4243381668269258105}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1197,7 +1197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7157436183286711801}
   - component: {fileID: 2095374367794806634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Arms_Claws_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1237,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: b1e9f33ad65a03d498786a4b284b7b43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1302,7 +1302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 946868745989457101}
   - component: {fileID: 4378176491694701428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Legs_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1342,7 +1342,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: 3ce78060a5d32a2449e3f2e851fa7c8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1414,7 +1414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8294321903720927527}
   - component: {fileID: 7709064874375490894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_1_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5575909111162673557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_2_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5819391116165099060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_L_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8414579995621932116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Eye_R_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5011995541169159528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_2_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1617,7 +1617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4732470720655796642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Eye_L_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1648,7 +1648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5344460102461853203}
   - component: {fileID: 683903901955541144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Legs_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1688,7 +1688,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: dba3f2d2da0fbc54da4ecf2b913613c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1756,7 +1756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7475330474487395304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,7 +1796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6655031511040515103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_3_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1828,7 +1828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638880062574617475}
   - component: {fileID: 7328871941182314796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Arms_Claws_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1868,7 +1868,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: 2d70ceb09358963409c71cb115a18b16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1933,7 +1933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5330143002473724332}
   - component: {fileID: 7709064875420394208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_L_A_Palm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1982,7 +1982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7887668636405176649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2014,7 +2014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4223042017506056089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_L_A_Digit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2044,7 +2044,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7425326059393137150}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2075,7 +2075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5933093519485957445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2730,7 +2730,7 @@ GameObject:
   - component: {fileID: 7709064874209760524}
   - component: {fileID: 7709064874339324680}
   - component: {fileID: 5369895122664869697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CM_ThirdPerson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2745,7 +2745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7350764, y: 0.39999998, z: -2.1838858}
+  m_LocalPosition: {x: -2.7957792, y: 0.39999998, z: -2.1056159}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
@@ -2920,7 +2920,7 @@ GameObject:
   - component: {fileID: 7709064874459285451}
   - component: {fileID: 7709064874459285493}
   - component: {fileID: 7709064874459285492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IK_Crab_Arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3000,7 +3000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7709064874596812858}
   - component: {fileID: 7709064874596812860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3352,7 +3352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709064874664270907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab IK Inherit Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3387,7 +3387,7 @@ GameObject:
   - component: {fileID: 7709064875134631829}
   - component: {fileID: 7709064875134631828}
   - component: {fileID: 7709064875134631827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3511,7 +3511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7709064875299506518}
   - component: {fileID: 7709064875299506517}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CM_FirstPerson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3579,7 +3579,7 @@ GameObject:
   - component: {fileID: 7709064875642990525}
   - component: {fileID: 7709064875642990527}
   - component: {fileID: 7709064875642990526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IK_Crab_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3661,7 +3661,7 @@ GameObject:
   - component: {fileID: 7709064875697898561}
   - component: {fileID: 7709064875697898560}
   - component: {fileID: 7709064875697898575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3785,7 +3785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8175384860002530304}
   - component: {fileID: 7709064874335963997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_3_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3834,7 +3834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3420731874455794159}
   - component: {fileID: 7709064874498311330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_R_3_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3882,7 +3882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8062607022958865941}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3913,7 +3913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4564088053950715467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3945,7 +3945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928296926561416910}
   - component: {fileID: 7709064874170474985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Leg_L_2_A_Ankle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3993,7 +3993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4454236216925785908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crab_Arm_R_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4025,7 +4025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2870044650881162741}
   - component: {fileID: 7204774997129256707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_Crab_Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4065,7 +4065,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f4ebf7b550d744148af654ab31202518, type: 3}
+  - {fileID: 2100000, guid: cb5e7514b3370e54da035a9525885bcc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

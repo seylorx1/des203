@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7203b1f27173834cbb067c13874238a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   CurrentPhase: 1
 --- !u!1001 &363634081
 PrefabInstance:
@@ -521,24 +521,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c7c1707f2ee51b46933079ca41b4411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   Languages:
   - LanguageName: English (US)
     GameName: Crab Crab Revolution (WIP)
     Menu:
       Play: Play Game
-      Quit: 
+      Quit:
   - LanguageName: English (UK)
     GameName: Crab Crab Revolution (WIP)
     Menu:
       Play: Play Game
-      Quit: 
+      Quit:
   - LanguageName: "G\xE0idhlig"
     GameName: "Teicheadh Cr\xF9bag "
     Menu:
       Play: "T\xF2iseachadh Geama"
-      Quit: 
+      Quit:
 --- !u!1 &1358671589
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,8 +633,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
@@ -667,62 +667,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e8682dc16ab8e340bcd1d6ba84e9b05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   movement:
     m_Name: Movement
     m_Type: 0
     m_ExpectedControlType: Axis
     m_Id: 0abc898f-4db0-47bc-ab39-bdf2413dd699
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
-    - m_Name: 
+    - m_Name:
       m_Id: 04ce87db-e6ef-480e-a7ec-b4b17ef6a016
       m_Path: <Gamepad>/leftStick
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 0
     - m_Name: WASD
       m_Id: 7df5572e-5522-4418-9a58-87ad55e21995
       m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 4
     - m_Name: up
       m_Id: 6d17bd6b-6f30-4cff-81c4-5d476a3b7250
       m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 8
     - m_Name: down
       m_Id: a0f87cab-5083-4db6-8f2f-e406453207ea
       m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 8
     - m_Name: left
       m_Id: 56e3c747-27d6-4c35-a3c8-496548c3527b
       m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 8
     - m_Name: right
       m_Id: 109bb9f7-875d-4133-b9f2-28b312ed2242
       m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Movement
       m_Flags: 8
   look:
@@ -730,151 +730,151 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: Axis
     m_Id: e8d2ae3e-8371-4519-b0b8-da2661bb6ab9
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
     - m_Name: Arrow Keys
       m_Id: 765d8433-cb49-47ce-bbe5-e081b0d91a9a
       m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 4
     - m_Name: up
       m_Id: 1f1f5507-593b-406b-bb42-622fc54cb91d
       m_Path: <Keyboard>/upArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 8
     - m_Name: down
       m_Id: bd45d16a-9ce0-456c-b270-fe7ac664da5d
       m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 8
     - m_Name: left
       m_Id: dd2062d0-483d-4726-9bca-d6b999f8d1ed
       m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 8
     - m_Name: right
       m_Id: b1e52835-f97e-437b-b6e0-0ff04f16279d
       m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 8
-    - m_Name: 
+    - m_Name:
       m_Id: 8a55ad80-a5cd-4919-8ff6-3a7e31d76547
       m_Path: <Gamepad>/rightStick
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Look
       m_Flags: 0
   jump:
     m_Name: Jump
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: a9c521bb-8407-4448-80c7-87c22786c3e9
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
-    - m_Name: 
+    - m_Name:
       m_Id: f3fcb4ed-74d1-4476-872a-466ed67f3b52
       m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Jump
       m_Flags: 0
-    - m_Name: 
+    - m_Name:
       m_Id: 356f4776-6bb2-4593-a478-0b120d067eae
       m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Jump
       m_Flags: 0
   snipModeToggle:
     m_Name: Snip Mode Toggle
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: b586b19c-a513-4a44-adde-3ebfd0032be4
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
-    - m_Name: 
+    - m_Name:
       m_Id: 307e0187-09cd-464e-8a70-14dac2467c5a
       m_Path: <Keyboard>/tab
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Snip Mode Toggle
       m_Flags: 0
-    - m_Name: 
+    - m_Name:
       m_Id: 1f9d29d6-8d13-4084-a7de-811091d2c0a4
       m_Path: <Gamepad>/buttonWest
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Snip Mode Toggle
       m_Flags: 0
   leftCrabClaw:
     m_Name: Left Crab Claw
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 89971c63-e921-4391-8412-69542a79b83d
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
-    - m_Name: 
+    - m_Name:
       m_Id: 2def152f-ce35-41d3-973d-b74bef9a4b6f
       m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Left Crab Claw
       m_Flags: 0
-    - m_Name: 
+    - m_Name:
       m_Id: 5a0eec69-a2b6-42a2-baeb-517494ef86df
       m_Path: <Gamepad>/leftTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Left Crab Claw
       m_Flags: 0
   rightCrabClaw:
     m_Name: Right Crab Claw
     m_Type: 0
-    m_ExpectedControlType: 
+    m_ExpectedControlType:
     m_Id: 951dffb9-dbe6-42b1-b6ed-5cacfcc5593b
-    m_Processors: 
-    m_Interactions: 
+    m_Processors:
+    m_Interactions:
     m_SingletonActionBindings:
-    - m_Name: 
+    - m_Name:
       m_Id: 657eeb0a-832c-4526-96d6-44baff522286
       m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Right Crab Claw
       m_Flags: 0
-    - m_Name: 
+    - m_Name:
       m_Id: d932c383-504a-40e3-9f0d-43a25b387714
       m_Path: <Gamepad>/rightTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
+      m_Interactions:
+      m_Processors:
+      m_Groups:
       m_Action: Right Crab Claw
       m_Flags: 0
 --- !u!1 &1520471907 stripped
@@ -948,15 +948,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5663456055598001393, guid: 089f3268f27453249bf329462a696fa3, type: 3}
       propertyPath: SingletonBases.Array.data[0].m_data
-      value: 
+      value:
       objectReference: {fileID: 1333533528}
     - target: {fileID: 5663456055598001393, guid: 089f3268f27453249bf329462a696fa3, type: 3}
       propertyPath: SingletonBases.Array.data[1].m_data
-      value: 
+      value:
       objectReference: {fileID: 179325334}
     - target: {fileID: 5663456055598001393, guid: 089f3268f27453249bf329462a696fa3, type: 3}
       propertyPath: SingletonBases.Array.data[2].m_data
-      value: 
+      value:
       objectReference: {fileID: 1449099553}
     - target: {fileID: 5663456055598001394, guid: 089f3268f27453249bf329462a696fa3, type: 3}
       propertyPath: m_Name
@@ -1308,6 +1308,18 @@ PrefabInstance:
     - target: {fileID: 4925275509737903978, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5197803692143090833, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290278132828134643, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766019724333055279, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5773505379303149111, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
       propertyPath: m_Name
