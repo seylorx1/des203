@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour {
         lClawIKTarget,
         rClawIKTarget;
 
-    public float speed = 5;
-    public float maxSpeedChange = 5;
+    public float Acceleration = 5;
+    public float MaxVelocity = 5;
 
     public float rotateSpeed = 20.0f;
 
@@ -179,11 +179,11 @@ public class PlayerController : MonoBehaviour {
                 //Invert the x input based on whether the camera is facing the front or the back of the crab.
                 bool invert = Vector3.Dot(Camera.main.transform.forward, transform.forward) > 0.0f;
 
-                Vector3 targetVelocity = transform.right * inputLS.x * speed * (invert ? 1.0f : -1.0f);
+                Vector3 targetVelocity = transform.right * inputLS.x * Acceleration * (invert ? 1.0f : -1.0f);
 
                 Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
-                velocityChange.x = Mathf.Clamp(targetVelocity.x, -maxSpeedChange, maxSpeedChange);
-                velocityChange.z = Mathf.Clamp(targetVelocity.z, -maxSpeedChange, maxSpeedChange);
+                velocityChange.x = Mathf.Clamp(targetVelocity.x, -MaxVelocity, MaxVelocity);
+                velocityChange.z = Mathf.Clamp(targetVelocity.z, -MaxVelocity, MaxVelocity);
                 velocityChange.y = 0;
 
                 crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);

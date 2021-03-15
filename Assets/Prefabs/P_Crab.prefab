@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 3361389924063898658}
   - component: {fileID: 392433710782906041}
   - component: {fileID: 4243381668269258104}
-  - component: {fileID: 4243381668269258105}
+  - component: {fileID: 189952027}
   m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
@@ -1174,8 +1174,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &4243381668269258105
-BoxCollider:
+--- !u!135 &189952027
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1185,8 +1185,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.32, z: 0.63}
-  m_Center: {x: 0, y: 0.26, z: 0.05}
+  m_Radius: 0.29190892
+  m_Center: {x: 0, y: 0.3734812, z: 0.03}
 --- !u!1 &4272548759277652361
 GameObject:
   m_ObjectHideFlags: 0
