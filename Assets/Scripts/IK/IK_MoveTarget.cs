@@ -44,7 +44,6 @@ public class IK_MoveTarget : MonoBehaviour {
         if(snapLeg) {
             // Animate legs
             //dist = Vector3.Distance(transform.position, targetPosition);
-            Debug.Log(Mathf.Max(speed, targetDistance * DistanceSpeedMod));
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * Mathf.Max(speed, targetDistance * DistanceSpeedMod));
 
             if(transform.position == targetPosition) {
