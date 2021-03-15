@@ -18,18 +18,27 @@ public class IK_MoveTarget : MonoBehaviour {
 
     private bool snapLeg = false;
 
+    private int layerMask_Player;
+
     void Start() {
         targetOffset = transform.position - CrabTransform.position;
         targetPosition = transform.position;
+
+        layerMask_Player = LayerMask.GetMask("PlayerCharacter");
     }
 
     void Update() {
         // Future raycast
-        RaycastHit hit;
         targetPosition = CrabTransform.position + CrabTransform.TransformDirection(targetOffset);
 
         Debug.DrawRay(targetPosition + Vector3.up, Vector3.down, Color.green);
-        if (Physics.Raycast(targetPosition + Vector3.up, Vector3.down, out hit, rayLength)) {
+        RaycastHit hit;
+        if (Physics.Raycast(
+                targetPosition + Vector3.up,
+                Vector3.down,
+                out hit,
+                rayLength,
+                ~layerMask_Player)) {
             targetPosition.y = hit.point.y;
         }
 
