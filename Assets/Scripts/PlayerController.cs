@@ -15,29 +15,36 @@ public class PlayerController : MonoBehaviour {
         lClawIKTarget,
         rClawIKTarget;
 
-    public float Acceleration = 5;
-    public float MaxVelocity = 5;
-
-    public float rotateSpeed = 20.0f;
-
-    public float jumpForce = 4;
-    public float clawSpeed = 5;
-    public float resetSpeed = 0.1f;
-
-    public Vector3
-        lClawEulerStart,
-        rClawEulerStart,
-        lClawEulerEnd,
-        rClawEulerEnd;
-
-    public Vector2
-        lClawIKMin,
-        lClawIKMax,
-        rClawIKMin,
-        rClawIKMax;
     public float
-        lClawIK_Z,
-        rClawIK_Z;
+        Acceleration = 5,
+        MaxVelocity = 5,
+        rotateSpeed = 20.0f,
+        jumpForce = 4;
+
+    [System.Serializable]
+    public struct CrabClawData {
+        public Vector3
+            lClawEulerStart,
+            rClawEulerStart,
+            lClawEulerEnd,
+            rClawEulerEnd;
+
+        public Vector2
+            lClawIKMin,
+            lClawIKMax,
+            rClawIKMin,
+            rClawIKMax;
+
+        public float
+            lClawIK_Z,
+            rClawIK_Z,
+            clawSpeed;
+
+        public CapsuleCollider
+            lClawCollider,
+            rClawCollider;
+    }
+    public CrabClawData crabClawData;
     #endregion
 
     #region Private
@@ -65,15 +72,13 @@ public class PlayerController : MonoBehaviour {
     private bool
         jumpAttempt = false,
         snip = false,
-        onGround = false;
+        onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
+        isFlipped = false, // Is the crab flipped over? (Used for flipping.)
+        isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
     #endregion
     #endregion
 
-    public CapsuleCollider
-        lClawCollider,
-        rClawCollider;
-
-
+    //Used externally.
     public Vector2 LookAxis {
         get {
             if (!snip) {
@@ -87,10 +92,10 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
         //Convert euler angles to quaternion before anything else.
         //(Saves a bit of processing.)
-        lClawQuatStart = Quaternion.Euler(lClawEulerStart);
-        rClawQuatStart = Quaternion.Euler(rClawEulerStart);
-        lClawQuatEnd = Quaternion.Euler(lClawEulerEnd);
-        rClawQuatEnd = Quaternion.Euler(rClawEulerEnd);
+        lClawQuatStart = Quaternion.Euler(crabClawData.lClawEulerStart);
+        rClawQuatStart = Quaternion.Euler(crabClawData.rClawEulerStart);
+        lClawQuatEnd = Quaternion.Euler(crabClawData.lClawEulerEnd);
+        rClawQuatEnd = Quaternion.Euler(crabClawData.rClawEulerEnd);
     }
 
     void Start() {
@@ -165,6 +170,13 @@ public class PlayerController : MonoBehaviour {
             ~layerMask_Player //The tilde inverts the integer bits, meaning that it will collide against everything BUT the player character :)
             );
 
+        float crabVerticalDot = Vector3.Dot(Vector3.up, transform.up); //Provides information about the orientation of the crab.
+        //Detect whether the crab is tipped over.
+        isFlipped = crabVerticalDot < 0.0f;
+
+        //Detect if the crab is lying on their side.
+        isOnEdge = Mathf.Abs(crabVerticalDot) < 0.1f;
+
         if (!snip) {
             MoveMode();
         }
@@ -175,46 +187,58 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     void MoveMode() {
 
+        //Only apply movements if the crab is touching the ground.
         if (onGround) {
 
-            //Apply force.
-            //XInput is active.
-            if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
+            // Ensure the crab is not flipped over or on their edge.
+            if ( !(isFlipped || isOnEdge) ) { 
 
-                //Invert the x input based on whether the camera is facing the front or the back of the crab.
-                bool invert = Vector3.Dot(
-                    new Vector3(Camera.main.transform.forward.x, 0.0f, Camera.main.transform.forward.z),
-                    new Vector3(transform.forward.x, 0.0f, transform.forward.z)
-                    ) > 0.0f;
+                //Apply force.
+                //XInput is active.
+                if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
 
-                Vector3 targetVelocity = transform.right * inputLS.x * Acceleration * (invert ? 1.0f : -1.0f);
+                    Vector3 targetVelocity = transform.right * -inputLS.x * Acceleration;
 
-                Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
-                velocityChange.x = Mathf.Clamp(velocityChange.x, -MaxVelocity, MaxVelocity);
-                velocityChange.z = Mathf.Clamp(velocityChange.z, -MaxVelocity, MaxVelocity);
-                velocityChange.y = 0;
+                    Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
+                    velocityChange.x = Mathf.Clamp(velocityChange.x, -MaxVelocity, MaxVelocity);
+                    velocityChange.z = Mathf.Clamp(velocityChange.z, -MaxVelocity, MaxVelocity);
 
-                Debug.Log(velocityChange);
+                    velocityChange.y = 0.15f; //Adding a little bit of lift stops the crab from clipping the ground and tipping *as much*.
 
-                crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-            }
+                    crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+                }
 
-            //Rotate
-            //YInput is active
-            if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
-                crabRigidbody.rotation = Quaternion.Euler(
-                    crabRigidbody.rotation.eulerAngles.x,
-                    crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
-                    crabRigidbody.rotation.eulerAngles.z);
+                //Rotate
+                //YInput is active
+                if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
+                    crabRigidbody.rotation = Quaternion.Euler(
+                        crabRigidbody.rotation.eulerAngles.x,
+                        crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
+                        crabRigidbody.rotation.eulerAngles.z);
+                }
             }
 
             //Jump
             if (jumpAttempt) {
 
-                crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                if (isFlipped) {
+                    Debug.Log("Flip!");
+                    //attempt to rectify crab
+                    crabRigidbody.AddTorque(
+                        new Vector3(
+                            Random.Range(0,2) == 0 ? -0.1f : 0.1f, //Randomly add torque in one direction or an other to accomodate for edge cases.
+                            0.0f,
+                            0.0f),
+                        ForceMode.Impulse);
+                    crabRigidbody.AddForce(-transform.up * jumpForce, ForceMode.Impulse);
+                }
+                else {
+                    //perform jump
+                    crabRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    onGround = false;
+                }
 
                 jumpAttempt = false;
-                onGround = false;
             }
         }
     }
@@ -226,45 +250,28 @@ public class PlayerController : MonoBehaviour {
 
         if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
             lClawIKTarget.transform.position +=
-            ((Camera.main.transform.right * inputLS.x) +
-            (Camera.main.transform.up * inputLS.y)) *
-            clawSpeed * Time.deltaTime;
+                ((Camera.main.transform.right * inputLS.x) + (Camera.main.transform.up * inputLS.y)) *
+                crabClawData.clawSpeed * Time.deltaTime;
 
             lClawIKTarget.transform.localPosition = new Vector3(
-                Mathf.Clamp(lClawIKTarget.transform.localPosition.x, lClawIKMin.x, lClawIKMax.x),
-                Mathf.Clamp(lClawIKTarget.transform.localPosition.y, lClawIKMin.y, lClawIKMax.y),
-                lClawIK_Z
+                Mathf.Clamp(lClawIKTarget.transform.localPosition.x, crabClawData.lClawIKMin.x, crabClawData.lClawIKMax.x),
+                Mathf.Clamp(lClawIKTarget.transform.localPosition.y, crabClawData.lClawIKMin.y, crabClawData.lClawIKMax.y),
+                crabClawData.lClawIK_Z
                 );
         }
 
         if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
             rClawIKTarget.transform.position +=
-            ((Camera.main.transform.right * inputRS.x) +
-            (Camera.main.transform.up * inputRS.y)) *
-            clawSpeed * Time.deltaTime;
+                ((Camera.main.transform.right * inputRS.x) + (Camera.main.transform.up * inputRS.y)) *
+                crabClawData.clawSpeed * Time.deltaTime;
 
             rClawIKTarget.transform.localPosition = new Vector3(
-                Mathf.Clamp(rClawIKTarget.transform.localPosition.x, rClawIKMin.x, rClawIKMax.x),
-                Mathf.Clamp(rClawIKTarget.transform.localPosition.y, rClawIKMin.y, rClawIKMax.y),
-                rClawIK_Z
+                Mathf.Clamp(rClawIKTarget.transform.localPosition.x, crabClawData.rClawIKMin.x, crabClawData.rClawIKMax.x),
+                Mathf.Clamp(rClawIKTarget.transform.localPosition.y, crabClawData.rClawIKMin.y, crabClawData.rClawIKMax.y),
+                crabClawData.rClawIK_Z
                 );
         }
     }
-
-
-    /*void OnCollisionEnter(Collision collision) {
-
-        //TODO check collision *starts on* ground
-
-        onGround = true;
-    }
-
-    void OnCollisionExit(Collision collision) {
-
-        //TODO check collision *left* ground
-
-        onGround = false;
-    }*/
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {

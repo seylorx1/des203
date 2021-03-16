@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.018820435, y: -0.4026434, z: 0.008280742, w: 0.915126}
+  m_LocalRotation: {x: 0.028862346, y: 0.42354113, z: -0.013502896, w: 0.9053163}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.035419054, y: -0.40242693, z: 0.01558392, w: 0.9146339}
+  m_LocalRotation: {x: 0.045281354, y: 0.4232265, z: -0.021184329, w: 0.9046437}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -298,7 +298,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.05204992, y: -0.40207687, z: 0.022901282, w: 0.9138384}
+  m_LocalRotation: {x: 0.061728865, y: 0.42277113, z: -0.028879095, w: 0.9036704}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 3361389924063898658}
   - component: {fileID: 392433710782906041}
   - component: {fileID: 4243381668269258104}
-  - component: {fileID: 189952027}
+  - component: {fileID: 1346958536}
   m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
@@ -1157,24 +1157,24 @@ MonoBehaviour:
   rightClaw: {fileID: 159455554046159493}
   lClawIKTarget: {fileID: 7709064875642990524}
   rClawIKTarget: {fileID: 7709064874459285450}
-  Acceleration: 1
-  MaxVelocity: 0.1
+  Acceleration: 1.5
+  MaxVelocity: 2
   rotateSpeed: 50
   jumpForce: 4
-  clawSpeed: 1.5
-  resetSpeed: 0.1
-  lClawEulerStart: {x: 350.5436, y: 281.66016, z: 334.7777}
-  rClawEulerStart: {x: 1.6842829, y: 89.49627, z: 337.41974}
-  lClawEulerEnd: {x: 350.88403, y: 337.91925, z: 9.810146}
-  rClawEulerEnd: {x: 2.6433244, y: 16.993876, z: 358.66577}
-  lClawIKMin: {x: 0, y: 0.1}
-  lClawIKMax: {x: 0.4, y: 0.4}
-  rClawIKMin: {x: -0.4, y: 0.1}
-  rClawIKMax: {x: 0, y: 0.4}
-  lClawIK_Z: -0.45
-  rClawIK_Z: -0.45
-  lClawCollider: {fileID: 0}
-  rClawCollider: {fileID: 0}
+  crabClawData:
+    lClawEulerStart: {x: 350.5, y: 281.7, z: 334.8}
+    rClawEulerStart: {x: 1.7, y: 89.5, z: 337.4}
+    lClawEulerEnd: {x: 350.9, y: 337.9, z: 9.8}
+    rClawEulerEnd: {x: 2.6, y: 17, z: 358.7}
+    lClawIKMin: {x: 0, y: 0.1}
+    lClawIKMax: {x: 0.4, y: 0.4}
+    rClawIKMin: {x: -0.4, y: 0.1}
+    rClawIKMax: {x: 0, y: 0.4}
+    lClawIK_Z: -0.45
+    rClawIK_Z: -0.45
+    clawSpeed: 1.5
+    lClawCollider: {fileID: 0}
+    rClawCollider: {fileID: 0}
 --- !u!54 &4243381668269258104
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1184,15 +1184,15 @@ Rigidbody:
   m_GameObject: {fileID: 4243381668269258111}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0.1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
+  m_Interpolate: 1
+  m_Constraints: 48
   m_CollisionDetection: 0
---- !u!135 &189952027
-SphereCollider:
+--- !u!136 &1346958536
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1201,9 +1201,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.29190892
-  m_Center: {x: 0, y: 0.3734812, z: 0.03}
+  m_Radius: 0.18216133
+  m_Height: 0.77243805
+  m_Direction: 0
+  m_Center: {x: -0.007144928, y: 0.26556587, z: 0.016815186}
 --- !u!1 &4272548759277652361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,7 +2763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.580377, y: 0.39999998, z: -2.3646681}
+  m_LocalPosition: {x: -2.7957764, y: 0.40000153, z: -2.1056137}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
