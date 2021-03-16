@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour {
         Acceleration = 5,
         MaxVelocity = 5,
         rotateSpeed = 20.0f,
-        jumpForce = 4;
+        jumpForce = 4,
+        flipTorque = 0.2f;
 
     [System.Serializable]
     public struct CrabClawData {
@@ -226,7 +227,7 @@ public class PlayerController : MonoBehaviour {
                     //attempt to rectify crab
                     crabRigidbody.AddTorque(
                         new Vector3(
-                            Random.Range(0,2) == 0 ? -0.1f : 0.1f, //Randomly add torque in one direction or an other to accomodate for edge cases.
+                            Random.Range(0,2) == 0 ? -flipTorque : flipTorque, //Randomly add torque in one direction or an other to accomodate for edge cases.
                             0.0f,
                             0.0f),
                         ForceMode.Impulse);
