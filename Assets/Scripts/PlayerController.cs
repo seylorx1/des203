@@ -89,6 +89,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool GetCrabFlipped {
+        get {
+            return isFlipped;
+        }
+    }
+
 
     void Awake() {
         //Convert euler angles to quaternion before anything else.
@@ -334,7 +340,12 @@ public class PlayerController : MonoBehaviour {
     private void onInputSnipModeToggle(InputAction.CallbackContext ctx) {
         //Toggle snip mode on "Joystick1Button2".
         if (ctx.ReadValueAsButton()) {
-            snip = !snip;
+            if (isFlipped) {
+                snip = false;
+            }
+            else {
+                snip = !snip;
+            }
         }
     }
 
