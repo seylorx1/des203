@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour {
     // Variables
     #region Variables
+
+    
+
     #region Public
     public GameObject
         thirdCam,
@@ -23,6 +28,10 @@ public class PlayerController : MonoBehaviour {
         flipTorque = 0.2f,
         lTrigger,
         rTrigger;
+
+    public Text scoretext;
+    public Animator PointsAnim;
+    
 
     [System.Serializable]
     public struct CrabClawData {
@@ -65,6 +74,7 @@ public class PlayerController : MonoBehaviour {
         rCloseAmount;
 
     private int layerMask_Player;
+    private int score = 0;
 
     private bool
         jumpAttempt = false,
@@ -104,6 +114,9 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
+
+        scoretext.text = "" + score;
+        
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
@@ -279,6 +292,12 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {
             Debug.Log("Item Picked Up");
+
+
+            PointsAnim.SetBool("GetPoints", true);
+            score = score + 50;
+            scoretext.text = "" + score;
+            
             Destroy(other.gameObject);
         }
     }
