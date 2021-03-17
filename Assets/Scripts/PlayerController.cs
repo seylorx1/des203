@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour {
         MaxVelocity = 5,
         rotateSpeed = 20.0f,
         jumpForce = 4,
-        flipTorque = 0.2f;
+        flipTorque = 0.2f,
+        lTrigger,
+        rTrigger;
 
     [System.Serializable]
     public struct CrabClawData {
@@ -40,10 +42,6 @@ public class PlayerController : MonoBehaviour {
             lClawIK_Z,
             rClawIK_Z,
             clawSpeed;
-
-        public CapsuleCollider
-            lClawCollider,
-            rClawCollider;
     }
     public CrabClawData crabClawData;
     #endregion
@@ -63,8 +61,6 @@ public class PlayerController : MonoBehaviour {
     inputRS;
 
     private float
-        lTrigger,
-        rTrigger,
         lCloseAmount,
         rCloseAmount;
 
@@ -286,16 +282,6 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject);
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Grabbable" && rTrigger > 0.1f)
-        {
-            Debug.Log("grabbed");
-            other.transform.parent = rightClaw.gameObject.transform;
-        }
-    }
-
 
     #region Handle Inputs
 
