@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour {
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
 
-        //scoretext.text = "" + score;
+        scoretext.text = "" + score;
 
         heat = 0;
 
@@ -303,17 +303,25 @@ public class PlayerController : MonoBehaviour {
     {
 
     }
-    void OnTriggerEnter(Collider other) {
-        if (other.tag == "Collectable") {
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Collectable")
+        {
             Debug.Log("Item Picked Up");
 
 
             PointsAnim.SetBool("GetPoints", true);
             score = score + 50;
             scoretext.text = "" + score;
-            
             Destroy(other.gameObject);
+            Invoke("ToDoAfterAnimationPlayed", 1);
+
         }
+    }
+
+    void ToDoAfterAnimationPlayed()
+    {
+        PointsAnim.SetBool("GetPoints", false);
     }
 
     private void OnCollisionStay(Collision collision)
