@@ -311,10 +311,10 @@ public class PlayerController : MonoBehaviour {
 
 
             PointsAnim.SetBool("GetPoints", true);
-            score = score + 50;
+            
             scoretext.text = "" + score;
             Destroy(other.gameObject);
-            Invoke("ToDoAfterAnimationPlayed", 1);
+            Invoke("ToDoAfterAnimationPlayed", 0.8f);
 
         }
     }
@@ -322,6 +322,8 @@ public class PlayerController : MonoBehaviour {
     void ToDoAfterAnimationPlayed()
     {
         PointsAnim.SetBool("GetPoints", false);
+        score = score + 50;
+        scoretext.text = "" + score;
     }
 
     private void OnCollisionStay(Collision collision)
