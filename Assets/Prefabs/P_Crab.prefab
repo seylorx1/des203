@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.003989677, y: 0.9807876, z: -0.020171033, w: 0.19399236}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.004671291, y: 0.97364575, z: -0.020023951, w: 0.22713712}
+  m_LocalPosition: {x: -0.00000047683716, y: 0, z: 0.00000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875134631826}
@@ -98,8 +98,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.007508325, y: 0.98026025, z: -0.037960634, w: 0.19388804}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.008791122, y: 0.97312224, z: -0.037684005, w: 0.227015}
+  m_LocalPosition: {x: -0.00000047683716, y: 0, z: 0.00000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875697898574}
@@ -298,8 +298,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.011033811, y: 0.97940755, z: -0.055784814, w: 0.19371936}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.012918952, y: 0.9722758, z: -0.055378366, w: 0.22681755}
+  m_LocalPosition: {x: -0.0000019073486, y: 0, z: 0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 896856946}
@@ -1209,6 +1209,8 @@ MonoBehaviour:
   flipTorque: 0.2
   lTrigger: 0
   rTrigger: 0
+  heat: 0
+  dps: 5
   scoretext: {fileID: 0}
   PointsAnim: {fileID: 0}
   crabClawData:
@@ -2581,7 +2583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3324203, y: 0.40000153, z: 3.2364578}
+  m_LocalPosition: {x: -1.5487124, y: 0.39999998, z: 3.1387086}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}

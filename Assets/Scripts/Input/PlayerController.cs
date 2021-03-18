@@ -27,9 +27,13 @@ public class PlayerController : MonoBehaviour {
         jumpForce = 4,
         flipTorque = 0.2f,
         lTrigger,
-        rTrigger;
+        rTrigger,
+        heat,
+        dps;
+
 
     public Text scoretext;
+
     public Animator PointsAnim;
     
 
@@ -115,8 +119,9 @@ public class PlayerController : MonoBehaviour {
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
 
-        scoretext.text = "" + score;
-        
+        //scoretext.text = "" + score;
+
+        heat = 0;
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
@@ -137,6 +142,11 @@ public class PlayerController : MonoBehaviour {
 
         firstCam.gameObject.SetActive(snip);
         thirdCam.gameObject.SetActive(!snip);
+
+        if (heat >= 100)
+        {
+            GameOver();
+        }
 
         #region Crab Claw Controls
 
@@ -289,6 +299,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void GameOver()
+    {
+
+    }
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {
             Debug.Log("Item Picked Up");
@@ -299,6 +313,14 @@ public class PlayerController : MonoBehaviour {
             scoretext.text = "" + score;
             
             Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Hazard")
+        {
+            heat += dps * Time.deltaTime;
         }
     }
 
