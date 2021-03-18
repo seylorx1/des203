@@ -6,19 +6,19 @@ using UnityEngine.UI;
 public class HeatSlider : MonoBehaviour
 {
     public PlayerController playerController;
-    private Slider slider;
+    private Image slider;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>(); 
+        slider = GetComponent<Image>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        float fillValue = playerController.heat;
-        slider.value = fillValue;
+        float fillValue = playerController.heat / 100;
+        slider.fillAmount = fillValue;
     }
 }
