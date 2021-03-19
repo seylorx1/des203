@@ -10,5 +10,6 @@ public class InputManagerData : ScriptableObject, ISingletonData {
     [SerializeField] public InputAction snipModeToggle;
     [SerializeField] public InputAction leftCrabClaw;
     [SerializeField] public InputAction rightCrabClaw;
+    [SerializeField] public InputAction pause;
 
 }
