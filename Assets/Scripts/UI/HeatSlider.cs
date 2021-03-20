@@ -18,7 +18,7 @@ public class HeatSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float fillValue = playerController.heat / 100;
+        float fillValue = playerController.Heat / 100;
         slider.fillAmount = fillValue;
     }
 }

@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour {
-    // Variables
     #region Variables
-
-    
 
     #region Public
     public GameObject
@@ -28,15 +24,7 @@ public class PlayerController : MonoBehaviour {
         jumpForce = 4,
         flipTorque = 0.2f,
         lTrigger,
-        rTrigger,
-        heat,
-        dps;
-
-
-    public Text scoretext;
-
-    public Animator PointsAnim;
-    
+        rTrigger;
 
     [System.Serializable]
     public struct CrabClawData {
@@ -71,25 +59,23 @@ public class PlayerController : MonoBehaviour {
     rClawQuatEnd;
 
     private Vector2
-    inputLS,
-    inputRS;
+        inputLS,
+        inputRS;
 
     private float
         lCloseAmount,
         rCloseAmount;
 
     private int layerMask_Player;
-    private int score = 0;
 
     private bool
         jumpAttempt = false,
         snip = false,
         onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
-        isFlipped = false, // Is the crab flipped over? (Used for flipping.)
         isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
     #endregion
-    #endregion
 
+    #region Properties
     //Used externally.
     public Vector2 LookAxis {
         get {
@@ -100,11 +86,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public bool GetCrabFlipped {
-        get {
-            return isFlipped;
-        }
-    }
+    // Is the crab flipped over? (Used for flipping.)
+    public bool CrabFlipped { get; private set; } = false;
+
+    public float Heat { get; private set; } = 0;
+    #endregion
+
+    #endregion
 
 
     void Awake() {
@@ -119,10 +107,6 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
-
-        scoretext.text = "" + score;
-
-        heat = 0;
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
@@ -143,11 +127,6 @@ public class PlayerController : MonoBehaviour {
 
         firstCam.gameObject.SetActive(snip);
         thirdCam.gameObject.SetActive(!snip);
-
-        if (heat >= 100)
-        {
-            GameOver();
-        }
 
         #region Crab Claw Controls
 
@@ -199,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 
         float crabVerticalDot = Vector3.Dot(Vector3.up, transform.up); //Provides information about the orientation of the crab.
         //Detect whether the crab is tipped over.
-        isFlipped = crabVerticalDot < 0.0f;
+        CrabFlipped = crabVerticalDot < 0.0f;
 
         //Detect if the crab is lying on their side.
         isOnEdge = Mathf.Abs(crabVerticalDot) < 0.1f;
@@ -218,7 +197,7 @@ public class PlayerController : MonoBehaviour {
         if (onGround) {
 
             // Ensure the crab is not flipped over or on their edge.
-            if ( !(isFlipped || isOnEdge) ) { 
+            if (!(CrabFlipped || isOnEdge)) {
 
                 //Apply force.
                 //XInput is active.
@@ -248,12 +227,11 @@ public class PlayerController : MonoBehaviour {
             //Jump
             if (jumpAttempt) {
 
-                if (isFlipped) {
-                    Debug.Log("Flip!");
+                if (CrabFlipped) {
                     //attempt to rectify crab
                     crabRigidbody.AddTorque(
                         new Vector3(
-                            Random.Range(0,2) == 0 ? -flipTorque : flipTorque, //Randomly add torque in one direction or an other to accomodate for edge cases.
+                            Random.Range(0, 2) == 0 ? -flipTorque : flipTorque, //Randomly add torque in one direction or an other to accomodate for edge cases.
                             0.0f,
                             0.0f),
                         ForceMode.Impulse);
@@ -300,38 +278,16 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void GameOver()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Collectable")
-        {
-            Debug.Log("Item Picked Up");
+    /// <summary>
+    /// Damage and heat are synonymous in CCR.
+    /// </summary>
+    /// <param name="amount">Amount of "heat" taken.</param>
+    public void TakeHeat(float amount) {
+        Heat += amount;
 
-
-            PointsAnim.SetBool("GetPoints", true);
-            
-            scoretext.text = "" + score;
-            Destroy(other.gameObject);
-            Invoke("ToDoAfterAnimationPlayed", 0.8f);
-
-        }
-    }
-
-    void ToDoAfterAnimationPlayed()
-    {
-        PointsAnim.SetBool("GetPoints", false);
-        score = score + 50;
-        scoretext.text = "" + score;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.tag == "Hazard")
-        {
-            heat += dps * Time.deltaTime;
+        if (Heat >= 100.0f) {
+            //Crab death sequence
+            SceneManager.LoadScene("MainScene"); // TODO Handle death logic better.
         }
     }
 
@@ -342,19 +298,19 @@ public class PlayerController : MonoBehaviour {
 
         data.movement.performed += onInputMovement;
         data.movement.canceled += onInputMovement;
-        
+
         data.look.performed += onInputLook;
         data.look.canceled += onInputLook;
-        
+
         data.jump.performed += onInputJump;
         data.jump.canceled += onInputJump;
-        
+
         data.snipModeToggle.performed += onInputSnipModeToggle;
         data.snipModeToggle.canceled += onInputSnipModeToggle;
-        
+
         data.leftCrabClaw.performed += onInputLeftCrabClaw;
         data.leftCrabClaw.canceled += onInputLeftCrabClaw;
-        
+
         data.rightCrabClaw.performed += onInputRightCrabClaw;
         data.rightCrabClaw.canceled += onInputRightCrabClaw;
     }
@@ -378,7 +334,7 @@ public class PlayerController : MonoBehaviour {
     private void onInputSnipModeToggle(InputAction.CallbackContext ctx) {
         //Toggle snip mode on "Joystick1Button2".
         if (ctx.ReadValueAsButton()) {
-            if (isFlipped) {
+            if (CrabFlipped) {
                 snip = false;
             }
             else {

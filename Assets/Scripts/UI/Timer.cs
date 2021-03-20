@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-public class Timer : MonoBehaviour
-{
-    public Text timertext;
+public class Timer : MonoBehaviour {
+    private TextMeshProUGUI timerText;
     private float seconds = 0f;
-    private string secondsnodecimal;
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        timerText = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         seconds += Time.deltaTime;
-        secondsnodecimal = seconds.ToString("F0");
-        timertext.text = "" + secondsnodecimal;
+
+        timerText.text =
+            "Time: " +
+            Mathf.FloorToInt(seconds / 60.0f).ToString("D2") +
+            ":" +
+            Mathf.FloorToInt(seconds % 60.0f).ToString("D2");
     }
 }
