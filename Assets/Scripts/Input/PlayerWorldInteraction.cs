@@ -28,7 +28,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
         if (other.tag == "Collectable") {
             Score += 20;
 
-            //Destroy(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 
