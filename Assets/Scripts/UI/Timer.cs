@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour {
         seconds += Time.deltaTime;
 
         timerText.text =
-            "Time: " +
+            "" +
             Mathf.FloorToInt(seconds / 60.0f).ToString("D2") +
             ":" +
             Mathf.FloorToInt(seconds % 60.0f).ToString("D2");

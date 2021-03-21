@@ -26,7 +26,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {
-            Score += 20;
+            Score += 50;
 
             Destroy(other.gameObject);
         }

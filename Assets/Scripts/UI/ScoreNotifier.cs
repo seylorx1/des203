@@ -26,7 +26,7 @@ public class ScoreNotifier : MonoBehaviour {
             UpdateScoreText();
 
             if (stashedScores != null && stashedScores.Count > 0) {
-                scoreNotifyText.text = "$" + stashedScores[0];
+                scoreNotifyText.text = "+" + stashedScores[0];
 
                 scoreNotifyAnim.Play();
                 visualScore += stashedScores[0];
@@ -52,6 +52,6 @@ public class ScoreNotifier : MonoBehaviour {
 
     //NOT THE NOTIFIER
     private void UpdateScoreText() {
-        ScoreTMP.text = "$" + visualScore;
+        ScoreTMP.text = "" + visualScore;
     }
 }
