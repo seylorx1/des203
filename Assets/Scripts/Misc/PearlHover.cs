@@ -14,5 +14,6 @@ public class PearlHover : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         transform.position = startPosition + new Vector3(0.0f, 0.05f * Mathf.Sin(Time.time * 2.0f), 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, Time.time * 30.0f, 0.0f);
     }
 }
