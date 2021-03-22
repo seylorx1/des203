@@ -6,6 +6,7 @@ public class ItemPickup : MonoBehaviour
 {
     public PlayerController playerController;
     public bool isHolding;
+    public float step = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -17,21 +18,52 @@ public class ItemPickup : MonoBehaviour
     void Update()
     {
         HoldItems();
+
     }
     void OnTriggerStay(Collider other)
     {
-        if (gameObject.tag == "Right Claw" && other.tag == "Grabbable" && playerController.rTrigger > 0.2f)
+        if (gameObject.tag == "Right Claw")  
         {
-            Debug.Log("grabbed");
-            other.transform.parent = gameObject.transform;
-            isHolding = true;
+            if (other.tag == "Grabbable" && playerController.rTrigger > 0.2f)
+            {
+                Debug.Log("grabbed");
+                other.transform.parent = gameObject.transform;
+                isHolding = true;
+            }
+
+            if (other.tag == "Lever" && playerController.rTrigger > 0.2f && playerController.inputRS.x < -0.3)
+            {
+                Debug.Log("Lever rotate");
+                other.transform.Rotate(step, 0, 0 * Time.deltaTime, Space.Self);
+            }
+
+            else if (other.tag == "Lever" && playerController.rTrigger > 0.2f && playerController.inputRS.x > 0.3)
+            {
+                Debug.Log("Lever rotate");
+                other.transform.Rotate(-step, 0, 0 * Time.deltaTime, Space.Self);
+            }
         }
 
-        else if (gameObject.tag == "Left Claw" && other.tag == "Grabbable" && playerController.lTrigger > 0.2f)
+        else if (gameObject.tag == "Left Claw")
         {
-            Debug.Log("grabbed");
-            other.transform.parent = gameObject.transform;
-            isHolding = true;
+            if (other.tag == "Grabbable" && playerController.lTrigger > 0.2f)
+            {
+                Debug.Log("grabbed");
+                other.transform.parent = gameObject.transform;
+                isHolding = true;
+            }
+
+            if (other.tag == "Lever" && playerController.lTrigger > 0.2f && playerController.inputLS.x < -0.3)
+            {
+                Debug.Log("Lever rotate");
+                other.transform.Rotate(step, 0, 0 * Time.deltaTime, Space.Self);
+            }
+
+            else if (other.tag == "Lever" && playerController.lTrigger > 0.2f && playerController.inputLS.x > 0.3)
+            {
+                Debug.Log("Lever rotate");
+                other.transform.Rotate(-step, 0, 0 * Time.deltaTime, Space.Self);
+            }
         }
     }
 

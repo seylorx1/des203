@@ -9,6 +9,8 @@ TagManager:
   - Grabbable
   - Left Claw
   - Right Claw
+  - Hazard
+  - Lever
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Water
   - UI
   - PlayerCharacter
-  - 
+  - PostProcessing
   - 
   - 
   - 

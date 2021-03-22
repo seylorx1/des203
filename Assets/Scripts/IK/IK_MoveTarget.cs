@@ -39,7 +39,7 @@ public class IK_MoveTarget : MonoBehaviour {
 
     void Update() {
 
-        if (playerController.GetCrabFlipped) {
+        if (playerController.CrabFlipped) {
             UpdateTargetPosition();
 
             Vector3 circleMovement = new Vector3(
@@ -64,7 +64,7 @@ public class IK_MoveTarget : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (!playerController.GetCrabFlipped) {
+        if (!playerController.CrabFlipped) {
             UpdateTargetPosition();
 
             RaycastHit hit;

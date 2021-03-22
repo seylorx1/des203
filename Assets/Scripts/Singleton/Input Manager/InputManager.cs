@@ -16,5 +16,6 @@ public class InputManager : SingletonMonoBehaviour<InputManager> {
         data.snipModeToggle.Enable();
         data.leftCrabClaw.Enable();
         data.rightCrabClaw.Enable();
+        data.pause.Enable();
     }
 }
