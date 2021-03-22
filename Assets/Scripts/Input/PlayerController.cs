@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour {
         lTrigger,
         rTrigger;
 
+    public Vector2
+        inputLS,
+        inputRS;
+
     [System.Serializable]
     public struct CrabClawData {
         public Vector3
@@ -57,10 +61,6 @@ public class PlayerController : MonoBehaviour {
     rClawQuatStart,
     lClawQuatEnd,
     rClawQuatEnd;
-
-    private Vector2
-        inputLS,
-        inputRS;
 
     private float
         lCloseAmount,
