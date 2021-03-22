@@ -231,7 +231,7 @@ Shader "FlexibleCelShader/Cel Outline"
 							unity_LightColor[1],
 							unity_LightColor[2],
 							unity_LightColor[3],
-							unity_4LightAtten0 * 0.5,
+							unity_4LightAtten0,
 							i.worldPos.xyz,
 							worldNormal
 						);	 
