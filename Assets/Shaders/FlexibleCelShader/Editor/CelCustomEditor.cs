@@ -92,6 +92,12 @@ public class CelCustomEditor : MaterialEditor
         showProperty("_Color");
 
         GUILayout.Space(spacing);
+        EditorGUILayout.LabelField("Realtime Lighting", EditorStyles.boldLabel);
+        showProperty("_ApplyPointLighting");
+        showProperty("_PointLightSaturation");
+        showProperty("_PointLightScalar");
+
+        GUILayout.Space(spacing);
         EditorGUILayout.LabelField("Lighting Ramp", EditorStyles.boldLabel);
         showPropertyAsInt("_RampLevels");
         showProperty("_LightScalar");
