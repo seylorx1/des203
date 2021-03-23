@@ -8,6 +8,8 @@ Shader "FlexibleCelShader/Cel Outline"
 	Properties
 	{
 		[MaterialToggle] _ApplyPointLighting("Render Point Lights", Float) = 1.0
+		[MaterialToggle] _PointLightBanding("Point Light Banding", Float) = 0.0
+		[KeywordEnum(Add, Max)] _PointLightBlendMode("Point Light Blend Mode", Float) = 0.0
 		_PointLightSaturation("Point Light Saturation", Range(0, 1)) = 0.5
 		_PointLightScalar("Point Light Scalar", Range(0, 2)) = 0.5
 
@@ -137,6 +139,8 @@ Shader "FlexibleCelShader/Cel Outline"
 				}
 
 				float	  _ApplyPointLighting;
+				float	  _PointLightBanding;
+				float     _PointLightBlendMode;
 				float	  _PointLightSaturation;
 				float	  _PointLightScalar;
 				float4    _Color;
@@ -236,14 +240,24 @@ Shader "FlexibleCelShader/Cel Outline"
 							worldNormal
 						);	 
 
-						float3 dynamicPointLighting_hsl = rgb2hsl(dynamicPointLighting);
 
-						float3 dynamicPointLighting_banding = hsl2rgb(float3(
-							dynamicPointLighting_hsl.x,
-							_PointLightSaturation,
-							round(dynamicPointLighting_hsl.z * (_RampLevels + 3)) / (_RampLevels + 3)));
-							
-						return float4(col + (_PointLightScalar * dynamicPointLighting_banding), 1.0);
+						if (_PointLightBanding == 1.0) {
+							float3 dynamicPointLighting_hsl = rgb2hsl(dynamicPointLighting);
+
+							dynamicPointLighting = hsl2rgb(float3(
+								dynamicPointLighting_hsl.x,
+								_PointLightSaturation,
+								round(dynamicPointLighting_hsl.z * (_RampLevels + 3)) / (_RampLevels + 3)));
+						}
+
+						if (_PointLightBlendMode == 0.0) {
+							//Add
+							return float4(col + (_PointLightScalar * dynamicPointLighting), 1.0);
+						}
+						else {
+							//Max
+							return float4(max(col, _PointLightScalar * dynamicPointLighting), 1.0);
+						}
 					}
 					return float4(col.rgb, 1.0);
 

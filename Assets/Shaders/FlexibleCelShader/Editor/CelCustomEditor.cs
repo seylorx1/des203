@@ -94,6 +94,8 @@ public class CelCustomEditor : MaterialEditor
         GUILayout.Space(spacing);
         EditorGUILayout.LabelField("Realtime Lighting", EditorStyles.boldLabel);
         showProperty("_ApplyPointLighting");
+        showProperty("_PointLightBanding");
+        showProperty("_PointLightBlendMode");
         showProperty("_PointLightSaturation");
         showProperty("_PointLightScalar");
 
