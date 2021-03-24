@@ -81,63 +81,66 @@ public class CelCustomEditor : MaterialEditor
 
     public override void OnInspectorGUI()
     {
+        if (isVisible) {
+            //Don't really care for presets to be honest.
+            //drawPresets();            
+            //GUILayout.Space(spacing);
 
-        drawPresets();
+            EditorGUILayout.LabelField("Base Color and Textures", EditorStyles.boldLabel);
+            showProperty("_MainTex");
+            showProperty("_NormalTex");
+            showProperty("_EmmisTex");
+            showProperty("_Color");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Base Color and Textures", EditorStyles.boldLabel);
-        showProperty("_MainTex");
-        showProperty("_NormalTex");
-        showProperty("_EmmisTex");
-        showProperty("_Color");
+            EditorGUILayout.LabelField("Realtime Lighting", EditorStyles.boldLabel);
+            showProperty("_ApplyPointLighting");
+            if (GetMaterialProperty(targets, "_ApplyPointLighting").floatValue == 1.0f) {
+                showProperty("_PointLightBanding");
+                showProperty("_PointLightBlendMode");
+                showProperty("_PointLightSaturation");
+                showProperty("_PointLightScalar");
+            }
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Realtime Lighting", EditorStyles.boldLabel);
-        showProperty("_ApplyPointLighting");
-        showProperty("_PointLightBanding");
-        showProperty("_PointLightBlendMode");
-        showProperty("_PointLightSaturation");
-        showProperty("_PointLightScalar");
+            EditorGUILayout.LabelField("Lighting Ramp", EditorStyles.boldLabel);
+            showPropertyAsInt("_RampLevels");
+            showProperty("_LightScalar");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Lighting Ramp", EditorStyles.boldLabel);
-        showPropertyAsInt("_RampLevels");
-        showProperty("_LightScalar");
+            EditorGUILayout.LabelField("High Light", EditorStyles.boldLabel);
+            showProperty("_HighColor");
+            showProperty("_HighIntensity");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("High Light", EditorStyles.boldLabel);
-        showProperty("_HighColor");
-        showProperty("_HighIntensity");
+            EditorGUILayout.LabelField("Low Light", EditorStyles.boldLabel);
+            showProperty("_LowColor");
+            showProperty("_LowIntensity");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Low Light", EditorStyles.boldLabel);
-        showProperty("_LowColor");
-        showProperty("_LowIntensity");
+            EditorGUILayout.LabelField("Outline", EditorStyles.boldLabel);
+            showProperty("_OutlineColor");
+            showPropertyGreaterZero("_OutlineSize");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Outline", EditorStyles.boldLabel);
-        showProperty("_OutlineColor");
-        showPropertyGreaterZero("_OutlineSize");
+            EditorGUILayout.LabelField("Hard Edge Light", EditorStyles.boldLabel);
+            showProperty("_RimColor");
+            showProperty("_RimAlpha");
+            showProperty("_RimPower");
+            showProperty("_RimDropOff");
+            GUILayout.Space(spacing);
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Hard Edge Light", EditorStyles.boldLabel);
-        showProperty("_RimColor");
-        showProperty("_RimAlpha");
-        showProperty("_RimPower");
-        showProperty("_RimDropOff");
+            EditorGUILayout.LabelField("Soft Edge Light", EditorStyles.boldLabel);
+            showProperty("_FresnelColor");
+            showProperty("_FresnelBrightness");
+            showProperty("_FresnelPower");
+            showProperty("_FresnelShadowDropoff");
 
-        GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Soft Edge Light", EditorStyles.boldLabel);
-        showProperty("_FresnelColor");
-        showProperty("_FresnelBrightness");
-        showProperty("_FresnelPower");
-        showProperty("_FresnelShadowDropoff");
-
-        /*GUILayout.Space(spacing);
-        EditorGUILayout.LabelField("Vertical Gradient", EditorStyles.boldLabel);
-        showProperty("_GradIntensity");
-        showProperty("_GradYCap");*/
-
+            /*GUILayout.Space(spacing);
+            EditorGUILayout.LabelField("Vertical Gradient", EditorStyles.boldLabel);
+            showProperty("_GradIntensity");
+            showProperty("_GradYCap");*/
+        }
     }
 }
 

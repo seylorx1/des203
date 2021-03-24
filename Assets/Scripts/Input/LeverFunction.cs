@@ -23,7 +23,7 @@ public class LeverFunction : MonoBehaviour
 
         if (rotation >= -0.3f ) 
         {
-            Debug.Log("open");
+            //Debug.Log("open");
             openGate = true;            
         }
 
