@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
         inputLS,
         inputRS;
 
+    public bool snip = false;
+
     [System.Serializable]
     public struct CrabClawData {
         public Vector3
@@ -70,7 +72,6 @@ public class PlayerController : MonoBehaviour {
 
     private bool
         jumpAttempt = false,
-        snip = false,
         onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
         isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
     #endregion
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour {
             rCloseAmount);
 
         #endregion
-
+        
     }
 
     void FixedUpdate() {
