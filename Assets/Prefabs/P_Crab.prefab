@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.004671291, y: 0.97364575, z: -0.020023951, w: 0.22713712}
-  m_LocalPosition: {x: -0.00000047683716, y: 0, z: 0.00000023841858}
+  m_LocalRotation: {x: 0.020036748, y: -0.22449096, z: 0.0046169106, w: 0.97425926}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875134631826}
@@ -98,8 +98,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.008791122, y: 0.97312224, z: -0.037684005, w: 0.227015}
-  m_LocalPosition: {x: -0.00000047683716, y: 0, z: 0.00000023841858}
+  m_LocalRotation: {x: 0.03770793, y: -0.22437027, z: 0.008688744, w: 0.97373545}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875697898574}
@@ -298,8 +298,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.012918952, y: 0.9722758, z: -0.055378363, w: 0.22681758}
-  m_LocalPosition: {x: -0.0000009536743, y: 0, z: 0.00000047683716}
+  m_LocalRotation: {x: 0.055413425, y: -0.22417507, z: 0.012768482, w: 0.9728884}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 896856946}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 953300640}
   m_Layer: 6
   m_Name: Crab_Arm_R_A_Digit
-  m_TagString: Right Claw
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,9 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f714e4838d3b9f41ace3db978a4e300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  claw: 1
   playerController: {fileID: 392433710782906041}
   isHolding: 0
-  step: 2
+  step: 90
+  swingValue: 0.5
 --- !u!1 &178908456124418486
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,8 +724,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797088025235173248}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.987, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064874208889630}
@@ -1160,6 +1162,8 @@ GameObject:
   - component: {fileID: 392433710782906041}
   - component: {fileID: 4243381668269258104}
   - component: {fileID: 1346958536}
+  - component: {fileID: 1363735990}
+  - component: {fileID: 1363735991}
   m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
@@ -1254,6 +1258,32 @@ CapsuleCollider:
   m_Height: 0.77243805
   m_Direction: 0
   m_Center: {x: -0.007144928, y: 0.26556587, z: 0.016815186}
+--- !u!114 &1363735990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243381668269258111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ad9f21104e17a41814125ff0542621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenuUI: {fileID: 0}
+--- !u!114 &1363735991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243381668269258111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f316e1ad9ace645b671aa0bf2c6dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreNotifier: {fileID: 0}
 --- !u!1 &4272548759277652361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,7 +2115,7 @@ GameObject:
   - component: {fileID: 730850682}
   m_Layer: 6
   m_Name: Crab_Arm_L_A_Digit
-  m_TagString: Left Claw
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2130,9 +2160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f714e4838d3b9f41ace3db978a4e300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  claw: 0
   playerController: {fileID: 392433710782906041}
   isHolding: 0
-  step: 2
+  step: 90
+  swingValue: 0.5
 --- !u!1 &7413278806433249291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,6 +2317,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064873922633600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2408,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064874117142687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2499,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064874208889629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2590,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064874209760523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,7 +2603,6 @@ GameObject:
   - component: {fileID: 7709064874209760525}
   - component: {fileID: 7709064874209760524}
   - component: {fileID: 7709064874339324680}
-  - component: {fileID: 5369895122664869697}
   m_Layer: 6
   m_Name: CM_ThirdPerson
   m_TagString: Untagged
@@ -2583,7 +2618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5487124, y: 0.39999998, z: 3.1387086}
+  m_LocalPosition: {x: 1.5316353, y: 0.40000153, z: -3.1470795}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
@@ -2735,18 +2770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0ae64cdd19be54aaeafbbb26768d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5369895122664869697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7709064874209760523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0ae64cdd19be54aaeafbbb26768d87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7709064874459285450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,8 +2779,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709064874459285451}
-  - component: {fileID: 7709064874459285493}
-  - component: {fileID: 7709064874459285492}
   m_Layer: 6
   m_Name: IK_Crab_Arm_R
   m_TagString: Untagged
@@ -2779,55 +2800,6 @@ Transform:
   m_Father: {fileID: 7709064874664270907}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7709064874459285493
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7709064874459285450}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7709064874459285492
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7709064874459285450}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 5ae0e6bfe6ccfaa4688c6e67a03a1157, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7709064874596812857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,6 +2933,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064874609586477
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,6 +3024,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playerController: {fileID: 392433710782906041}
+  crabIKInheritTargets: {fileID: 7709064874664270907}
 --- !u!1 &7709064874664270906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,8 +3259,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709064875642990525}
-  - component: {fileID: 7709064875642990527}
-  - component: {fileID: 7709064875642990526}
   m_Layer: 6
   m_Name: IK_Crab_Arm_L
   m_TagString: Untagged
@@ -3308,55 +3280,6 @@ Transform:
   m_Father: {fileID: 7709064874664270907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7709064875642990527
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7709064875642990524}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7709064875642990526
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7709064875642990524}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 5ae0e6bfe6ccfaa4688c6e67a03a1157, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7709064875697898573
 GameObject:
   m_ObjectHideFlags: 0

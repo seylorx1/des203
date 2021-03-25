@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
         inputLS,
         inputRS;
 
-    public bool snip = false;
+    public bool Snip { get; private set; } = false;
 
     [System.Serializable]
     public struct CrabClawData {
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
     //Used externally.
     public Vector2 LookAxis {
         get {
-            if (!snip) {
+            if (!Snip) {
                 return inputRS;
             }
             return Vector2.zero;
@@ -122,12 +122,12 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (snip) {
+        if (Snip) {
             SnipMode();
         }
 
-        firstCam.gameObject.SetActive(snip);
-        thirdCam.gameObject.SetActive(!snip);
+        firstCam.gameObject.SetActive(Snip);
+        thirdCam.gameObject.SetActive(!Snip);
 
         #region Crab Claw Controls
 
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour {
         //Values between 0 and 1.
         lCloseAmount =
             (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a sine wave between 0 and 1
-            (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+            (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (lTrigger > 0.0f) {
@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour {
         //Values between 0 and 1.
         rCloseAmount =
             (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a cosine wave between 0 and 1
-            (snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+            (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
         //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
         if (rTrigger > 0.0f) {
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour {
         //Detect if the crab is lying on their side.
         isOnEdge = Mathf.Abs(crabVerticalDot) < 0.1f;
 
-        if (!snip) {
+        if (!Snip) {
             MoveMode();
         }
     }
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour {
     private void onInputJump(InputAction.CallbackContext ctx) {
         //Check if player attempted to jump.
         //Player must be out of snip mode and touching the ground
-        if (!snip && !jumpAttempt && onGround) {
+        if (!Snip && !jumpAttempt && onGround) {
             jumpAttempt = ctx.ReadValueAsButton();
         }
     }
@@ -336,10 +336,10 @@ public class PlayerController : MonoBehaviour {
         //Toggle snip mode on "Joystick1Button2".
         if (ctx.ReadValueAsButton()) {
             if (CrabFlipped) {
-                snip = false;
+                Snip = false;
             }
             else {
-                snip = !snip;
+                Snip = !Snip;
             }
         }
     }
