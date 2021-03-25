@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 
 public class PlayerWorldInteraction : MonoBehaviour {
     public ScoreNotifier scoreNotifier;
+
+    public GameObject chuteDoor;
 
     private PlayerController playerController;
 
@@ -30,11 +34,32 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
             Destroy(other.gameObject);
         }
+
+        if (other.tag == "Exit")
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+
+        if (other.tag == "Button")
+        {
+            chuteDoor.SetActive(true);
+        }
+
+
     }
 
     private void OnCollisionStay(Collision collision) {
         if (collision.collider.tag == "Hazard") {
             playerController.TakeHeat(5.0f * Time.deltaTime);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Hazard")
+        {
+            playerController.TakeHeat(5.0f * Time.deltaTime);
+
         }
     }
 }
