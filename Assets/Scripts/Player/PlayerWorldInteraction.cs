@@ -9,6 +9,8 @@ public class PlayerWorldInteraction : MonoBehaviour {
     public ScoreNotifier scoreNotifier;
 
     public GameObject chuteDoor;
+    public Light RClight;
+    public Light Buttonlight;
 
     private PlayerController playerController;
 
@@ -43,6 +45,8 @@ public class PlayerWorldInteraction : MonoBehaviour {
         if (other.tag == "Button")
         {
             chuteDoor.SetActive(true);
+            RClight.color = Color.green;
+            Buttonlight.color = Color.green;
         }
 
 
