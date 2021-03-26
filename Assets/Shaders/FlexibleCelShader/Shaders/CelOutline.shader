@@ -102,9 +102,6 @@ Shader "FlexibleCelShader/Cel Outline"
 				struct v2f
 				{
 					float2 uv : TEXCOORD0;
-
-					float2 uv_lm : TEXCOORD1;
-
 					SHADOW_COORDS(1)
 					float3 worldNormal : TEXCOORD2;
 					float3 worldTangent : TEXCOORD3;
@@ -131,9 +128,6 @@ Shader "FlexibleCelShader/Cel Outline"
 
 					// Compute shadows data
 					TRANSFER_SHADOW(o);
-
-					// Apply Lightmap
-					o.uv_lm = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
 
 					return o;
 				}
