@@ -6,15 +6,18 @@ using TMPro;
 
 
 public class PlayerWorldInteraction : MonoBehaviour {
+   
     public ScoreNotifier scoreNotifier;
 
     public GameObject chuteDoor;
     public Light RClight;
     public Light Buttonlight;
+    public GameObject Results;
 
     private PlayerController playerController;
 
     private int _score = 0;
+
     public int Score {
         get {
             return _score;
@@ -39,8 +42,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
         if (other.tag == "Exit")
         {
-            SceneManager.LoadScene("Main Menu");
-        }
+
+            Time.timeScale = 0.0f;
+            Results.SetActive(true);
+
+}
 
         if (other.tag == "Button")
         {
