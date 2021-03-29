@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour {
 
     #endregion
 
-
     void Awake() {
         //Convert euler angles to quaternion before anything else.
         //(Saves a bit of processing.)
@@ -103,6 +102,9 @@ public class PlayerController : MonoBehaviour {
         rClawQuatStart = Quaternion.Euler(crabClawData.rClawEulerStart);
         lClawQuatEnd = Quaternion.Euler(crabClawData.lClawEulerEnd);
         rClawQuatEnd = Quaternion.Euler(crabClawData.rClawEulerEnd);
+
+        //detatch transform from parent P_Crab.
+        transform.parent = null;
     }
 
     void Start() {
