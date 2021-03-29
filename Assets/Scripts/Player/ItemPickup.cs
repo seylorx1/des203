@@ -66,10 +66,6 @@ public class ItemPickup : MonoBehaviour {
     void HandleHeldItems() {
         if (isHolding) {
 
-            if (playerController.Snip) {
-                
-            }
-
             if (ClawTrigger < 0.2f) {
                 if (heldWeapon != null) {
                     heldWeapon.Drop();
@@ -89,6 +85,7 @@ public class ItemPickup : MonoBehaviour {
     public bool IsClawSwingingItem() {
         return
             isHolding &&
+            playerController.Snip && 
             (Mathf.Abs(ClawStick.x) >= swingValue || Mathf.Abs(ClawStick.y) >= swingValue);
     }
 }

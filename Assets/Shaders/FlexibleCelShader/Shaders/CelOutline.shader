@@ -13,6 +13,12 @@ Shader "FlexibleCelShader/Cel Outline"
 		_PointLightSaturation("Point Light Saturation", Range(0, 1)) = 0.5
 		_PointLightScalar("Point Light Scalar", Range(0, 2)) = 0.5
 
+		[MaterialToggle] _ApplyCracks("Apply Cracks", Float) = 0.0
+		_CrackStartScale("Crack Start Scale", Float) = 0.1
+		_CrackEndScale("Crack End Scale", Float) = 10.0
+		_CrackStartEndThickness("Start/End Smooth", Vector) = (0.8,0.9,0.1,0.2)
+		_CrackAmount("Crack Amount", Range(0.0, 1.0)) = 0.0
+
 		_Color("Global Color Modifier", Color) = (1, 1, 1, 1)
 		_MainTex("Texture", 2D) = "white" {}
 		_NormalTex("Normal", 2D) = "bump" {}
@@ -59,6 +65,9 @@ Shader "FlexibleCelShader/Cel Outline"
 				#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
 				#include "AutoLight.cginc"
 
+				#define VORONOI
+				#include "Assets/Shaders/_Shared/PerlinRepeat.hlsl"
+
 				float3 rgb2hsl(in float3 c) {
 					float h = 0.0;
 					float s = 0.0;
@@ -73,7 +82,6 @@ Shader "FlexibleCelShader/Cel Outline"
 					if (cMax > cMin) {
 						float cDelta = cMax - cMin;
 
-						//s = l < .05 ? cDelta / ( cMax + cMin ) : cDelta / ( 2.0 - ( cMax + cMin ) ); Original
 						s = l < 0.0 ? cDelta / (cMax + cMin) : cDelta / (2.0 - (cMax + cMin));
 
 						if (r == cMax) {
@@ -132,11 +140,18 @@ Shader "FlexibleCelShader/Cel Outline"
 					return o;
 				}
 
-				float	  _ApplyPointLighting;
-				float	  _PointLightBanding;
-				float     _PointLightBlendMode;
-				float	  _PointLightSaturation;
-				float	  _PointLightScalar;
+				float	_ApplyPointLighting;
+				float	_PointLightBanding;
+				float   _PointLightBlendMode;
+				float	_PointLightSaturation;
+				float	_PointLightScalar;
+
+				float	_ApplyCracks;
+				float4	_CrackStartEndThickness;
+				float	_CrackStartScale;
+				float	_CrackEndScale;
+				float	_CrackAmount;
+
 				float4    _Color;
 				sampler2D _MainTex;
 				uniform float4 _MainTex_ST;
@@ -158,6 +173,8 @@ Shader "FlexibleCelShader/Cel Outline"
 				float     _FresnelPower;
 				float4    _FresnelColor;
 				float     _FresnelShadowDropoff;
+
+				float4	  _OutlineColor;
 
 				fixed4 frag(v2f i) : SV_Target {
 					_RampLevels -= 1;
@@ -246,14 +263,32 @@ Shader "FlexibleCelShader/Cel Outline"
 
 						if (_PointLightBlendMode == 0.0) {
 							//Add
-							return float4(col + (_PointLightScalar * dynamicPointLighting), 1.0);
+							col = float4(col + (_PointLightScalar * dynamicPointLighting), 1.0);
 						}
 						else {
 							//Max
-							return float4(max(col, _PointLightScalar * dynamicPointLighting), 1.0);
+							col = float4(max(col, _PointLightScalar * dynamicPointLighting), 1.0);
 						}
 					}
-					return float4(col.rgb, 1.0);
+
+					if (_ApplyCracks == 1.0 && _CrackAmount > 0.0) {
+						col =
+							float4(
+								lerp(
+									lerp(col.rgb, float3(1,0,0), max(0,_CrackAmount - 0.2) * 0.6),
+									lerp(float3(0,0,0),float3(_CrackAmount,0,0), 0.5 * (sin(_Time.y * (_CrackAmount * 10.0 + 1.0)) + 1.0)),
+									clamp(
+										smoothstep(
+											lerp(_CrackStartEndThickness.x, _CrackStartEndThickness.z, _CrackAmount),
+											lerp(_CrackStartEndThickness.y, _CrackStartEndThickness.w, _CrackAmount),
+											voronoiBorder(
+												lerp(_CrackStartScale, _CrackEndScale, _CrackAmount) * i.uv).x),
+										0.0,
+										1.0)),
+								1.0);
+					}
+
+					return col;
 
 				}
 
