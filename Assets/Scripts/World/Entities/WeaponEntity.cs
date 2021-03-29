@@ -9,10 +9,12 @@ public class WeaponEntity : WorldEntity {
     private Rigidbody weaponRigidbody;
     private Collider weaponCollider;
 
-    private ItemPickup claw;
     private bool weaponSwung = false;
+    [HideInInspector] public ItemPickup HeldClaw { get; private set; }
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
+
         awakeTransform = transform.parent;
         weaponRigidbody = GetComponent<Rigidbody>();
         weaponCollider = GetComponent<Collider>();
@@ -35,7 +37,7 @@ public class WeaponEntity : WorldEntity {
 
         weaponCollider.isTrigger = true;
 
-        this.claw = claw;
+        this.HeldClaw = claw;
         transform.parent = claw.transform;
     }
 
@@ -46,21 +48,31 @@ public class WeaponEntity : WorldEntity {
         weaponCollider.isTrigger = false;
 
         //Reset the claw.
-        claw = null;
+        HeldClaw = null;
         weaponSwung = false;
         transform.parent = awakeTransform;
     }
 
+
+    /// <returns>True, if damage was inflicted.</returns>
+    public bool InflictDamage(WorldEntity otherEntity) {
+        //check to see if other entity is a weaponentity
+        if (otherEntity.GetType() == typeof(WeaponEntity) && ((WeaponEntity)otherEntity).HeldClaw != null) {
+            return false; //Don't inflict damage on a held weapon!
+        }
+
+        otherEntity.Damage(1);
+        Damage(1);
+
+        return true;
+    }
+
     public void OnTriggerEnter(Collider other) {
         if (!weaponSwung) {
-            if (claw != null && claw.IsClawSwingingItem()) {
+            if (HeldClaw != null && HeldClaw.IsClawSwingingItem()) {
                 WorldEntity otherEntity = other.GetComponent<WorldEntity>();
                 if (otherEntity != null) {
-
-                    otherEntity.Damage(1);
-                    Damage(1);
-
-                    weaponSwung = true;
+                    weaponSwung = InflictDamage(otherEntity);
                 }
             }
         }

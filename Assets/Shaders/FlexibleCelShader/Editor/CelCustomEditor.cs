@@ -103,6 +103,19 @@ public class CelCustomEditor : MaterialEditor
             }
             GUILayout.Space(spacing);
 
+            EditorGUILayout.LabelField("Cracks", EditorStyles.boldLabel);
+            showProperty("_ApplyCracks");
+            if (GetMaterialProperty(targets, "_ApplyCracks").floatValue == 1.0f) {
+                showProperty("_CrackStartScale");
+                showProperty("_CrackEndScale");
+                showProperty("_CrackStartEndThickness");
+                showProperty("_CrackAmount");
+            }
+            else {
+                EditorGUILayout.LabelField("Only enable on breakable (Entity) objects.", EditorStyles.miniLabel);
+            }
+            GUILayout.Space(spacing);
+
             EditorGUILayout.LabelField("Lighting Ramp", EditorStyles.boldLabel);
             showPropertyAsInt("_RampLevels");
             showProperty("_LightScalar");

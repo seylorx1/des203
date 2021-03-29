@@ -5,9 +5,20 @@ using UnityEngine;
 public class WorldEntity : MonoBehaviour {
     public bool verbose = false;
 
-    [SerializeField] private int
+    [SerializeField]
+    private int
         health = 10,
         healthMax = 10;
+
+    private Material crackMaterialInstance;
+
+    protected virtual void Awake() {
+        crackMaterialInstance = GetComponent<MeshRenderer>().material;
+
+        if (!crackMaterialInstance.HasProperty("_CrackAmount")) {
+            crackMaterialInstance = null;
+        }
+    }
 
     public float HealthAsPercent() {
         return ((float)health) / ((float)healthMax);
@@ -15,7 +26,7 @@ public class WorldEntity : MonoBehaviour {
 
     public bool Damage(int damageAmount) {
         //Throw an error if negative damage is sent.
-        if(damageAmount <= 0) {
+        if (damageAmount <= 0) {
             Debug.LogError($"WorldEntity just received {damageAmount} damage!", gameObject);
             return false;
         }
@@ -23,12 +34,16 @@ public class WorldEntity : MonoBehaviour {
         //Take health.
         health -= damageAmount;
 
-        if(verbose) {
+        if (verbose) {
             Debug.Log($"{transform.name} just took {damageAmount} damage! Current health: {health}.");
         }
 
+        if(crackMaterialInstance != null) {
+            crackMaterialInstance.SetFloat("_CrackAmount", Mathf.Clamp01(1.0f - HealthAsPercent()));
+        }
+
         //Handle death, if applicable.
-        if(IsDead()) {
+        if (IsDead()) {
             Die();
         }
         return true;
