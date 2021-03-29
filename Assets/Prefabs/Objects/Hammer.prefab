@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3554669269574628144}
   - component: {fileID: 8586896648952850856}
   - component: {fileID: 7816893286730274596}
+  - component: {fileID: 8184212892078967607}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,3 +114,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8164388750953057965, guid: 6dca27c4adbe288469756c66a19079c8, type: 3}
+--- !u!114 &8184212892078967607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050138362629427941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcb238ad87731b43be41425c4bed215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verbose: 0
+  health: 10
+  healthMax: 10

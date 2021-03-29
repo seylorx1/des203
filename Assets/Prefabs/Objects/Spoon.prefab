@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7396906399449929721}
   - component: {fileID: 3924499817250907542}
   - component: {fileID: 1613578568776812119}
+  - component: {fileID: 3941616020565867454}
   m_Layer: 0
   m_Name: Spoon
   m_TagString: Grabbable
@@ -113,3 +114,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -760733123537448851, guid: 817fc0a17c0caab4b89682e9e372c49d, type: 3}
+--- !u!114 &3941616020565867454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9054464365862417964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcb238ad87731b43be41425c4bed215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verbose: 0
+  health: 10
+  healthMax: 10
