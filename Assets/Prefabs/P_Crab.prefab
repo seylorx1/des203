@@ -1284,6 +1284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreNotifier: {fileID: 0}
+  chuteDoor: {fileID: 0}
+  RClight: {fileID: 0}
+  Buttonlight: {fileID: 0}
+  Results: {fileID: 0}
 --- !u!1 &4272548759277652361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,9 +2729,9 @@ MonoBehaviour:
     m_Radius: 3.5
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
-  - {fileID: 900109728}
-  - {fileID: 280312913}
-  - {fileID: 154298326}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7709064874209760524
 MonoBehaviour:
   m_ObjectHideFlags: 0
