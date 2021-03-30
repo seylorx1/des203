@@ -70,3 +70,60 @@ float fBm(in float2 p)
 	// Clamp it just in case....
 	return min(f, 1.0);
 }
+
+#ifdef VORONOI
+float voronoiHash(in float2 p) {
+	return
+		fract(
+			sin(
+				float2(
+					dot(p, float2(127.1, 311.7)),
+					dot(p,float2(269.5, 183.3))
+				)
+			) * 43758.5453
+		);
+}
+
+float voronoiDistance(in float2 x) {
+	int2 p = int2(floor(x).xx);
+	float2 f = fract(x);
+
+	int2 mb;
+	float2 mr;
+
+	float res = 8.0;
+	for (int vj = -1; vj <= 1; vj++) {
+		for (int vi = -1; vi <= 1; vi++) {
+			int2 b = int2(vi, vj);
+
+			float2 r = float2(b) + voronoiHash(float2(p + b)) - f;
+			float d = dot(r, r);
+
+			if (d < res) {
+				res = d;
+				mr = r;
+				mb = b;
+			}
+		}
+	}
+
+	res = 8.0;
+	for (int vj = -2; vj <= 2; vj++) {
+		for (int vi = -2; vi <= 2; vi++) {
+			int2 b = mb + int2(vi, vj);
+
+			float2 r = float2(b)+ voronoiHash(float2(p + b)) - f;
+			float d = dot(0.5 * (mr + r), normalize(r - mr));
+
+			res = min(res, d);
+		}
+	}
+
+	return res;
+}
+
+float voronoiBorder(in float2 p) {
+	float d = voronoiDistance(p);
+	return 1.0 - smoothstep(0.0, 0.05, d);
+}
+#endif
