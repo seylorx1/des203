@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerController : MonoBehaviour {
     #region Variables
 
     #region Public
+    public SkinnedMeshRenderer[] crabMeshRenderers;
+
     public GameObject
         thirdCam,
         firstCam,
@@ -55,6 +57,11 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region Private
+    private List<Material> crabMaterials = new List<Material>();
+
+    private FlamesPP cameraFlamesPP;
+    private Vignette cameraFlamesVignette;
+
     private Collider crabCollider;
     private Rigidbody crabRigidbody;
 
@@ -108,6 +115,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
+        foreach(SkinnedMeshRenderer r in crabMeshRenderers) {
+            Material rMat = r.material;
+
+            if(!crabMaterials.Contains(rMat) && rMat.HasProperty("_OutlineColor")) {
+                crabMaterials.Add(rMat);
+            }
+        }
+
+        PostProcessVolume cameraPostProcessVolume = Camera.main.GetComponentInChildren<PostProcessVolume>();
+        if(cameraPostProcessVolume != null) {
+            cameraPostProcessVolume.profile.TryGetSettings(out cameraFlamesPP);
+            cameraPostProcessVolume.profile.TryGetSettings(out cameraFlamesVignette);
+        }
+
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
 
@@ -297,6 +318,18 @@ public class PlayerController : MonoBehaviour {
         if (Heat >= 100.0f) {
             //Crab death sequence
             SceneManager.LoadScene("MainScene"); // TODO Handle death logic better.
+        }
+
+        float clampedHeat = Mathf.Clamp01(Heat * 0.01f);
+        
+        if (cameraFlamesPP != null) {
+            cameraFlamesPP.flameAmount.value = clampedHeat;
+            cameraFlamesVignette.intensity.value = clampedHeat * 0.6f;
+        }
+
+        foreach(Material rMat in crabMaterials) {
+            rMat.SetColor("_Color", Color.Lerp(Color.white, Color.red, clampedHeat * 0.5f));
+            rMat.SetColor("_OutlineColor", Color.Lerp(Color.black, Color.red, clampedHeat));
         }
     }
 
