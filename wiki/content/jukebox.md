@@ -5,10 +5,19 @@ Follow Findlay on Soundcloud [@officialquestionable](https://soundcloud.com/offi
 
 ---
 
-### Main Menu Theme
-Currently used as the main theme for the game, although may become music used in the tutorial zone at some point in the future.
+### Main Menu Music
+Theme for Crab Crab Revolution and its menu. Chill vibes here. 😎
 <audio controls>
-<source src="../media/music/main_menu_theme.mp3" type="audio/mpeg">
+<source src="../media/music/main_menu_music.mp3" type="audio/mpeg">
+Your browser does not support audio! :(
+</audio>
+
+---
+
+### Tutorial
+Tutorial music for the game, to ease the player.
+<audio controls>
+<source src="../media/music/tutorial.mp3" type="audio/mpeg">
 Your browser does not support audio! :(
 </audio>
 
