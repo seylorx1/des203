@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour {
     private FlamesPP cameraFlamesPP;
     private Vignette cameraFlamesVignette;
 
+    private InputSingleton inputSingleton;
+
     private Collider crabCollider;
     private Rigidbody crabRigidbody;
 
@@ -134,12 +136,13 @@ public class PlayerController : MonoBehaviour {
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
-        if (!InputManager.IsLoaded) {
-            Debug.LogError("Please ensure a singleton asset is in the scene with an InputManager attached!");
+        inputSingleton = SingletonManager.Instance.GetSingleton<InputSingleton>();
+        if (inputSingleton == null) {
+            Debug.LogError("Please ensure a singleton asset is in the scene with an InputSingleton attached!");
             return;
         }
 
-        registerInputEvents();
+        RegisterInputEvents();
 
         Time.timeScale = 1.0f;
     }
@@ -335,26 +338,25 @@ public class PlayerController : MonoBehaviour {
 
     #region Handle Inputs
 
-    private void registerInputEvents() {
-        InputManagerData data = (InputManagerData)InputManager.Instance.SingletonBaseRef.Data;
+    private void RegisterInputEvents() {
 
-        data.movement.performed += onInputMovement;
-        data.movement.canceled += onInputMovement;
+        inputSingleton.movement.performed += onInputMovement;
+        inputSingleton.movement.canceled += onInputMovement;
 
-        data.look.performed += onInputLook;
-        data.look.canceled += onInputLook;
+        inputSingleton.look.performed += onInputLook;
+        inputSingleton.look.canceled += onInputLook;
 
-        data.jump.performed += onInputJump;
-        data.jump.canceled += onInputJump;
+        inputSingleton.jump.performed += onInputJump;
+        inputSingleton.jump.canceled += onInputJump;
 
-        data.snipModeToggle.performed += onInputSnipModeToggle;
-        data.snipModeToggle.canceled += onInputSnipModeToggle;
+        inputSingleton.snipModeToggle.performed += onInputSnipModeToggle;
+        inputSingleton.snipModeToggle.canceled += onInputSnipModeToggle;
 
-        data.leftCrabClaw.performed += onInputLeftCrabClaw;
-        data.leftCrabClaw.canceled += onInputLeftCrabClaw;
+        inputSingleton.leftCrabClaw.performed += onInputLeftCrabClaw;
+        inputSingleton.leftCrabClaw.canceled += onInputLeftCrabClaw;
 
-        data.rightCrabClaw.performed += onInputRightCrabClaw;
-        data.rightCrabClaw.canceled += onInputRightCrabClaw;
+        inputSingleton.rightCrabClaw.performed += onInputRightCrabClaw;
+        inputSingleton.rightCrabClaw.canceled += onInputRightCrabClaw;
     }
 
     private void onInputMovement(InputAction.CallbackContext ctx) {
