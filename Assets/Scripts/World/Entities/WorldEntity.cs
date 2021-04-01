@@ -10,14 +10,19 @@ public class WorldEntity : MonoBehaviour {
         health = 10,
         healthMax = 10;
 
-    private Material crackMaterialInstance;
+    private List<Material> crackMaterialInstances = new List<Material>();
 
     protected virtual void Awake() {
-        crackMaterialInstance = GetComponent<MeshRenderer>().material;
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
 
-        if (!crackMaterialInstance.HasProperty("_CrackAmount")) {
-            crackMaterialInstance = null;
+        foreach(MeshRenderer mr in meshRenderers) {
+            Material m = mr.material;
+            if (m.HasProperty("_CrackAmount")) {
+                crackMaterialInstances.Add(m);
+            }
         }
+
+
     }
 
     public float HealthAsPercent() {
@@ -38,8 +43,10 @@ public class WorldEntity : MonoBehaviour {
             Debug.Log($"{transform.name} just took {damageAmount} damage! Current health: {health}.");
         }
 
-        if(crackMaterialInstance != null) {
-            crackMaterialInstance.SetFloat("_CrackAmount", Mathf.Clamp01(1.0f - HealthAsPercent()));
+        if (crackMaterialInstances.Count > 0) {
+            foreach (Material m in crackMaterialInstances) {
+                m.SetFloat("_CrackAmount", Mathf.Clamp01(1.0f - HealthAsPercent()));
+            }
         }
 
         //Handle death, if applicable.
