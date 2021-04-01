@@ -8,6 +8,7 @@ using TMPro;
 public class PlayerWorldInteraction : MonoBehaviour {
    
     public ScoreNotifier scoreNotifier;
+    public ObjectiveHandler objectiveHandler;
 
     public GameObject chuteDoor;
     public Light RClight;
@@ -87,6 +88,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
         {
             crabRigidbody.useGravity = true;
             crabRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        }
+
+        if (other.tag == "Fish Tank")
+        {
+            objectiveHandler.escapeFishTank = true;
         }
     }
 

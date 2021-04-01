@@ -9,6 +9,7 @@ public class LeverFunction : MonoBehaviour
     public bool openGate;
     public GameObject gate;
     public Transform target;
+    public ObjectiveHandler objectiveHandler;
 
     // Update is called once per frame
     void Update()
@@ -24,6 +25,7 @@ public class LeverFunction : MonoBehaviour
         if (openGate == true)
         {
             gate.transform.position = Vector3.Lerp(gate.transform.position, target.transform.position, speed * Time.deltaTime);
+            objectiveHandler.openGate = true;
         }
     }
 
