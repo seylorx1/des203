@@ -26,6 +26,10 @@ public class PlayerWorldInteraction : MonoBehaviour {
     public TextMeshProUGUI OpenChuteInfoText;
     public TextMeshProUGUI OpenChuteNotifierText;
 
+    public int NumberOfPearls;
+    private int CollectedPearls = 0;
+    public TextMeshProUGUI PearlsText;
+
     public float gravityScale = 5;
     public float MaxVelocity = 5;
     public float Acceleration = 5;
@@ -53,12 +57,14 @@ public class PlayerWorldInteraction : MonoBehaviour {
         playerController = GetComponent<PlayerController>();
         crabRigidbody = GetComponent<Rigidbody>();
         ObjectNotifierAnim = ObjectiveNotifier.GetComponent<Animation>();
+        PearlsText.text = CollectedPearls + " / " + NumberOfPearls;
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Collectable") {
             Score += 50;
-
+            CollectedPearls = CollectedPearls + 1;
+            PearlsText.text = CollectedPearls + " / " + NumberOfPearls;
             Destroy(other.gameObject);
         }
 
