@@ -30,10 +30,15 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private int CollectedPearls = 0;
     public TextMeshProUGUI PearlsText;
 
-    public TextMeshProUGUI CNotifier;
-    public TextMeshProUGUI RNotifier;
-    public TextMeshProUGUI ANotifier;
-    public TextMeshProUGUI BNotifier;
+    public TextMeshProUGUI CPauseNotifier;
+    public TextMeshProUGUI RPauseNotifier;
+    public TextMeshProUGUI APauseNotifier;
+    public TextMeshProUGUI BPauseNotifier;
+
+    public TextMeshProUGUI CUINotifier;
+    public TextMeshProUGUI RUINotifier;
+    public TextMeshProUGUI AUINotifier;
+    public TextMeshProUGUI BUINotifier;
 
     public float gravityScale = 5;
     public float MaxVelocity = 5;
@@ -111,28 +116,36 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
         if (other.tag == "C")
         {
-            CNotifier.color = new Color32(255, 196, 52, 255);
+            CPauseNotifier.color = new Color32(255, 196, 52, 255);
+            CUINotifier.color = new Color32(255, 196, 52, 255);
+            ObjectNotifierAnim.Play("CRABPopup");
             Score += 50;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "R")
         {
-            RNotifier.color = new Color32(255, 196, 52, 255);
+            RPauseNotifier.color = new Color32(255, 196, 52, 255);
+            RUINotifier.color = new Color32(255, 196, 52, 255);
+            ObjectNotifierAnim.Play("CRABPopup");
             Score += 50;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "A")
         {
-            ANotifier.color = new Color32(255, 196, 52, 255);
+            APauseNotifier.color = new Color32(255, 196, 52, 255);
+            AUINotifier.color = new Color32(255, 196, 52, 255);
+            ObjectNotifierAnim.Play("CRABPopup");
             Score += 50;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "B")
         {
-            BNotifier.color = new Color32(255, 196, 52, 255);
+            BPauseNotifier.color = new Color32(255, 196, 52, 255);
+            BUINotifier.color = new Color32(255, 196, 52, 255);
+            ObjectNotifierAnim.Play("CRABPopup");
             Score += 50;
             Destroy(other.gameObject);
         }
