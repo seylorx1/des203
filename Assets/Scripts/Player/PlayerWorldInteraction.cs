@@ -30,6 +30,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private int CollectedPearls = 0;
     public TextMeshProUGUI PearlsText;
 
+    public TextMeshProUGUI CNotifier;
+    public TextMeshProUGUI RNotifier;
+    public TextMeshProUGUI ANotifier;
+    public TextMeshProUGUI BNotifier;
+
     public float gravityScale = 5;
     public float MaxVelocity = 5;
     public float Acceleration = 5;
@@ -37,6 +42,10 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private PlayerController playerController;
     private Rigidbody crabRigidbody;
     private Animation ObjectNotifierAnim;
+
+    private bool ChuteOpen = false;
+    private bool TankEscaped = false;
+
 
 
 
@@ -100,19 +109,46 @@ public class PlayerWorldInteraction : MonoBehaviour {
             Results.SetActive(true);
         }
 
+        if (other.tag == "C")
+        {
+            CNotifier.color = new Color32(255, 196, 52, 255);
+            Score += 50;
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "R")
+        {
+            RNotifier.color = new Color32(255, 196, 52, 255);
+            Score += 50;
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "A")
+        {
+            ANotifier.color = new Color32(255, 196, 52, 255);
+            Score += 50;
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "B")
+        {
+            BNotifier.color = new Color32(255, 196, 52, 255);
+            Score += 50;
+            Destroy(other.gameObject);
+        }
+
         if (other.tag == "Button")
         {
-            chuteDoor.SetActive(true);
-            RClight.color = Color.green;
-            Buttonlight.color = Color.green;
+                chuteDoor.SetActive(true);
+                RClight.color = Color.green;
+                Buttonlight.color = Color.green;
 
-            OpenChuteNotifierText.text = "Open Rubbish Chute";
-            OpenChuteInfoText.text = OpenChuteNotifierText.text;
+                OpenChuteNotifierText.text = "Open Rubbish Chute";
+                OpenChuteInfoText.text = OpenChuteNotifierText.text;
 
-            ObjectNotifierAnim.Play("PopUpOpenChute");
-            OpenChuteTick.SetActive(true);
-
-
+                ObjectNotifierAnim.Play("PopUpOpenChute");
+                OpenChuteTick.SetActive(true);
+                Destroy(other.gameObject);
         }
 
         if (other.tag == "Float")
