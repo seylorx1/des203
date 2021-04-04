@@ -30,6 +30,10 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private int CollectedPearls = 0;
     public TextMeshProUGUI PearlsText;
 
+    public int NumberOfCrabs;
+    private int CollectedCrabs = 0;
+    public TextMeshProUGUI CrabsText;
+
     public TextMeshProUGUI CPauseNotifier;
     public TextMeshProUGUI RPauseNotifier;
     public TextMeshProUGUI APauseNotifier;
@@ -71,7 +75,9 @@ public class PlayerWorldInteraction : MonoBehaviour {
         playerController = GetComponent<PlayerController>();
         crabRigidbody = GetComponent<Rigidbody>();
         ObjectNotifierAnim = ObjectiveNotifier.GetComponent<Animation>();
+
         PearlsText.text = CollectedPearls + " / " + NumberOfPearls;
+        CrabsText.text = CollectedCrabs + " / " + NumberOfCrabs;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -110,6 +116,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
         if (other.tag == "Exit")
         {
+            Score += 100;
             Time.timeScale = 0.0f;
             Results.SetActive(true);
         }
@@ -119,7 +126,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
             CPauseNotifier.color = new Color32(255, 196, 52, 255);
             CUINotifier.color = new Color32(255, 196, 52, 255);
             ObjectNotifierAnim.Play("CRABPopup");
-            Score += 50;
+            Score += 100;
             Destroy(other.gameObject);
         }
 
@@ -128,7 +135,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
             RPauseNotifier.color = new Color32(255, 196, 52, 255);
             RUINotifier.color = new Color32(255, 196, 52, 255);
             ObjectNotifierAnim.Play("CRABPopup");
-            Score += 50;
+            Score += 100;
             Destroy(other.gameObject);
         }
 
@@ -137,7 +144,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
             APauseNotifier.color = new Color32(255, 196, 52, 255);
             AUINotifier.color = new Color32(255, 196, 52, 255);
             ObjectNotifierAnim.Play("CRABPopup");
-            Score += 50;
+            Score += 100;
             Destroy(other.gameObject);
         }
 
@@ -146,6 +153,14 @@ public class PlayerWorldInteraction : MonoBehaviour {
             BPauseNotifier.color = new Color32(255, 196, 52, 255);
             BUINotifier.color = new Color32(255, 196, 52, 255);
             ObjectNotifierAnim.Play("CRABPopup");
+            Score += 100;
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "SaveCrab")
+        {
+            CollectedCrabs = CollectedCrabs + 1;
+            CrabsText.text = CollectedCrabs + " / " + NumberOfCrabs;
             Score += 50;
             Destroy(other.gameObject);
         }
