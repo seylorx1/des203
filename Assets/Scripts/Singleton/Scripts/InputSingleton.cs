@@ -8,15 +8,19 @@ public class InputSingleton : SingletonScriptableObject {
     public InputAction snipModeToggle;
     public InputAction leftCrabClaw;
     public InputAction rightCrabClaw;
+    public InputAction pivotLeftCrabClaw;
+    public InputAction pivotRightCrabClaw;
     public InputAction pause;
 
-    public override void OnStart() {
+    public override void OnAwake() {
         movement.Enable();
         look.Enable();
         jump.Enable();
         snipModeToggle.Enable();
         leftCrabClaw.Enable();
         rightCrabClaw.Enable();
+        pivotLeftCrabClaw.Enable();
+        pivotRightCrabClaw.Enable();
         pause.Enable();
     }
 

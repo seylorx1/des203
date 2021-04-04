@@ -220,10 +220,58 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Right Crab Claw
       m_Flags: 0
+  pivotLeftCrabClaw:
+    m_Name: Pivot Left Crab Claw
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 931b0aff-c4d3-4ab0-a444-1a76a0255040
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 086f5865-d94b-4d60-9aaa-afc2dce78044
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pivot Left Crab Claw
+      m_Flags: 0
+    - m_Name: 
+      m_Id: b5e8784c-2344-46ed-8e2c-db94498bd97f
+      m_Path: <Gamepad>/leftStickPress
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pivot Left Crab Claw
+      m_Flags: 0
+  pivotRightCrabClaw:
+    m_Name: Pivot Right Crab Claw
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 22650e99-c80c-4d00-af75-a061025003e6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 8bc14f6a-82e7-4ddc-b3de-039397f0f8d5
+      m_Path: <Keyboard>/rightShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pivot Right Crab Claw
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 01d65616-434d-49b3-88ab-979cd9c90ed5
+      m_Path: <Gamepad>/rightStickPress
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pivot Right Crab Claw
+      m_Flags: 0
   pause:
     m_Name: Pause
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: 647d0a30-87d1-4d28-9363-3b110686ecf1
     m_Processors: 
     m_Interactions: 

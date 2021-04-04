@@ -62,8 +62,6 @@ public class PlayerController : MonoBehaviour {
     private FlamesPP cameraFlamesPP;
     private Vignette cameraFlamesVignette;
 
-    private InputSingleton inputSingleton;
-
     private Collider crabCollider;
     private Rigidbody crabRigidbody;
 
@@ -96,6 +94,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool LeftClawPivot { get; private set; } = false;
+    public bool RightClawPivot { get; private set; } = false;
+
     // Is the crab flipped over? (Used for flipping.)
     public bool CrabFlipped { get; private set; } = false;
 
@@ -117,16 +118,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        foreach(SkinnedMeshRenderer r in crabMeshRenderers) {
+        foreach (SkinnedMeshRenderer r in crabMeshRenderers) {
             Material rMat = r.material;
 
-            if(!crabMaterials.Contains(rMat) && rMat.HasProperty("_OutlineColor")) {
+            if (!crabMaterials.Contains(rMat) && rMat.HasProperty("_OutlineColor")) {
                 crabMaterials.Add(rMat);
             }
         }
 
         PostProcessVolume cameraPostProcessVolume = Camera.main.GetComponentInChildren<PostProcessVolume>();
-        if(cameraPostProcessVolume != null) {
+        if (cameraPostProcessVolume != null) {
             cameraPostProcessVolume.profile.TryGetSettings(out cameraFlamesPP);
             cameraPostProcessVolume.profile.TryGetSettings(out cameraFlamesVignette);
         }
@@ -135,12 +136,6 @@ public class PlayerController : MonoBehaviour {
         crabRigidbody = GetComponent<Rigidbody>();
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
-
-        inputSingleton = SingletonManager.Instance.GetSingleton<InputSingleton>();
-        if (inputSingleton == null) {
-            Debug.LogError("Please ensure a singleton asset is in the scene with an InputSingleton attached!");
-            return;
-        }
 
         RegisterInputEvents();
 
@@ -193,7 +188,7 @@ public class PlayerController : MonoBehaviour {
             rCloseAmount);
 
         #endregion
-        
+
     }
 
     void FixedUpdate() {
@@ -256,7 +251,7 @@ public class PlayerController : MonoBehaviour {
             //Jump
             if (jumpAttempt) {
 
-                if(isOnEdge || CrabFlipped) {
+                if (isOnEdge || CrabFlipped) {
                     //apply torque to crab
                     crabRigidbody.AddTorque(
                         new Vector3(
@@ -281,33 +276,34 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
     void SnipMode() {
 
-        //TODO Arms appear to have collisions enabled. Consider calling this from FixedUpdate() if this is intentional.
+        if (!LeftClawPivot) {
+            if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
+                lClawIKTarget.transform.position +=
+                    ((Camera.main.transform.right * inputLS.x) + (Camera.main.transform.up * inputLS.y)) *
+                    crabClawData.clawSpeed * Time.deltaTime;
 
-        if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
-            lClawIKTarget.transform.position +=
-                ((Camera.main.transform.right * inputLS.x) + (Camera.main.transform.up * inputLS.y)) *
-                crabClawData.clawSpeed * Time.deltaTime;
-
-            lClawIKTarget.transform.localPosition = new Vector3(
-                Mathf.Clamp(lClawIKTarget.transform.localPosition.x, crabClawData.lClawIKMin.x, crabClawData.lClawIKMax.x),
-                Mathf.Clamp(lClawIKTarget.transform.localPosition.y, crabClawData.lClawIKMin.y, crabClawData.lClawIKMax.y),
-                crabClawData.lClawIK_Z
-                );
+                lClawIKTarget.transform.localPosition = new Vector3(
+                    Mathf.Clamp(lClawIKTarget.transform.localPosition.x, crabClawData.lClawIKMin.x, crabClawData.lClawIKMax.x),
+                    Mathf.Clamp(lClawIKTarget.transform.localPosition.y, crabClawData.lClawIKMin.y, crabClawData.lClawIKMax.y),
+                    crabClawData.lClawIK_Z
+                    );
+            }
         }
 
-        if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
-            rClawIKTarget.transform.position +=
-                ((Camera.main.transform.right * inputRS.x) + (Camera.main.transform.up * inputRS.y)) *
-                crabClawData.clawSpeed * Time.deltaTime;
+        if (!RightClawPivot) {
+            if (Mathf.Abs(inputRS.x) > 0.1f || Mathf.Abs(inputRS.y) > 0.1f) { //Accomodate for stick-drift
+                rClawIKTarget.transform.position +=
+                    ((Camera.main.transform.right * inputRS.x) + (Camera.main.transform.up * inputRS.y)) *
+                    crabClawData.clawSpeed * Time.deltaTime;
 
-            rClawIKTarget.transform.localPosition = new Vector3(
-                Mathf.Clamp(rClawIKTarget.transform.localPosition.x, crabClawData.rClawIKMin.x, crabClawData.rClawIKMax.x),
-                Mathf.Clamp(rClawIKTarget.transform.localPosition.y, crabClawData.rClawIKMin.y, crabClawData.rClawIKMax.y),
-                crabClawData.rClawIK_Z
-                );
+                rClawIKTarget.transform.localPosition = new Vector3(
+                    Mathf.Clamp(rClawIKTarget.transform.localPosition.x, crabClawData.rClawIKMin.x, crabClawData.rClawIKMax.x),
+                    Mathf.Clamp(rClawIKTarget.transform.localPosition.y, crabClawData.rClawIKMin.y, crabClawData.rClawIKMax.y),
+                    crabClawData.rClawIK_Z
+                    );
+            }
         }
     }
 
@@ -324,13 +320,13 @@ public class PlayerController : MonoBehaviour {
         }
 
         float clampedHeat = Mathf.Clamp01(Heat * 0.01f);
-        
+
         if (cameraFlamesPP != null) {
             cameraFlamesPP.flameAmount.value = clampedHeat;
             cameraFlamesVignette.intensity.value = clampedHeat * 0.6f;
         }
 
-        foreach(Material rMat in crabMaterials) {
+        foreach (Material rMat in crabMaterials) {
             rMat.SetColor("_Color", Color.Lerp(Color.white, Color.red, clampedHeat * 0.5f));
             rMat.SetColor("_OutlineColor", Color.Lerp(Color.black, Color.red, clampedHeat));
         }
@@ -340,34 +336,46 @@ public class PlayerController : MonoBehaviour {
 
     private void RegisterInputEvents() {
 
-        inputSingleton.movement.performed += onInputMovement;
-        inputSingleton.movement.canceled += onInputMovement;
+        InputSingleton inputSingleton = SingletonManager.Instance.GetSingleton<InputSingleton>();
+        if (inputSingleton == null) {
+            Debug.LogError("Please ensure a singleton asset is in the scene with an InputSingleton attached!");
+            return;
+        }
 
-        inputSingleton.look.performed += onInputLook;
-        inputSingleton.look.canceled += onInputLook;
+        inputSingleton.movement.performed += OnInputMovement;
+        inputSingleton.movement.canceled += OnInputMovement;
 
-        inputSingleton.jump.performed += onInputJump;
-        inputSingleton.jump.canceled += onInputJump;
+        inputSingleton.look.performed += OnInputLook;
+        inputSingleton.look.canceled += OnInputLook;
 
-        inputSingleton.snipModeToggle.performed += onInputSnipModeToggle;
-        inputSingleton.snipModeToggle.canceled += onInputSnipModeToggle;
+        inputSingleton.jump.performed += OnInputJump;
+        inputSingleton.jump.canceled += OnInputJump;
 
-        inputSingleton.leftCrabClaw.performed += onInputLeftCrabClaw;
-        inputSingleton.leftCrabClaw.canceled += onInputLeftCrabClaw;
+        inputSingleton.snipModeToggle.performed += OnInputSnipModeToggle;
+        inputSingleton.snipModeToggle.canceled += OnInputSnipModeToggle;
 
-        inputSingleton.rightCrabClaw.performed += onInputRightCrabClaw;
-        inputSingleton.rightCrabClaw.canceled += onInputRightCrabClaw;
+        inputSingleton.leftCrabClaw.performed += OnInputLeftCrabClaw;
+        inputSingleton.leftCrabClaw.canceled += OnInputLeftCrabClaw;
+
+        inputSingleton.rightCrabClaw.performed += OnInputRightCrabClaw;
+        inputSingleton.rightCrabClaw.canceled += OnInputRightCrabClaw;
+
+        inputSingleton.pivotLeftCrabClaw.performed += OnInputPivotLeftCrabClaw;
+        inputSingleton.pivotLeftCrabClaw.canceled += OnInputPivotLeftCrabClaw;
+
+        inputSingleton.pivotRightCrabClaw.performed += OnInputPivotRightCrabClaw;
+        inputSingleton.pivotRightCrabClaw.canceled += OnInputPivotRightCrabClaw;
     }
 
-    private void onInputMovement(InputAction.CallbackContext ctx) {
+    private void OnInputMovement(InputAction.CallbackContext ctx) {
         inputLS = ctx.ReadValue<Vector2>();
     }
 
-    private void onInputLook(InputAction.CallbackContext ctx) {
+    private void OnInputLook(InputAction.CallbackContext ctx) {
         inputRS = ctx.ReadValue<Vector2>();
     }
 
-    private void onInputJump(InputAction.CallbackContext ctx) {
+    private void OnInputJump(InputAction.CallbackContext ctx) {
         //Check if player attempted to jump.
         //Player must be out of snip mode and touching the ground
         if (!Snip && !jumpAttempt && onGround) {
@@ -375,7 +383,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void onInputSnipModeToggle(InputAction.CallbackContext ctx) {
+    private void OnInputSnipModeToggle(InputAction.CallbackContext ctx) {
         //Toggle snip mode on "Joystick1Button2".
         if (ctx.ReadValueAsButton()) {
             if (CrabFlipped) {
@@ -387,12 +395,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void onInputLeftCrabClaw(InputAction.CallbackContext ctx) {
+    private void OnInputLeftCrabClaw(InputAction.CallbackContext ctx) {
         lTrigger = ctx.ReadValue<float>();
     }
 
-    private void onInputRightCrabClaw(InputAction.CallbackContext ctx) {
+    private void OnInputRightCrabClaw(InputAction.CallbackContext ctx) {
         rTrigger = ctx.ReadValue<float>();
+    }
+
+    private void OnInputPivotLeftCrabClaw(InputAction.CallbackContext ctx) {
+        LeftClawPivot = !LeftClawPivot;
+    }
+
+    private void OnInputPivotRightCrabClaw(InputAction.CallbackContext ctx) {
+        RightClawPivot = !RightClawPivot;
     }
 
     #endregion
