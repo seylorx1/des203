@@ -26,6 +26,10 @@ public class PlayerWorldInteraction : MonoBehaviour {
     public TextMeshProUGUI OpenChuteInfoText;
     public TextMeshProUGUI OpenChuteNotifierText;
 
+    public GameObject SmashWindowTick;
+    public TextMeshProUGUI SmashWindowInfoText;
+    public TextMeshProUGUI SmashWindowNotifierText;
+
     public int NumberOfPearls;
     private int CollectedPearls = 0;
     public TextMeshProUGUI PearlsText;
@@ -55,10 +59,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private bool ChuteOpen = false;
     private bool TankEscaped = false;
 
-
-
-
-    private int _score = 0;
+    public int _score = 0;
 
     public int Score {
         get {
@@ -100,6 +101,8 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
         if (other.tag == "TankObjective")
         {
+            SmashWindowInfoText.text = "Open Castle Gate";
+            SmashWindowNotifierText.text = SmashWindowInfoText.text;
             ObjectNotifierAnim.Play("PopUpEscapeTank");
             EscapeTankTick.SetActive(true);
             Destroy(other.gameObject);
