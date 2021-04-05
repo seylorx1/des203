@@ -37,22 +37,22 @@ public class ObjectiveHandler : MonoBehaviour
     {
         if (openGate == true)
         {
-            openGateToggle.isOn = true;
+           // openGateToggle.isOn = true;
         }   
 
         if (escapeFishTank == true)
         {
-            escapeFishTankToggle.isOn = true;
+            // escapeFishTankToggle.isOn = true;
         }
 
         if (openChute == true)
         {
-            openChuteToggle.isOn = true;
+            // openChuteToggle.isOn = true;
         }
 
         if (escapeRestaurant == true)
         {
-            escapeRestaurantToggle.isOn = true;
+            // escapeRestaurantToggle.isOn = true;
         }
     }
 
