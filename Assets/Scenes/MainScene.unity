@@ -8795,7 +8795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149046486875}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -20.10057, y: 4.3971863, z: -6.9569855}
+  m_LocalPosition: {x: -20.25, y: 4.3971863, z: -7.02}
   m_LocalScale: {x: 1.3450999, y: 1.3450998, z: 1.3450998}
   m_Children: []
   m_Father: {fileID: 1595105894}
@@ -10403,7 +10403,7 @@ GameObject:
   - component: {fileID: 964925965}
   m_Layer: 0
   m_Name: Box_UVW
-  m_TagString: Untagged
+  m_TagString: NoFloat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13955,8 +13955,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.233879, y: 9.211227, z: 6.5817795}
-  m_Center: {x: 0.15485, y: 4.1056137, z: 1.1673775}
+  m_Size: {x: 9.103497, y: 9.211227, z: 7.0145264}
+  m_Center: {x: -0.27995872, y: 4.1056137, z: 0.12827301}
 --- !u!33 &4813639676294672697
 MeshFilter:
   m_ObjectHideFlags: 0

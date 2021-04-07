@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Float : MonoBehaviour
 {
-    public float gravityScale = 1;
+    public float gravityScale = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class Float : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player") || !other.gameObject.CompareTag("NoFloat"))
         {
             other.attachedRigidbody.useGravity = false;
             other.attachedRigidbody.AddForce(transform.up * -gravityScale);
@@ -29,7 +29,7 @@ public class Float : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag != "Player")
+        if (!other.gameObject.CompareTag("Player"))
         {
             other.attachedRigidbody.useGravity = true;
         }
