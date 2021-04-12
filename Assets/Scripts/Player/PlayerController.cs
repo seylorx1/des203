@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject
         thirdCam,
         firstCam,
+        startCam,
         leftClaw,
         rightClaw,
         lClawIKTarget,
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour {
     private int layerMask_Player;
 
     private bool
+        anyKeyPress = false, // Workaround for the input system not having an easy way to check if any key is pressed 
         jumpAttempt = false,
         onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
         isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
@@ -144,6 +146,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (anyKeyPress == true)
+        {
+            startCam.gameObject.SetActive(false);
+
+        }
 
         if (Snip) {
             SnipMode();
@@ -226,6 +234,7 @@ public class PlayerController : MonoBehaviour {
                 //Apply force.
                 //XInput is active.
                 if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
+                    anyKeyPress = true;
 
                     Vector3 targetVelocity = transform.right * -inputLS.x * Acceleration;
 
@@ -241,6 +250,8 @@ public class PlayerController : MonoBehaviour {
                 //Rotate
                 //YInput is active
                 if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
+                    anyKeyPress = true;
+
                     crabRigidbody.rotation = Quaternion.Euler(
                         crabRigidbody.rotation.eulerAngles.x,
                         crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
