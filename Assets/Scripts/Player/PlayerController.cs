@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject
         thirdCam,
+        secondCam,
         firstCam,
         startCam,
         leftClaw,
@@ -27,13 +28,15 @@ public class PlayerController : MonoBehaviour {
         jumpForce = 4,
         flipTorque = 0.2f,
         lTrigger,
-        rTrigger;
+        rTrigger,
+        currentCam = 1;
 
     public Vector2
         inputLS,
         inputRS;
 
     public bool Snip { get; private set; } = false;
+    public bool camToggle = false;
 
     [System.Serializable]
     public struct CrabClawData {
@@ -142,6 +145,8 @@ public class PlayerController : MonoBehaviour {
         RegisterInputEvents();
 
         Time.timeScale = 1.0f;
+
+        currentCam = 1;
     }
 
     // Update is called once per frame
@@ -150,15 +155,17 @@ public class PlayerController : MonoBehaviour {
         if (anyKeyPress == true)
         {
             startCam.gameObject.SetActive(false);
-
         }
 
         if (Snip) {
             SnipMode();
         }
 
-        firstCam.gameObject.SetActive(Snip);
-        thirdCam.gameObject.SetActive(!Snip);
+        firstCam.gameObject.SetActive(currentCam == 1);
+        secondCam.gameObject.SetActive(currentCam == 2);
+        thirdCam.gameObject.SetActive(currentCam == 3);
+
+        CamControl();
 
         #region Crab Claw Controls
 
@@ -343,6 +350,26 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    void CamControl() // Cycle through the cameras
+    {
+        if (camToggle == true)
+        {
+            if (currentCam < 3)
+            {
+                currentCam += 1;
+            }
+
+            else if (currentCam >= 3)
+            {
+                currentCam = 1;
+            }
+
+            camToggle = false;
+        }
+    }
+
+        
+
     #region Handle Inputs
 
     private void RegisterInputEvents() {
@@ -376,6 +403,9 @@ public class PlayerController : MonoBehaviour {
 
         inputSingleton.pivotRightCrabClaw.performed += OnInputPivotRightCrabClaw;
         inputSingleton.pivotRightCrabClaw.canceled += OnInputPivotRightCrabClaw;
+
+        inputSingleton.camToggle.performed += OnInputCamToggle;
+        inputSingleton.camToggle.canceled += OnInputCamToggle;
     }
 
     private void OnInputMovement(InputAction.CallbackContext ctx) {
@@ -422,5 +452,9 @@ public class PlayerController : MonoBehaviour {
         RightClawPivot = !RightClawPivot;
     }
 
+    private void OnInputCamToggle(InputAction.CallbackContext ctx)
+    {
+        camToggle = ctx.ReadValueAsButton();
+    }
     #endregion
 }

@@ -292,3 +292,27 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Pause
       m_Flags: 0
+  camToggle:
+    m_Name: Cam Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e667bbdd-0112-4615-955a-2144bdf2c105
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 69995d75-9af6-4979-a5bd-44954b5bf50f
+      m_Path: <Keyboard>/tab
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Cam Toggle
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ee296e6e-4e80-4d5b-a355-2926f75fd741
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Cam Toggle
+      m_Flags: 0

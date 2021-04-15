@@ -11,6 +11,7 @@ public class InputSingleton : SingletonScriptableObject {
     public InputAction pivotLeftCrabClaw;
     public InputAction pivotRightCrabClaw;
     public InputAction pause;
+    public InputAction camToggle;
 
     public override void OnAwake() {
         movement.Enable();
@@ -22,6 +23,7 @@ public class InputSingleton : SingletonScriptableObject {
         pivotLeftCrabClaw.Enable();
         pivotRightCrabClaw.Enable();
         pause.Enable();
+        camToggle.Enable();
     }
 
     [MenuItem("Assets/Create/Singleton/InputSingleton")]
