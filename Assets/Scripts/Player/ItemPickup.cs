@@ -76,7 +76,7 @@ public class ItemPickup : MonoBehaviour {
                     new Vector3(
                         ClawStick.y,
                         0.0f,
-                        ClawStick.x
+                        -ClawStick.x
                         ),
                     pivotSpeed * Mathf.Clamp01(ClawStick.magnitude) * Time.deltaTime);
             }

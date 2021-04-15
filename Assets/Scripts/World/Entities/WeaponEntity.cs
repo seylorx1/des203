@@ -5,31 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class WeaponEntity : WorldEntity {
 
-    public string gibID = "";
-
     private Transform awakeTransform;
     private Rigidbody weaponRigidbody;
     private Collider weaponCollider;
 
     private bool weaponSwung = false;
 
-    private GibManagerSingleton.GibBase gib;
     [HideInInspector] public ItemPickup HeldClaw { get; private set; }
 
     protected override void Awake() {
         base.Awake();
 
-        if(gibID == "") {
-            gibID = "metal";
-        }
-
         awakeTransform = transform.parent;
         weaponRigidbody = GetComponent<Rigidbody>();
         weaponCollider = GetComponent<Collider>();
-    }
-
-    void Start() {
-        gib = SingletonManager.Instance.GetSingleton<GibManagerSingleton>().GetGib(gibID);
     }
 
     void Reset() {
@@ -75,10 +64,6 @@ public class WeaponEntity : WorldEntity {
 
         otherEntity.Damage(1);
         Damage(1);
-
-        if(gib != null) {
-            gib.SpawnGibAtPosition(otherEntity.transform.position);
-        }
 
         return true;
     }
