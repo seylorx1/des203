@@ -79,14 +79,8 @@ public class ItemPickup : MonoBehaviour {
                         ClawStick.x
                         ),
                     pivotSpeed * Mathf.Clamp01(ClawStick.magnitude) * Time.deltaTime);
-                /*heldTransform.Rotate(
-                    new Vector3(
-                        pivotSpeed * ClawStick.x * Time.deltaTime,
-                        0.0f,
-                        0.0f),
-                    Space.Self);*/
             }
-            if (ClawTrigger < 0.2f) { //Player let go of trigger.
+            if (ClawTrigger < 0.95f) { //Player let go of trigger.
                 if (heldWeapon != null) {
                     heldWeapon.Drop();
                 }
