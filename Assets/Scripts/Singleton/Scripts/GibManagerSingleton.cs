@@ -15,7 +15,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
         private GameObject cachedParticleInstance = null;
 
         //Quite laggy...
-        public void CacheParticleSystem() {
+        public void CacheParticleSystem(Transform parentTransform) {
             //Create new gameobject and assign a new particle system
             cachedParticleInstance = new GameObject("Cached Particle System Instance"); //Create the gameobject
             ParticleSystem ps = (ParticleSystem)cachedParticleInstance.AddComponent(typeof(ParticleSystem)); //Add a particle system
@@ -32,6 +32,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
             //Apply material
             ps_r.material = particleSystemMaterial;
 
+            cachedParticleInstance.transform.parent = parentTransform;
             cachedParticleInstance.SetActive(false);
         }
 
@@ -75,6 +76,8 @@ public class GibManagerSingleton : SingletonScriptableObject {
     }
 
     public override void OnAwake() {
+        GameObject cacheParent = new GameObject("Cached Particle Systems");
+
         //Populate missing attributes
         foreach (GibBase gib in gibs) {
             //Check to see if any elements are unavailable
@@ -86,7 +89,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
                 gib.particleSystemPreset = defaultGib.particleSystemPreset;
             }
 
-            gib.CacheParticleSystem();
+            gib.CacheParticleSystem(cacheParent.transform);
         }
     }
 }
