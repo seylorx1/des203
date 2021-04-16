@@ -6,13 +6,19 @@ using UnityEditor.Presets;
 
 public class GibManagerSingleton : SingletonScriptableObject {
 
+    public GameObject[] gibModels;
+    private List<KeyValuePair<int, float>> gibSizes;
+
     [System.Serializable]
     public class GibBase {
+
         public Color gibColor;
         public Material particleSystemMaterial;
         public Preset particleSystemPreset;
 
         private GameObject cachedParticleInstance = null;
+
+        public GibManagerSingleton GibManager { private get; set; }
 
         //Quite laggy...
         public void CacheParticleSystem(Transform parentTransform) {
@@ -36,13 +42,45 @@ public class GibManagerSingleton : SingletonScriptableObject {
             cachedParticleInstance.SetActive(false);
         }
 
-        public GameObject SpawnGibAtPosition(Vector3 worldPos) {
+        public GameObject SpawnParticlesAtPosition(Vector3 worldPos) {
             GameObject ps_go = Instantiate(cachedParticleInstance);
             ps_go.transform.position = worldPos;
             ps_go.name = "Particle System Instance";
             ps_go.SetActive(true);
 
             return ps_go;
+        }
+
+        public GameObject[] SpawnGibExplosion(MeshFilter meshFilter, Vector3 worldPos) {
+            //Max gib size should be, at the most, quarter that of the object.
+            float maxSize =
+                meshFilter.mesh.bounds.size.magnitude *
+                meshFilter.transform.localScale.magnitude *
+                0.25f;
+
+            GameObject[] spawnedGameObjects = new GameObject[5];
+
+            for (int i = 3; i < GibManager.gibSizes.Count; i++) {
+                if (GibManager.gibSizes[i].Value > maxSize || i == GibManager.gibSizes.Count-1) {
+                    for(int j = i-3; j <= i; j++) {
+                        //Iterate over the previous 4
+                        int spawnedGibIndex = j - i + 3;
+
+                        //Spawn gibs. 
+                        spawnedGameObjects[spawnedGibIndex] = Instantiate(GibManager.gibModels[GibManager.gibSizes[j].Key]);
+                        spawnedGameObjects[spawnedGibIndex].transform.position = worldPos;
+                        spawnedGameObjects[spawnedGibIndex].transform.rotation = Random.rotation;
+                        spawnedGameObjects[spawnedGibIndex].GetComponent<MeshRenderer>().material.color = gibColor;
+
+                        //Force is handled by scripts on gibs...
+                    }
+                    break;
+                }
+            }
+
+            spawnedGameObjects[4] = SpawnParticlesAtPosition(worldPos);
+
+            return spawnedGameObjects;
         }
     }
 
@@ -80,6 +118,10 @@ public class GibManagerSingleton : SingletonScriptableObject {
 
         //Populate missing attributes
         foreach (GibBase gib in gibs) {
+
+            //Update the gib's manager.
+            gib.GibManager = this;
+
             //Check to see if any elements are unavailable
             if (gib.particleSystemMaterial == null) {
                 gib.particleSystemMaterial = defaultGib.particleSystemMaterial;
@@ -91,5 +133,17 @@ public class GibManagerSingleton : SingletonScriptableObject {
 
             gib.CacheParticleSystem(cacheParent.transform);
         }
+
+        //Get list of gib indexes and sizes.
+        gibSizes = new List<KeyValuePair<int, float>>(gibModels.Length);
+        for (int i = 0; i < gibModels.Length; i++) {
+            gibSizes.Add(new KeyValuePair<int, float>(
+                i,
+                gibModels[i].GetComponent<MeshFilter>().sharedMesh.bounds.size.magnitude * gibModels[i].transform.localScale.magnitude));
+        }
+        //Sort by size.
+        gibSizes.Sort(delegate (KeyValuePair<int, float> pair1, KeyValuePair<int, float> pair2) {
+            return pair1.Value.CompareTo(pair2.Value);
+        });
     }
 }

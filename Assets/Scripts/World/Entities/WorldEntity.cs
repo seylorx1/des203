@@ -15,13 +15,16 @@ public class WorldEntity : MonoBehaviour {
 
     private List<Material> crackMaterialInstances = new List<Material>();
 
+    private MeshFilter meshFilter;
+
     protected virtual void Awake() {
         if (gibID == "") {
             gibID = "metal"; //Default to the metal gib.
         }
 
-        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        meshFilter = GetComponentInChildren<MeshFilter>();
 
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer mr in meshRenderers) {
             Material m = mr.material;
             if (m.HasProperty("_CrackAmount")) {
@@ -58,13 +61,14 @@ public class WorldEntity : MonoBehaviour {
             }
         }
 
-        if (gib != null) {
-            gib.SpawnGibAtPosition(transform.position);
-        }
 
         //Handle death, if applicable.
         if (IsDead()) {
+            gib?.SpawnGibExplosion(meshFilter, transform.position);
             Die();
+        }
+        else {
+            gib?.SpawnParticlesAtPosition(transform.position);
         }
         return true;
     }
