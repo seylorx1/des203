@@ -6,7 +6,7 @@ using UnityEditor.Presets;
 
 public class GibManagerSingleton : SingletonScriptableObject {
 
-    public GameObject[] gibModels;
+    public GameObject[] gibInstanceGameObjects;
     private List<KeyValuePair<int, float>> gibSizes;
 
     [System.Serializable]
@@ -67,7 +67,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
                         int spawnedGibIndex = j - i + 3;
 
                         //Spawn gibs. 
-                        spawnedGameObjects[spawnedGibIndex] = Instantiate(GibManager.gibModels[GibManager.gibSizes[j].Key]);
+                        spawnedGameObjects[spawnedGibIndex] = Instantiate(GibManager.gibInstanceGameObjects[GibManager.gibSizes[j].Key]);
                         spawnedGameObjects[spawnedGibIndex].transform.position = worldPos;
                         spawnedGameObjects[spawnedGibIndex].transform.rotation = Random.rotation;
                         spawnedGameObjects[spawnedGibIndex].GetComponent<MeshRenderer>().material.color = gibColor;
@@ -135,11 +135,11 @@ public class GibManagerSingleton : SingletonScriptableObject {
         }
 
         //Get list of gib indexes and sizes.
-        gibSizes = new List<KeyValuePair<int, float>>(gibModels.Length);
-        for (int i = 0; i < gibModels.Length; i++) {
+        gibSizes = new List<KeyValuePair<int, float>>(gibInstanceGameObjects.Length);
+        for (int i = 0; i < gibInstanceGameObjects.Length; i++) {
             gibSizes.Add(new KeyValuePair<int, float>(
                 i,
-                gibModels[i].GetComponent<MeshFilter>().sharedMesh.bounds.size.magnitude * gibModels[i].transform.localScale.magnitude));
+                gibInstanceGameObjects[i].GetComponent<MeshFilter>().sharedMesh.bounds.size.magnitude * gibInstanceGameObjects[i].transform.localScale.magnitude));
         }
         //Sort by size.
         gibSizes.Sort(delegate (KeyValuePair<int, float> pair1, KeyValuePair<int, float> pair2) {

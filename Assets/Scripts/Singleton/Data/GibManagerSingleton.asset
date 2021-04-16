@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e0d10f67b42114b9d03b56124ca562, type: 3}
   m_Name: GibManagerSingleton
   m_EditorClassIdentifier: 
-  gibModels:
+  gibInstanceGameObjects:
   - {fileID: 1284126260500060617, guid: 5d17b9362890702478090eefa085c27f, type: 3}
   - {fileID: 1662229839101578743, guid: 0b8d4733d160d634fb4c8d83146ad562, type: 3}
   - {fileID: 2783487953215290134, guid: 94f5e1102626807409aa78c64a92efb7, type: 3}
