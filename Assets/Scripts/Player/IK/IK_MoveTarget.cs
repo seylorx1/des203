@@ -93,6 +93,7 @@ public class IK_MoveTarget : MonoBehaviour {
                 targetHitYPoint = hit.point.y;
             }
 
+            // TODO Verify if TODO is still necessary
             // TODO check the rotation of the crab is correct -- don't want to attempt IK if she's flipped!
             targetDistance = Vector3.Distance(transform.position, targetTransform.position);
             if (targetDistance > MaxDistance) {

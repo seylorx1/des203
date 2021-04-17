@@ -7,6 +7,10 @@ Shader "FlexibleCelShader/Cel Outline"
 {
 	Properties
 	{
+		_SrcBlend("__src", Float) = 1.0
+		_DstBlend("__dst", Float) = 0.0
+		//_ZWrite("__zw", Float) = 1.0
+
 		[MaterialToggle] _ApplyPointLighting("Render Point Lights", Float) = 1.0
 		[MaterialToggle] _PointLightBanding("Point Light Banding", Float) = 0.0
 		[KeywordEnum(Add, Max)] _PointLightBlendMode("Point Light Blend Mode", Float) = 0.0
@@ -55,7 +59,9 @@ Shader "FlexibleCelShader/Cel Outline"
 			Pass
 			{
 				Tags{ "LightMode" = "ForwardBase" }
-
+				
+				Blend [_SrcBlend] [_DstBlend]
+				//ZWrite [_ZWrite]
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
@@ -288,7 +294,7 @@ Shader "FlexibleCelShader/Cel Outline"
 								1.0);
 					}
 
-					return col;
+					return float4(col.rgb, _Color.a);
 
 				}
 
@@ -299,7 +305,7 @@ Shader "FlexibleCelShader/Cel Outline"
 			Cull Front
 			Pass
 			{
-				Blend SrcAlpha OneMinusSrcAlpha
+				Blend[_SrcBlend][_DstBlend]
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
@@ -328,10 +334,11 @@ Shader "FlexibleCelShader/Cel Outline"
 					return o;
 				}
 
+				float4 _Color;
 				float4 _OutlineColor;
 				fixed4 frag(v2f i) : SV_Target
 				{
-					return _OutlineColor;
+					return float4(_OutlineColor.rgb, _Color.a);
 				}
 
 				ENDCG

@@ -10,6 +10,7 @@ public class WeaponEntity : WorldEntity {
     private Collider weaponCollider;
 
     private bool weaponSwung = false;
+
     [HideInInspector] public ItemPickup HeldClaw { get; private set; }
 
     protected override void Awake() {
@@ -37,7 +38,7 @@ public class WeaponEntity : WorldEntity {
 
         weaponCollider.isTrigger = true;
 
-        this.HeldClaw = claw;
+        HeldClaw = claw;
         transform.parent = claw.transform;
     }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WorldEntity : MonoBehaviour {
     public bool verbose = false;
+    public string gibID = "";
+
+    protected GibManagerSingleton.GibBase gib;
 
     [SerializeField]
     private int
@@ -12,17 +15,26 @@ public class WorldEntity : MonoBehaviour {
 
     private List<Material> crackMaterialInstances = new List<Material>();
 
-    protected virtual void Awake() {
-        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+    private MeshFilter meshFilter;
 
+    protected virtual void Awake() {
+        if (gibID == "") {
+            gibID = "metal"; //Default to the metal gib.
+        }
+
+        meshFilter = GetComponentInChildren<MeshFilter>();
+
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer mr in meshRenderers) {
             Material m = mr.material;
             if (m.HasProperty("_CrackAmount")) {
                 crackMaterialInstances.Add(m);
             }
         }
+    }
 
-
+    protected virtual void Start() {
+        gib = SingletonManager.Instance.GetSingleton<GibManagerSingleton>().GetGib(gibID);
     }
 
     public float HealthAsPercent() {
@@ -49,9 +61,14 @@ public class WorldEntity : MonoBehaviour {
             }
         }
 
+
         //Handle death, if applicable.
         if (IsDead()) {
+            gib?.SpawnGibExplosion(meshFilter, transform.position);
             Die();
+        }
+        else {
+            gib?.SpawnParticlesAtPosition(transform.position);
         }
         return true;
     }
