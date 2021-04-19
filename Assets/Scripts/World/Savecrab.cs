@@ -8,10 +8,25 @@ public class Savecrab : MonoBehaviour
     public int NumberOfCrabs;
     private int CollectedCrabs = 0;
     public TextMeshProUGUI CrabsText;
+    public string gibID = "";
+    private MeshFilter meshFilter;
+
+    protected GibManagerSingleton.GibBase gib;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gib = SingletonManager.Instance.GetSingleton<GibManagerSingleton>().GetGib(gibID);
+    }
+
+    protected virtual void Awake()
+    {
+        if (gibID == "")
+        {
+            gibID = "metal"; //Default to the metal gib.
+        }
+
+        meshFilter = GetComponentInChildren<MeshFilter>();
+
     }
 
     // Update is called once per frame
@@ -24,6 +39,7 @@ public class Savecrab : MonoBehaviour
     {
         if (other.tag == "Exit")
         {
+            gib?.SpawnParticlesAtPosition(transform.position);
             CollectedCrabs = CollectedCrabs + 1;
             CrabsText.text = CollectedCrabs + " / " + NumberOfCrabs;
             Destroy(gameObject);

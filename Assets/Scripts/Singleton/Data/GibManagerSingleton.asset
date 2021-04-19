@@ -41,3 +41,15 @@ MonoBehaviour:
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
     particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
     id: metal
+  - gibColor: {r: 0.19339621, g: 0.7535379, b: 1, a: 1}
+    particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
+    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    id: glass
+  - gibColor: {r: 0.6698113, g: 0.58401513, b: 0.48972055, a: 1}
+    particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
+    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    id: wood
+  - gibColor: {r: 1, g: 0.989954, b: 0, a: 1}
+    particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
+    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    id: crab
