@@ -39,6 +39,7 @@ Shader "FlexibleCelShader/Cel Outline"
 
 		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
 		_OutlineSize("Outline Size", float) = 10
+		_OutlineHighlight("Outline Highlight", float) = 0.0
 
 		_RimColor("Hard Edge Light Color", Color) = (1, 1, 1, 1)
 		_RimAlpha("Hard Edge Light Brightness", Range(0, 1)) = 0
@@ -336,9 +337,10 @@ Shader "FlexibleCelShader/Cel Outline"
 
 				float4 _Color;
 				float4 _OutlineColor;
+				float _OutlineHighlight;
 				fixed4 frag(v2f i) : SV_Target
-				{
-					return float4(_OutlineColor.rgb, _Color.a);
+				{					
+					return _OutlineHighlight == 1.0 ? float4(1.0, 1.0, 0.0, 1.0) : float4(_OutlineColor.rgb, _Color.a);
 				}
 
 				ENDCG

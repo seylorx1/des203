@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
     private int layerMask_Player;
 
     private bool
-        crabMovedInput = false, // Workaround for the input system not having an easy way to check if any key is pressed 
+        anyKeyPress = false, // Workaround for the input system not having an easy way to check if any key is pressed 
         jumpAttempt = false,
         onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
         isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (crabMovedInput) {
+        if (anyKeyPress) {
             startCam.gameObject.SetActive(false);
         }
 
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour {
         
         //Detect whether the crab is tipped over.
         CrabFlipped = crabVerticalDot < 0.0f;
-        if(CrabFlipped && crabMovedInput) {
+        if(CrabFlipped && anyKeyPress) {
             //Reset the camera if flipped.
             CurrentCam = 0;
         }
@@ -258,8 +258,6 @@ public class PlayerController : MonoBehaviour {
                 //Apply force.
                 //XInput is active.
                 if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
-                    crabMovedInput = true;
-
                     Vector3 targetVelocity = transform.right * -inputLS.x * Acceleration;
 
                     Vector3 velocityChange = (targetVelocity - crabRigidbody.velocity);
@@ -274,8 +272,6 @@ public class PlayerController : MonoBehaviour {
                 //Rotate
                 //YInput is active
                 if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
-                    crabMovedInput = true;
-
                     crabRigidbody.rotation = Quaternion.Euler(
                         crabRigidbody.rotation.eulerAngles.x,
                         crabRigidbody.rotation.eulerAngles.y + inputLS.y * Time.fixedDeltaTime * rotateSpeed,
@@ -407,16 +403,23 @@ public class PlayerController : MonoBehaviour {
 
     private void OnInputMovement(InputAction.CallbackContext ctx) {
         inputLS = ctx.ReadValue<Vector2>();
+        if(!anyKeyPress) {
+            anyKeyPress = inputLS.sqrMagnitude > 0.0f;
+        }
     }
 
     private void OnInputLook(InputAction.CallbackContext ctx) {
         inputRS = ctx.ReadValue<Vector2>();
+        if(!anyKeyPress) {
+            anyKeyPress = inputRS.sqrMagnitude > 0.0f;
+        }
     }
 
     private void OnInputJump(InputAction.CallbackContext ctx) {
         //Check if player attempted to jump.
         //Player must be out of snip mode and touching the ground
         if (!Snip && !jumpAttempt && onGround) {
+            anyKeyPress = true;
             jumpAttempt = ctx.ReadValueAsButton();
         }
     }
@@ -424,11 +427,24 @@ public class PlayerController : MonoBehaviour {
     private void OnInputSnipModeToggle(InputAction.CallbackContext ctx) {
         //Toggle snip mode on "Joystick1Button2".
         if (ctx.ReadValueAsButton()) {
+            anyKeyPress = true;
+
             if (CrabFlipped) {
                 Snip = false;
             }
             else {
                 Snip = !Snip;
+
+                if (Snip) {
+                    //Set snip camera to first person.
+                    //(This will not prevent the player from switching to a different camera view should they wish to.)
+                    CurrentCam = 1;
+                }
+                else {
+                    //Resets the camera to third person.
+                    //(This will not prevent the player from switching to a different camera view should they wish to.)
+                    CurrentCam = 0;
+                }
             }
         }
     }
@@ -450,8 +466,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnInputCamToggle(InputAction.CallbackContext ctx) {
-        if (ctx.ReadValueAsButton() && !CrabFlipped && crabMovedInput) {
-            CurrentCam = CurrentCam == 2 ? 0 : CurrentCam + 1;
+        if (ctx.ReadValueAsButton() && !CrabFlipped) {
+            if (!anyKeyPress) {
+                anyKeyPress = true;
+            }
+            else {
+                CurrentCam = CurrentCam == 2 ? 0 : CurrentCam + 1;
+            }
         }
     }
     #endregion
