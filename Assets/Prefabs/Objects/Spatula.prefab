@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7422593398813215634}
   - component: {fileID: 4676616678127910744}
   - component: {fileID: 573180204332879869}
-  - component: {fileID: 181869966228721383}
   - component: {fileID: 7634641164649871508}
+  - component: {fileID: 1176173995403657423}
+  - component: {fileID: 8387030143958758830}
   m_Layer: 0
   m_Name: Spatula
   m_TagString: Grabbable
@@ -100,20 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &181869966228721383
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622070906524311181}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4676188267520500942, guid: 1bd3c6250589fa8468a42e2e4398043c, type: 3}
 --- !u!114 &7634641164649871508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +117,29 @@ MonoBehaviour:
   gibID: 
   health: 10
   healthMax: 10
+--- !u!65 &1176173995403657423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6622070906524311181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0048689786, y: 0.0071191294, z: 0.00039391904}
+  m_Center: {x: 0.00046495086, y: 0.0010447641, z: 0.00016598243}
+--- !u!65 &8387030143958758830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6622070906524311181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0011417335, y: 0.011771542, z: 0.0002465459}
+  m_Center: {x: 0.00056762015, y: -0.007961035, z: 0.00012315856}

@@ -288,11 +288,11 @@ public class PlayerController : MonoBehaviour {
 
                 if (isOnEdge || CrabFlipped) {
                     //apply torque to crab
-                    crabRigidbody.AddTorque(
+                    crabRigidbody.AddRelativeTorque(
                         new Vector3(
-                            Random.Range(0, 2) == 0 ? -flipTorque : flipTorque, //Randomly add torque in one direction or an other to accomodate for edge cases.
+                            0.0f, //Randomly add torque in one direction or an other to accomodate for edge cases.
                             0.0f,
-                            0.0f),
+                            Random.Range(0, 2) == 0 ? -flipTorque : flipTorque),
                         ForceMode.Impulse);
                 }
 

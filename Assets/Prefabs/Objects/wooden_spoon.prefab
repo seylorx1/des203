@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8998015764889674914}
   - component: {fileID: 6574033777470591080}
   - component: {fileID: 3921838223494190514}
-  - component: {fileID: 2073678898714504140}
   - component: {fileID: 7490412355017770256}
+  - component: {fileID: 7327756528942610138}
+  - component: {fileID: 7520139098062064333}
   m_Layer: 0
   m_Name: wooden_spoon
   m_TagString: Grabbable
@@ -100,20 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2073678898714504140
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4628386036570026429}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 937655058597225062, guid: f03a14719f92b3a41bf0cbdf5da1d29f, type: 3}
 --- !u!114 &7490412355017770256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +117,29 @@ MonoBehaviour:
   gibID: 
   health: 10
   healthMax: 10
+--- !u!65 &7327756528942610138
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628386036570026429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.004626833, y: 0.0062086442, z: 0.0004825266}
+  m_Center: {x: 0.00050650217, y: 0.007628848, z: 0.00006682485}
+--- !u!65 &7520139098062064333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628386036570026429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001101286, y: 0.012354434, z: 0.0003515411}
+  m_Center: {x: 0.00057701295, y: -0.0008959523, z: 0.00006391876}
