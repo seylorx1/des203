@@ -166,7 +166,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 0abd886a-d571-4022-9924-11bac291cf12
-      m_Path: <Gamepad>/buttonWest
+      m_Path: <Gamepad>/buttonEast
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -230,7 +230,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 086f5865-d94b-4d60-9aaa-afc2dce78044
-      m_Path: <Keyboard>/leftShift
+      m_Path: <Keyboard>/leftAlt
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -238,7 +238,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: b5e8784c-2344-46ed-8e2c-db94498bd97f
-      m_Path: <Gamepad>/leftStickPress
+      m_Path: <Gamepad>/leftShoulder
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -254,7 +254,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 8bc14f6a-82e7-4ddc-b3de-039397f0f8d5
-      m_Path: <Keyboard>/rightShift
+      m_Path: <Keyboard>/rightAlt
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -262,7 +262,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 01d65616-434d-49b3-88ab-979cd9c90ed5
-      m_Path: <Gamepad>/rightStickPress
+      m_Path: <Gamepad>/rightShoulder
       m_Interactions: 
       m_Processors: 
       m_Groups: 
