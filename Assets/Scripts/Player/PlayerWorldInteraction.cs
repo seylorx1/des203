@@ -202,6 +202,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
                 crabRigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
             }
         }
+
     }
 
     private void OnTriggerExit(Collider other)
