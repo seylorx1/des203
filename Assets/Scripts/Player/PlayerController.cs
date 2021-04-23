@@ -28,14 +28,12 @@ public class PlayerController : MonoBehaviour {
         jumpForce = 4,
         flipTorque = 0.2f,
         lTrigger,
-        rTrigger,
-        currentCam = 1;
+        rTrigger;
 
     public Vector2
         inputLS,
         inputRS;
 
-    public bool Snip { get; private set; } = false;
     public bool camToggle = false;
 
     [System.Serializable]
@@ -82,7 +80,7 @@ public class PlayerController : MonoBehaviour {
     private int layerMask_Player;
 
     private bool
-        anyKeyPress = false, // Workaround for the input system not having an easy way to check if any key is pressed 
+        crabMovedInput = false, // Workaround for the input system not having an easy way to check if any key is pressed 
         jumpAttempt = false,
         onGround = false, // Is the crab touching the ground? (Used to prevent spam jumping / b-hopping.)
         isOnEdge = false; // Is the crab on their side? (Prevents peculiar wall bug.)
@@ -90,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 
     #region Properties
     //Used externally.
+    public bool Snip { get; private set; } = false;
+
     public Vector2 LookAxis {
         get {
             if (!Snip) {
@@ -106,6 +106,26 @@ public class PlayerController : MonoBehaviour {
     public bool CrabFlipped { get; private set; } = false;
 
     public float Heat { get; private set; } = 0;
+
+    private float _currentCam;
+
+    /// <summary>
+    /// Updates the current camera.
+    /// </summary>
+    public float CurrentCam {
+        get {
+            return _currentCam;
+        }
+        private set {
+            _currentCam = Mathf.Clamp(value, 0, 2);
+
+            //Update cameras.
+            firstCam.gameObject.SetActive(_currentCam == 0);
+            secondCam.gameObject.SetActive(_currentCam == 1);
+            thirdCam.gameObject.SetActive(_currentCam == 2);
+        }
+    }
+
     #endregion
 
     #endregion
@@ -123,6 +143,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
+        RegisterInputEvents();
+
         foreach (SkinnedMeshRenderer r in crabMeshRenderers) {
             Material rMat = r.material;
 
@@ -142,30 +164,20 @@ public class PlayerController : MonoBehaviour {
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
-        RegisterInputEvents();
 
-        Time.timeScale = 1.0f;
-
-        currentCam = 1;
+        CurrentCam = 0;
     }
 
     // Update is called once per frame
     void Update() {
 
-        if (anyKeyPress == true)
-        {
+        if (crabMovedInput) {
             startCam.gameObject.SetActive(false);
         }
 
         if (Snip) {
             SnipMode();
         }
-
-        firstCam.gameObject.SetActive(currentCam == 1);
-        secondCam.gameObject.SetActive(currentCam == 2);
-        thirdCam.gameObject.SetActive(currentCam == 3);
-
-        CamControl();
 
         #region Crab Claw Controls
 
@@ -216,8 +228,13 @@ public class PlayerController : MonoBehaviour {
             );
 
         float crabVerticalDot = Vector3.Dot(Vector3.up, transform.up); //Provides information about the orientation of the crab.
+        
         //Detect whether the crab is tipped over.
         CrabFlipped = crabVerticalDot < 0.0f;
+        if(CrabFlipped && crabMovedInput) {
+            //Reset the camera if flipped.
+            CurrentCam = 0;
+        }
 
         //Detect if the crab is lying on their side.
         isOnEdge = Mathf.Abs(crabVerticalDot) < 0.1f;
@@ -241,7 +258,7 @@ public class PlayerController : MonoBehaviour {
                 //Apply force.
                 //XInput is active.
                 if (Mathf.Abs(inputLS.x) > 0.1f) { //Accomodate for stick-drift
-                    anyKeyPress = true;
+                    crabMovedInput = true;
 
                     Vector3 targetVelocity = transform.right * -inputLS.x * Acceleration;
 
@@ -257,7 +274,7 @@ public class PlayerController : MonoBehaviour {
                 //Rotate
                 //YInput is active
                 if (Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
-                    anyKeyPress = true;
+                    crabMovedInput = true;
 
                     crabRigidbody.rotation = Quaternion.Euler(
                         crabRigidbody.rotation.eulerAngles.x,
@@ -350,26 +367,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void CamControl() // Cycle through the cameras
-    {
-        if (camToggle == true)
-        {
-            if (currentCam < 3)
-            {
-                currentCam += 1;
-            }
-
-            else if (currentCam >= 3)
-            {
-                currentCam = 1;
-            }
-
-            camToggle = false;
-        }
-    }
-
-        
-
     #region Handle Inputs
 
     private void RegisterInputEvents() {
@@ -452,9 +449,10 @@ public class PlayerController : MonoBehaviour {
         RightClawPivot = !RightClawPivot;
     }
 
-    private void OnInputCamToggle(InputAction.CallbackContext ctx)
-    {
-        camToggle = ctx.ReadValueAsButton();
+    private void OnInputCamToggle(InputAction.CallbackContext ctx) {
+        if (ctx.ReadValueAsButton() && !CrabFlipped && crabMovedInput) {
+            CurrentCam = CurrentCam == 2 ? 0 : CurrentCam + 1;
+        }
     }
     #endregion
 }
