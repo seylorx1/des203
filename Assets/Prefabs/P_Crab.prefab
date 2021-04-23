@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.004681488, y: 0.9735299, z: -0.020021567, w: 0.22763303}
+  m_LocalRotation: {x: 0.0053272694, y: 0.9718001, z: -0.022056973, w: 0.23471227}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.00881032, y: 0.9730065, z: -0.037679527, w: 0.2275106}
+  m_LocalRotation: {x: 0.009584419, y: 0.9712399, z: -0.03968321, w: 0.23457694}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892357623}
   - component: {fileID: 892357624}
+  - component: {fileID: 1610101496}
   m_Layer: 6
   m_Name: CM_SecondCam
   m_TagString: Player
@@ -172,8 +173,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892357622}
-  m_LocalRotation: {x: -0.17640452, y: 0.09998373, z: -0.036420956, w: -0.97854906}
-  m_LocalPosition: {x: 0.243, y: 1.226, z: -1.505}
+  m_LocalRotation: {x: -0.17640455, y: 0.09998341, z: -0.036420923, w: -0.97854906}
+  m_LocalPosition: {x: 0.24300097, y: 1.2260005, z: -1.5050094}
   m_LocalScale: {x: 0.6816, y: 0.9164099, z: 0.69365}
   m_Children:
   - {fileID: 1833212039}
@@ -198,8 +199,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 3361389924063898658}
+  m_Follow: {fileID: 3361389924063898658}
   m_Lens:
     FieldOfView: 90
     OrthographicSize: 5
@@ -215,6 +216,36 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1833212039}
+--- !u!114 &1610101496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892357622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 0
+  m_MaximumEffort: 2
+  m_SmoothingTime: 0.2
+  m_Damping: 1
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &896856945
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.0129471645, y: 0.9721601, z: -0.05537179, w: 0.22731274}
+  m_LocalRotation: {x: 0.013849663, y: 0.9703574, z: -0.05734299, w: 0.2343638}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1450,12 +1481,11 @@ MonoBehaviour:
   rClawIKTarget: {fileID: 7709064874459285450}
   Acceleration: 1.5
   MaxVelocity: 2
-  rotateSpeed: 50
+  rotateSpeed: 75
   jumpForce: 4
-  flipTorque: 0.15
+  flipTorque: 0.5
   lTrigger: 0
   rTrigger: 0
-  currentCam: 1
   inputLS: {x: 0, y: 0}
   inputRS: {x: 0, y: 0}
   camToggle: 0
@@ -1526,7 +1556,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.1
-  m_AngularDrag: 0.15
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -2905,7 +2935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.55191, y: 0.4000001, z: 3.13713}
+  m_LocalPosition: {x: -1.55191, y: 0.39999998, z: 3.13713}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
@@ -3039,10 +3069,10 @@ MonoBehaviour:
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
   m_CameraRadius: 0.1
-  m_Strategy: 1
+  m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0.2
-  m_Damping: 0
+  m_Damping: 1
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
 --- !u!114 &7709064874339324680
