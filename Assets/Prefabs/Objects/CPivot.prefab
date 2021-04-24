@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1899651261758252783}
   - component: {fileID: 1899651261758252782}
   - component: {fileID: 1899651261758252780}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CPivot
   m_TagString: C
   m_Icon: {fileID: 0}
@@ -56,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6116967, y: 0.85690725, z: 0.2399111}
-  m_Center: {x: 0.013108584, y: 0.010217399, z: -0.050413318}
+  m_Size: {x: 0.6116967, y: 0.7823377, z: 0.2399111}
+  m_Center: {x: 0.013108584, y: 0.012745098, z: -0.050413318}
 --- !u!1 &6693269111309078590
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 8613098385103136808}
   - component: {fileID: 6723409622636635820}
   - component: {fileID: 1454258838863468551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: C
   m_TagString: Untagged
   m_Icon: {fileID: 0}

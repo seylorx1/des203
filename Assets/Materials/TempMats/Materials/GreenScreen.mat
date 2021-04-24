@@ -14,7 +14,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -80,18 +80,19 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HighIntensity: 1.5
-    - _LightScalar: 1
-    - _LowIntensity: 1
+    - _HighIntensity: 6
+    - _LightScalar: 5.5
+    - _LowIntensity: 4.4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineHighlight: 0
     - _OutlineSize: 10
     - _Parallax: 0.02
     - _PointLightBanding: 0
     - _PointLightBlendMode: 0
-    - _PointLightSaturation: 0.5
-    - _PointLightScalar: 0.5
+    - _PointLightSaturation: 0.2
+    - _PointLightScalar: 1.22
     - _RampLevels: 2
     - _RimAlpha: 0
     - _RimDropOff: 0

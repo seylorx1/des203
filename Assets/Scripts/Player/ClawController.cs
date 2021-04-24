@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ItemPickup : MonoBehaviour {
+public class ClawController : MonoBehaviour {
     public enum Claw { Left, Right };
     public Claw claw;
 
+    public ClawController otherClawController;
     public PlayerController playerController;
+
     public Transform pivotTarget;
 
     public float
@@ -15,8 +17,8 @@ public class ItemPickup : MonoBehaviour {
         swingValue = 0.5f,
         pivotSpeed = 20.0f;
 
-    private WeaponEntity heldWeapon = null;
-    private Transform heldTransform = null;
+    public WeaponEntity HeldWeapon { get; private set; } = null;
+    public Transform HeldTransform { get; private set; } = null;
 
     private float ClawTrigger {
         get {
@@ -42,52 +44,53 @@ public class ItemPickup : MonoBehaviour {
 
     void OnTriggerStay(Collider other) {
 
-        if (heldTransform == null) {
+        if (HeldTransform == null) {
             if (ClawTrigger > 0.2f) {
                 if (other.CompareTag("Grabbable")) {
-                    heldWeapon = other.GetComponent<WeaponEntity>();
-                    if (heldWeapon != null) {
-                        heldWeapon.Pickup(this);
+
+                    //If the other held transform is the same as the current other.transform, drop it.
+                    if(otherClawController.HeldTransform == other.transform) {
+                        otherClawController.HeldWeapon.Drop();
+                        otherClawController.HeldWeapon = null;
+                        otherClawController.HeldTransform = null;
+                    }
+
+                    HeldWeapon = other.GetComponent<WeaponEntity>();
+                    if (HeldWeapon != null) {
+                        HeldWeapon.Pickup(this);
                     }
                     else {
                         other.transform.parent = transform;
                     }
 
-                    heldTransform = other.transform;
-                }
-
-                if (other.CompareTag("Lever")) {
-                    if (ClawStick.x < -0.3f) {
-                        other.transform.Rotate(step * Time.deltaTime, 0, 0 , Space.Self);
-                    }
-                    else if (ClawStick.x > 0.3f) {
-                        other.transform.Rotate(-step * Time.deltaTime, 0, 0, Space.Self);
-                    }
+                    HeldTransform = other.transform;
+                    HeldTransform.GetComponent<MeshRenderer>()?.material?.SetFloat("_OutlineHighlight", 0.0f);
                 }
             }
         }
     }
 
     void HandleHeldItems() {
-        if (heldTransform != null) { //Player holding the item.
+        if (HeldTransform != null) { //Player holding the item.
             if (ClawPivot) {
-                heldTransform.RotateAround(
-                    pivotTarget.position,
-                    new Vector3(
-                        ClawStick.y,
-                        0.0f,
-                        -ClawStick.x
-                        ),
-                    pivotSpeed * Mathf.Clamp01(ClawStick.magnitude) * Time.deltaTime);
+                HeldTransform.Rotate(
+                    playerController.transform.TransformDirection(
+                        new Vector3(
+                            -ClawStick.y,
+                            0.0f,
+                            ClawStick.x
+                            )),
+                    pivotSpeed * Mathf.Clamp01(ClawStick.magnitude) * Time.deltaTime,
+                    Space.World);
             }
             if (ClawTrigger < 0.95f) { //Player let go of trigger.
-                if (heldWeapon != null) {
-                    heldWeapon.Drop();
+                if (HeldWeapon != null) {
+                    HeldWeapon.Drop();
                 }
                 else {
                     transform.DetachChildren();
                 }
-                heldTransform = null;
+                HeldTransform = null;
             }
         }
     }
@@ -98,7 +101,7 @@ public class ItemPickup : MonoBehaviour {
     /// <returns>True, if an item is held and the absolute value of ClawStick exceeds swingValue.</returns>
     public bool IsClawSwingingItem() {
         return
-            (heldTransform != null) && //Has to have item to swing
+            (HeldTransform != null) && //Has to have item to swing
             playerController.Snip && //Only swing in snip mode
             !ClawPivot && //Don't class as swinging when pivoting
             (Mathf.Abs(ClawStick.x) >= swingValue || Mathf.Abs(ClawStick.y) >= swingValue);

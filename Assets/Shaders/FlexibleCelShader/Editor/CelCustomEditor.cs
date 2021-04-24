@@ -40,16 +40,24 @@ public class CelCustomEditor : MaterialEditor {
 
             MaterialProperty srcBlend = GetMaterialProperty(targets, "_SrcBlend");
             MaterialProperty dstBlend = GetMaterialProperty(targets, "_DstBlend");
+            Material targetMat = (Material)target;
+
             //MaterialProperty zWrite = GetMaterialProperty(targets, "_ZWrite");
             if (EditorGUILayout.Toggle("Transparent Blending", isTransparent())) {
                 srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.SrcAlpha;
                 dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
-                ((Material)target).renderQueue = 2001;
+                if(targetMat.renderQueue == 2000) {
+                    targetMat.renderQueue = 2001;
+                }
+
+                string newRenderQueue = EditorGUILayout.TextField(new GUIContent("Render Queue"), ((Material)target).renderQueue.ToString());
+                int newRenderQueueValue = 0;
+                targetMat.renderQueue = int.TryParse(newRenderQueue, out newRenderQueueValue) ? newRenderQueueValue : targetMat.renderQueue;
             }
             else {
                 srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.One;
                 dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.Zero;
-                ((Material)target).renderQueue = 2000;
+                targetMat.renderQueue = 2000;
 
             }
             GUILayout.Space(spacing);

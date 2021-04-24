@@ -5,13 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class WeaponEntity : WorldEntity {
 
+    public bool spin = false;
+
     private Transform awakeTransform;
     private Rigidbody weaponRigidbody;
     private Collider weaponCollider;
 
+    private Vector3 spinPosition;
+
     private bool weaponSwung = false;
 
-    [HideInInspector] public ItemPickup HeldClaw { get; private set; }
+    [HideInInspector] public ClawController HeldClaw { get; private set; }
 
     protected override void Awake() {
         base.Awake();
@@ -19,6 +23,23 @@ public class WeaponEntity : WorldEntity {
         awakeTransform = transform.parent;
         weaponRigidbody = GetComponent<Rigidbody>();
         weaponCollider = GetComponent<Collider>();
+
+        spinPosition = transform.position;
+    }
+
+    private void Update() {
+        if(spin) {
+            weaponRigidbody.isKinematic = true;
+            weaponRigidbody.useGravity = false;
+
+            weaponCollider.isTrigger = true;
+
+            transform.Rotate(Vector3.up, Time.deltaTime * 360.0f * 0.5f, Space.World);
+            transform.position = spinPosition + new Vector3(0.0f, Mathf.Sin(Time.time) * 0.05f, 0.0f);
+        }
+        else {
+            spinPosition = transform.position;
+        }
     }
 
     void Reset() {
@@ -32,7 +53,9 @@ public class WeaponEntity : WorldEntity {
         }
     }
 
-    public void Pickup(ItemPickup claw) {
+    public void Pickup(ClawController claw) {
+        spin = false;
+
         weaponRigidbody.isKinematic = true;
         weaponRigidbody.useGravity = false;
 
@@ -43,6 +66,8 @@ public class WeaponEntity : WorldEntity {
     }
 
     public void Drop() {
+        spin = false;
+
         weaponRigidbody.isKinematic = false;
         weaponRigidbody.useGravity = true;
 

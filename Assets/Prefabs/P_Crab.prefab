@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.0053272694, y: 0.9718001, z: -0.022056973, w: 0.23471227}
+  m_LocalRotation: {x: 0.005446799, y: 0.9714793, z: -0.022421464, w: 0.23599929}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.009584419, y: 0.9712399, z: -0.03968321, w: 0.23457694}
+  m_LocalRotation: {x: 0.009727274, y: 0.97091264, z: -0.040041827, w: 0.23586169}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -173,14 +173,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892357622}
-  m_LocalRotation: {x: -0.17640455, y: 0.09998341, z: -0.036420923, w: -0.97854906}
-  m_LocalPosition: {x: 0.24300097, y: 1.2260005, z: -1.5050094}
+  m_LocalRotation: {x: 0.17364816, y: -0, z: -0.0000000074505797, w: 0.9848078}
+  m_LocalPosition: {x: -0.0000006183982, y: 0.71000004, z: -1.0800005}
   m_LocalScale: {x: 0.6816, y: 0.9164099, z: 0.69365}
   m_Children:
   - {fileID: 1833212039}
   m_Father: {fileID: 3361389924063898658}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 20.642, y: 348.734, z: 2.205}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!114 &892357624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 3361389924063898658}
   m_Follow: {fileID: 3361389924063898658}
   m_Lens:
-    FieldOfView: 90
+    FieldOfView: 76
     OrthographicSize: 5
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -230,12 +230,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
+  m_MinimumDistanceFromTarget: 0.5
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.4, z: -3.5}
+  m_FollowOffset: {x: 0, y: 0.75, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -396,7 +396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.013849663, y: 0.9703574, z: -0.05734299, w: 0.2343638}
+  m_LocalRotation: {x: 0.014015874, y: 0.9700237, z: -0.057695616, w: 0.23564571}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 1373687427}
   - component: {fileID: 1373687429}
   - component: {fileID: 1373687428}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: CelOutlineTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,6 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43609b78578ddd844bb1fb1359890f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftClaw: {fileID: 730850682}
+  rightClaw: {fileID: 953300640}
 --- !u!1 &1833212038
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   claw: 1
+  otherClawController: {fileID: 730850682}
   playerController: {fileID: 392433710782906041}
   pivotTarget: {fileID: 1917343103}
   step: 90
@@ -1471,9 +1474,10 @@ MonoBehaviour:
   - {fileID: 7328871941182314796}
   - {fileID: 683903901955541144}
   - {fileID: 4378176491694701428}
-  thirdCam: {fileID: 892357622}
-  secondCam: {fileID: 7709064875299506516}
-  firstCam: {fileID: 7709064874209760523}
+  crabEyes: {fileID: 2708288310397727832}
+  secondPersonCamera: {fileID: 892357622}
+  firstPersonCamera: {fileID: 7709064875299506516}
+  thirdPersonCamera: {fileID: 7709064874209760523}
   startCam: {fileID: 0}
   leftClaw: {fileID: 7375854508536373516}
   rightClaw: {fileID: 159455554046159493}
@@ -1500,7 +1504,7 @@ MonoBehaviour:
     rClawIKMax: {x: 0, y: 0.4}
     lClawIK_Z: -0.45
     rClawIK_Z: -0.45
-    clawSpeed: 1.5
+    clawSpeed: 2
 --- !u!114 &1363735991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2477,6 +2481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   claw: 0
+  otherClawController: {fileID: 953300640}
   playerController: {fileID: 392433710782906041}
   pivotTarget: {fileID: 1889579216}
   step: 90
@@ -3032,14 +3037,14 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 4
-  m_SplineCurvature: 0.2
+  m_SplineCurvature: 0.1
   m_Orbits:
-  - m_Height: 5
+  - m_Height: 6
     m_Radius: 5
   - m_Height: 3
     m_Radius: 5
-  - m_Height: 0.4
-    m_Radius: 3.5
+  - m_Height: 0.75
+    m_Radius: 2
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 900109728}
@@ -3059,12 +3064,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 1
+  m_MinimumDistanceFromTarget: 0.7
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
@@ -3432,7 +3437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.4, z: -3.5}
+  m_FollowOffset: {x: 0, y: 0.75, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3524,14 +3529,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064875299506516}
-  m_LocalRotation: {x: 0, y: 0.9961947, z: -0.08715578, w: 0}
-  m_LocalPosition: {x: -0, y: 0.794, z: 0.208}
+  m_LocalRotation: {x: 0, y: 0.97629607, z: -0.2164396, w: 0}
+  m_LocalPosition: {x: -0, y: 0.7, z: 0}
   m_LocalScale: {x: 0.6816, y: 0.9164099, z: 0.69365}
   m_Children:
   - {fileID: 7709064874596812858}
   m_Father: {fileID: 3361389924063898658}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 10, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 180, z: 0}
 --- !u!114 &7709064875299506517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3553,7 +3558,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 65
     OrthographicSize: 5
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -3655,7 +3660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.4, z: -3.5}
+  m_FollowOffset: {x: 0, y: 0.75, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

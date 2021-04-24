@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,11 +9,12 @@ public class PlayerController : MonoBehaviour {
 
     #region Public
     public SkinnedMeshRenderer[] crabMeshRenderers;
+    public SkinnedMeshRenderer crabEyes;
 
     public GameObject
-        thirdCam,
-        secondCam,
-        firstCam,
+        secondPersonCamera,
+        firstPersonCamera,
+        thirdPersonCamera,
         startCam,
         leftClaw,
         rightClaw,
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour {
 
     #region Private
     private List<Material> crabMaterials = new List<Material>();
+    private Material crabEyesMaterial;
 
     private FlamesPP cameraFlamesPP;
     private Vignette cameraFlamesVignette;
@@ -120,9 +121,9 @@ public class PlayerController : MonoBehaviour {
             _currentCam = Mathf.Clamp(value, 0, 2);
 
             //Update cameras.
-            firstCam.gameObject.SetActive(_currentCam == 0);
-            secondCam.gameObject.SetActive(_currentCam == 1);
-            thirdCam.gameObject.SetActive(_currentCam == 2);
+            thirdPersonCamera.gameObject.SetActive(_currentCam == 0);
+            firstPersonCamera.gameObject.SetActive(_currentCam == 1);
+            secondPersonCamera.gameObject.SetActive(_currentCam == 2);
         }
     }
 
@@ -145,6 +146,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         RegisterInputEvents();
 
+        #region Obtain Material Instance References
         foreach (SkinnedMeshRenderer r in crabMeshRenderers) {
             Material rMat = r.material;
 
@@ -152,6 +154,8 @@ public class PlayerController : MonoBehaviour {
                 crabMaterials.Add(rMat);
             }
         }
+        crabEyesMaterial = crabEyes.material;
+        #endregion
 
         PostProcessVolume cameraPostProcessVolume = Camera.main.GetComponentInChildren<PostProcessVolume>();
         if (cameraPostProcessVolume != null) {
@@ -163,7 +167,6 @@ public class PlayerController : MonoBehaviour {
         crabRigidbody = GetComponent<Rigidbody>();
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
-
 
         CurrentCam = 0;
     }
@@ -179,41 +182,94 @@ public class PlayerController : MonoBehaviour {
             SnipMode();
         }
 
+        #region Crab Transparency
+        {
+            float crabTransparency =
+                CurrentCam == 0 ?
+                Mathf.Clamp(Vector3.SqrMagnitude(transform.position - Camera.main.transform.position) - 0.75f, 0.25f, 1.0f) :
+                1.0f;
+
+            foreach (Material rMat in crabMaterials) {
+                Color rMatColor = rMat.color;
+                rMatColor.a = crabTransparency;
+                rMat.color = rMatColor;
+
+                rMat.renderQueue = crabTransparency == 1.0f ? 2000 : 3001;
+            }
+
+            Color crabEyesMaterialColor = crabEyesMaterial.color;
+            crabEyesMaterialColor.a = crabTransparency;
+            crabEyesMaterial.color = crabEyesMaterialColor;
+
+            if (crabTransparency == 1.0f) {
+                //Sets opaque
+                if (crabEyesMaterial.renderQueue != 2000) { //Only want to set all this shit on one frame.
+
+                    crabEyesMaterial.SetFloat("_Mode", 0); //Sets the mode. mostly trivial.
+
+                    crabEyesMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                    crabEyesMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                    crabEyesMaterial.SetInt("_ZWrite", 1);
+                    crabEyesMaterial.DisableKeyword("_ALPHATEST_ON");
+                    crabEyesMaterial.DisableKeyword("_ALPHABLEND_ON");
+                    crabEyesMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    crabEyesMaterial.renderQueue = 2000;
+                }
+            }
+            else {
+                //Sets "fade"
+                if (crabEyesMaterial.renderQueue != 3001) { //Only want to set all this shit on one frame.
+
+                    crabEyesMaterial.SetFloat("_Mode", 2); //Sets the mode. mostly trivial.
+
+                    crabEyesMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    crabEyesMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    crabEyesMaterial.SetInt("_ZWrite", 0);
+                    crabEyesMaterial.DisableKeyword("_ALPHATEST_ON");
+                    crabEyesMaterial.EnableKeyword("_ALPHABLEND_ON");
+                    crabEyesMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    crabEyesMaterial.renderQueue = 3001;
+                }
+            }
+
+        }
+        #endregion
+
         #region Crab Claw Controls
+        {
+            //Set the left close amount to a sine sway.
+            //Values between 0 and 1.
+            lCloseAmount =
+                (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a sine wave between 0 and 1
+                (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
 
-        //Set the left close amount to a sine sway.
-        //Values between 0 and 1.
-        lCloseAmount =
-            (Mathf.Sin(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a sine wave between 0 and 1
-            (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+            //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
+            if (lTrigger > 0.0f) {
+                lCloseAmount = lTrigger;
+            }
 
-        //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
-        if (lTrigger > 0.0f) {
-            lCloseAmount = lTrigger;
+            //Set the right close amount to a cosine sway. (Same as sine wave, but with a half-interval offset. Makes it look more interesting.)
+            //Values between 0 and 1.
+            rCloseAmount =
+                (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a cosine wave between 0 and 1
+                (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
+
+            //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
+            if (rTrigger > 0.0f) {
+                rCloseAmount = rTrigger;
+            }
+
+            //Interpolate between start and end rotations based on the close amounts.
+            leftClaw.transform.localRotation = Quaternion.Lerp(
+                lClawQuatStart,
+                lClawQuatEnd,
+                lCloseAmount);
+
+            rightClaw.transform.localRotation = Quaternion.Lerp(
+                rClawQuatStart,
+                rClawQuatEnd,
+                rCloseAmount);
         }
-
-        //Set the right close amount to a cosine sway. (Same as sine wave, but with a half-interval offset. Makes it look more interesting.)
-        //Values between 0 and 1.
-        rCloseAmount =
-            (Mathf.Cos(Time.time * 2.0f) + 1.0f) * 0.5f *   //Calculate a cosine wave between 0 and 1
-            (Snip ? 0.05f : 0.2f);                          //Scale the wave down based on whether snip mode is active or not.
-
-        //If left trigger is pressed, ignore the sway and instead set the close amount to the axis value.
-        if (rTrigger > 0.0f) {
-            rCloseAmount = rTrigger;
-        }
-
-        //Interpolate between start and end rotations based on the close amounts.
-        leftClaw.transform.localRotation = Quaternion.Lerp(
-            lClawQuatStart,
-            lClawQuatEnd,
-            lCloseAmount);
-
-        rightClaw.transform.localRotation = Quaternion.Lerp(
-            rClawQuatStart,
-            rClawQuatEnd,
-            rCloseAmount);
-
         #endregion
 
     }
@@ -228,10 +284,10 @@ public class PlayerController : MonoBehaviour {
             );
 
         float crabVerticalDot = Vector3.Dot(Vector3.up, transform.up); //Provides information about the orientation of the crab.
-        
+
         //Detect whether the crab is tipped over.
         CrabFlipped = crabVerticalDot < 0.0f;
-        if(CrabFlipped && anyKeyPress) {
+        if (CrabFlipped && anyKeyPress) {
             //Reset the camera if flipped.
             CurrentCam = 0;
         }
@@ -358,7 +414,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         foreach (Material rMat in crabMaterials) {
-            rMat.SetColor("_Color", Color.Lerp(Color.white, Color.red, clampedHeat * 0.5f));
+            Color oldColor = rMat.GetColor("_Color");
+            rMat.SetColor("_Color", Color.Lerp(new Color(1.0f, 1.0f, 1.0f, oldColor.a), new Color(1.0f, 0.0f, 0.0f, oldColor.a), clampedHeat * 0.5f));
             rMat.SetColor("_OutlineColor", Color.Lerp(Color.black, Color.red, clampedHeat));
         }
     }
@@ -403,14 +460,14 @@ public class PlayerController : MonoBehaviour {
 
     private void OnInputMovement(InputAction.CallbackContext ctx) {
         inputLS = ctx.ReadValue<Vector2>();
-        if(!anyKeyPress) {
+        if (!anyKeyPress) {
             anyKeyPress = inputLS.sqrMagnitude > 0.0f;
         }
     }
 
     private void OnInputLook(InputAction.CallbackContext ctx) {
         inputRS = ctx.ReadValue<Vector2>();
-        if(!anyKeyPress) {
+        if (!anyKeyPress) {
             anyKeyPress = inputRS.sqrMagnitude > 0.0f;
         }
     }
