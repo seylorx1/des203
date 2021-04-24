@@ -22,7 +22,9 @@ public class IK_MoveTarget : MonoBehaviour {
         targetDistance,
         targetHitYPoint;
 
-    private int layerMask_Player;
+    private int
+        layerMask_Player,
+        layerMask_OutlineTrigger;
 
     private bool snapLeg = false;
 
@@ -38,6 +40,7 @@ public class IK_MoveTarget : MonoBehaviour {
         targetTransform.parent = crabIKInheritTargets;
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
+        layerMask_OutlineTrigger = LayerMask.GetMask("OutlineTrigger");
     }
 
 
@@ -89,7 +92,7 @@ public class IK_MoveTarget : MonoBehaviour {
                     Vector3.down,
                     out hit,
                     rayLength,
-                    ~layerMask_Player)) {
+                    ~(layerMask_Player | layerMask_OutlineTrigger) )) {
                 targetHitYPoint = hit.point.y;
             }
 
