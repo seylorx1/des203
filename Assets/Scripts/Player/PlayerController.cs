@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
     public SkinnedMeshRenderer crabEyes;
 
     public GameObject
+        flipindicator,
+        modeindicator,
         secondPersonCamera,
         firstPersonCamera,
         thirdPersonCamera,
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour {
         rightClaw,
         lClawIKTarget,
         rClawIKTarget;
+        
 
     public float
         Acceleration = 5,
@@ -67,6 +70,8 @@ public class PlayerController : MonoBehaviour {
 
     private Collider crabCollider;
     private Rigidbody crabRigidbody;
+
+    private Animation modeindicatoranim;
 
     private Quaternion
     lClawQuatStart,
@@ -165,6 +170,7 @@ public class PlayerController : MonoBehaviour {
 
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
+        modeindicatoranim = modeindicator.GetComponent<Animation>();
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
@@ -306,10 +312,15 @@ public class PlayerController : MonoBehaviour {
     void MoveMode() {
 
         //Only apply movements if the crab is touching the ground.
+        
         if (onGround) {
+
+            flipindicator.SetActive(true);
 
             // Ensure the crab is not flipped over or on their edge.
             if (!(CrabFlipped || isOnEdge)) {
+
+                flipindicator.SetActive(false);
 
                 //Apply force.
                 //XInput is active.
@@ -364,6 +375,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void SnipMode() {
+
 
         if (!LeftClawPivot) {
             if (Mathf.Abs(inputLS.x) > 0.1f || Mathf.Abs(inputLS.y) > 0.1f) { //Accomodate for stick-drift
@@ -490,17 +502,20 @@ public class PlayerController : MonoBehaviour {
                 Snip = false;
             }
             else {
+
                 Snip = !Snip;
 
                 if (Snip) {
                     //Set snip camera to first person.
                     //(This will not prevent the player from switching to a different camera view should they wish to.)
                     CurrentCam = 1;
+                    modeindicatoranim.Play("SnipFade");
                 }
                 else {
                     //Resets the camera to third person.
                     //(This will not prevent the player from switching to a different camera view should they wish to.)
                     CurrentCam = 0;
+                    modeindicatoranim.Play("MoveFade");
                 }
             }
         }
