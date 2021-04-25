@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour {
         lTrigger,
         rTrigger;
 
+    public int
+        Deaths = 0;
+
     public Vector2
         inputLS,
         inputRS;
@@ -415,6 +418,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Heat >= 100.0f) {
             //Crab death sequence
+            Deaths = Deaths + 1;
             SceneManager.LoadScene("MainScene"); // TODO Handle death logic better.
         }
 

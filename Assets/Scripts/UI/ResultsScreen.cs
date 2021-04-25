@@ -8,21 +8,89 @@ public class ResultsScreen : MonoBehaviour
 {
     public TextMeshProUGUI EndScoreTMP;
     public TextMeshProUGUI EndTimeTMP;
+    public TextMeshProUGUI EndDeathsTMP;
     public TextMeshProUGUI ScoreTMP;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI FinalScoreTMP;
     public TextMeshProUGUI FinalGradeTMP;
+    public TextMeshProUGUI BonusesNamesTMP;
+    public TextMeshProUGUI BonusesValuesTMP;
+
+    public GameObject TimerUI;
+    public GameObject CrabController;
 
     private int FinalScore;
     private string FinalGrade;
+    private float FinalTime;
+    private int FinalCrabs;
+    private int FinalPearls;
+    private int FinalDeaths;
+
+    private Timer TimerScript;
+    private PlayerWorldInteraction WorldScript;
+    private PlayerController playerController;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        int.TryParse(ScoreTMP.text, out FinalScore);
+
+        TimerScript = TimerUI.GetComponent<Timer>();
+        WorldScript = CrabController.GetComponent<PlayerWorldInteraction>();
+        playerController = CrabController.GetComponent<PlayerController>();
+
+        FinalDeaths = playerController.Deaths;
+        FinalCrabs = WorldScript.CollectedCrabs;
+        FinalPearls = WorldScript.CollectedPearls;
+        FinalTime = TimerScript.seconds;
+
+        EndDeathsTMP.text = "" + FinalDeaths;
         EndScoreTMP.text = ScoreTMP.text;
         EndTimeTMP.text = timerText.text;
-        
-        int.TryParse(ScoreTMP.text, out FinalScore);
+
+        BonusesNamesTMP.text = "" + "Escaped";
+        BonusesValuesTMP.text = "" + "100";
+
+        if (FinalDeaths == 0)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "Untouchable";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "100";
+            FinalScore = FinalScore + 100;
+        }
+
+        if (FinalTime <= 300)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "Speed Run";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "400";
+            FinalScore = FinalScore + 400;
+        }
+        else if (FinalTime <= 480)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "Extra Quick Crab";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "300";
+            FinalScore = FinalScore + 300;
+        }
+        else if (FinalTime <= 600)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "Quick Crab";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "200";
+            FinalScore = FinalScore + 200;
+        }
+
+        if (FinalCrabs == 1)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "All Crabs Saved";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "100";
+            FinalScore = FinalScore + 100;
+        }
+
+        if (FinalPearls == 11)
+        {
+            BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "All Pearls Collected";
+            BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "200";
+            FinalScore = FinalScore + 200;
+        }
 
         if (FinalScore <= 400)
         {
@@ -45,7 +113,9 @@ public class ResultsScreen : MonoBehaviour
             FinalGrade = "C";
         }
 
+        FinalScoreTMP.text = "" + FinalScore;
         FinalGradeTMP.text = "" + FinalGrade;
+        
 
     }
 

@@ -31,11 +31,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
     public TextMeshProUGUI SmashWindowNotifierText;
 
     public int NumberOfPearls;
-    private int CollectedPearls = 0;
+    public int CollectedPearls = 0;
     public TextMeshProUGUI PearlsText;
 
     public int NumberOfCrabs;
-    private int CollectedCrabs = 0;
+    public int CollectedCrabs = 0;
     public TextMeshProUGUI CrabsText;
 
     public TextMeshProUGUI CPauseNotifier;
@@ -56,8 +56,6 @@ public class PlayerWorldInteraction : MonoBehaviour {
     private Rigidbody crabRigidbody;
     private Animation ObjectNotifierAnim;
 
-    private bool ChuteOpen = false;
-    private bool TankEscaped = false;
 
     public int _score = 0;
 
