@@ -73,28 +73,29 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelBrightness: 0.063
-    - _FresnelPower: 0.404
-    - _FresnelShadowDropoff: 0.467
+    - _FresnelBrightness: 0
+    - _FresnelPower: 0
+    - _FresnelShadowDropoff: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighIntensity: 2.13
-    - _LightScalar: 2.16
-    - _LowIntensity: 2.66
+    - _HighIntensity: 1
+    - _LightScalar: 10
+    - _LowIntensity: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineHighlight: 0
     - _OutlineSize: 10
     - _Parallax: 0.02
     - _PointLightBanding: 0
     - _PointLightBlendMode: 0
     - _PointLightSaturation: 0.5
     - _PointLightScalar: 0.5
-    - _RampLevels: 4
-    - _RimAlpha: 0.185
-    - _RimDropOff: 0.859
-    - _RimPower: 0.779
+    - _RampLevels: 2
+    - _RimAlpha: 0.183
+    - _RimDropOff: 1
+    - _RimPower: 0.084
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

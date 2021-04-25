@@ -35,21 +35,21 @@ MonoBehaviour:
   defaultGib:
     gibColor: {r: 1, g: 1, b: 1, a: 1}
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
-    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    particleSystemPrefab: {fileID: 3482106886074000783, guid: 16329d3a3c94d494ba28e47dc2c5e173, type: 3}
   gibs:
   - gibColor: {r: 0.8045568, g: 0.90067637, b: 0.9433962, a: 1}
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
-    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    particleSystemPrefab: {fileID: 3482106886074000783, guid: 16329d3a3c94d494ba28e47dc2c5e173, type: 3}
     id: metal
   - gibColor: {r: 0.19339621, g: 0.7535379, b: 1, a: 1}
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
-    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    particleSystemPrefab: {fileID: 3482106886074000783, guid: 16329d3a3c94d494ba28e47dc2c5e173, type: 3}
     id: glass
   - gibColor: {r: 0.6698113, g: 0.58401513, b: 0.48972055, a: 1}
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
-    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    particleSystemPrefab: {fileID: 3482106886074000783, guid: 16329d3a3c94d494ba28e47dc2c5e173, type: 3}
     id: wood
   - gibColor: {r: 1, g: 0.989954, b: 0, a: 1}
     particleSystemMaterial: {fileID: 2100000, guid: 640a7187d2193244d844d9b60db48411, type: 2}
-    particleSystemPreset: {fileID: 2655988077585873504, guid: d72b4a73bdeee4e45bfb3751650172ff, type: 2}
+    particleSystemPrefab: {fileID: 3482106886074000783, guid: 16329d3a3c94d494ba28e47dc2c5e173, type: 3}
     id: crab

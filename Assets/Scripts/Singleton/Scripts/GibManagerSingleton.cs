@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Presets;
 
 public class GibManagerSingleton : SingletonScriptableObject {
 
@@ -14,41 +12,27 @@ public class GibManagerSingleton : SingletonScriptableObject {
 
         public Color gibColor;
         public Material particleSystemMaterial;
-        public Preset particleSystemPreset;
-
-        private GameObject cachedParticleInstance = null;
+        public GameObject particleSystemPrefab;
 
         public GibManagerSingleton GibManager { private get; set; }
 
-        //Quite laggy...
-        public void CacheParticleSystem(Transform parentTransform) {
+        public GameObject SpawnParticlesAtPosition(Vector3 worldPos) {
             //Create new gameobject and assign a new particle system
-            cachedParticleInstance = new GameObject("Cached Particle System Instance"); //Create the gameobject
-            ParticleSystem ps = (ParticleSystem)cachedParticleInstance.AddComponent(typeof(ParticleSystem)); //Add a particle system
+            GameObject gibParticleInstance = Instantiate(particleSystemPrefab, worldPos, Quaternion.identity);
+            gibParticleInstance.name = "Gib Particle Instance";
 
-            //Apply preset
-            particleSystemPreset.ApplyTo(ps);
+            //Get Particle System
+            ParticleSystem ps = gibParticleInstance.GetComponent<ParticleSystem>();
+            ParticleSystemRenderer ps_r = gibParticleInstance.GetComponent<ParticleSystemRenderer>();
 
             //Apply main module properties
             ParticleSystem.MainModule ps_mm = ps.main;
             ps_mm.startColor = gibColor;
 
-            ParticleSystemRenderer ps_r = cachedParticleInstance.GetComponent<ParticleSystemRenderer>();
-
             //Apply material
             ps_r.material = particleSystemMaterial;
 
-            cachedParticleInstance.transform.parent = parentTransform;
-            cachedParticleInstance.SetActive(false);
-        }
-
-        public GameObject SpawnParticlesAtPosition(Vector3 worldPos) {
-            GameObject ps_go = Instantiate(cachedParticleInstance);
-            ps_go.transform.position = worldPos;
-            ps_go.name = "Particle System Instance";
-            ps_go.SetActive(true);
-
-            return ps_go;
+            return gibParticleInstance;
         }
 
         public GameObject[] SpawnGibExplosion(MeshFilter meshFilter, Vector3 worldPos) {
@@ -108,16 +92,16 @@ public class GibManagerSingleton : SingletonScriptableObject {
         return null;
     }
 
+#if UNITY_EDITOR
     [MenuItem("Assets/Create/Singleton/GibManagerSingleton")]
     public static void CreateAsset() {
         ObjectHelper.CreateAsset<GibManagerSingleton>();
     }
+#endif
 
     public override void OnAwake() {
-        GameObject cacheParent = new GameObject("Cached Particle Systems");
-
         //Populate missing attributes
-        foreach (GibBase gib in gibs) {
+        foreach (GibCustom gib in gibs) {
 
             //Update the gib's manager.
             gib.GibManager = this;
@@ -127,11 +111,9 @@ public class GibManagerSingleton : SingletonScriptableObject {
                 gib.particleSystemMaterial = defaultGib.particleSystemMaterial;
             }
 
-            if (gib.particleSystemPreset == null) {
-                gib.particleSystemPreset = defaultGib.particleSystemPreset;
+            if (gib.particleSystemPrefab == null) {
+                gib.particleSystemPrefab = defaultGib.particleSystemPrefab;
             }
-
-            gib.CacheParticleSystem(cacheParent.transform);
         }
 
         //Get list of gib indexes and sizes.
@@ -141,6 +123,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
                 i,
                 gibInstanceGameObjects[i].GetComponent<MeshFilter>().sharedMesh.bounds.size.magnitude * gibInstanceGameObjects[i].transform.localScale.magnitude));
         }
+
         //Sort by size.
         gibSizes.Sort(delegate (KeyValuePair<int, float> pair1, KeyValuePair<int, float> pair2) {
             return pair1.Value.CompareTo(pair2.Value);
