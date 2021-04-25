@@ -28,6 +28,6 @@ public class InputSingleton : SingletonScriptableObject {
 
     [MenuItem("Assets/Create/Singleton/InputSingleton")]
     public static void CreateAsset() {
-        ScriptableObjectHelper.CreateAsset<InputSingleton>();
+        ObjectHelper.CreateAsset<InputSingleton>();
     }
 }

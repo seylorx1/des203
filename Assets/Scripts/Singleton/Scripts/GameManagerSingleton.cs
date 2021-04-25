@@ -7,6 +7,6 @@ public class GameManagerSingleton : SingletonScriptableObject {
 
     [MenuItem("Assets/Create/Singleton/GameManagerSingleton")]
     public static void CreateAsset() {
-        ScriptableObjectHelper.CreateAsset<GameManagerSingleton>();
+        ObjectHelper.CreateAsset<GameManagerSingleton>();
     }
 }

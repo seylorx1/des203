@@ -110,7 +110,7 @@ public class GibManagerSingleton : SingletonScriptableObject {
 
     [MenuItem("Assets/Create/Singleton/GibManagerSingleton")]
     public static void CreateAsset() {
-        ScriptableObjectHelper.CreateAsset<GibManagerSingleton>();
+        ObjectHelper.CreateAsset<GibManagerSingleton>();
     }
 
     public override void OnAwake() {
