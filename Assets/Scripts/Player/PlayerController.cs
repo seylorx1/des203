@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour {
         lTrigger,
         rTrigger;
 
+    public int
+        Deaths = 0;
+
     public Vector2
         inputLS,
         inputRS;
@@ -200,7 +203,18 @@ public class PlayerController : MonoBehaviour {
                 rMatColor.a = crabTransparency;
                 rMat.color = rMatColor;
 
-                rMat.renderQueue = crabTransparency == 1.0f ? 2000 : 3001;
+                if(crabTransparency == 1.0f) {
+                    rMat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                    rMat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                    rMat.SetOverrideTag("RenderType", "Opaque");
+                    rMat.renderQueue = 2000;
+                }
+                else {
+                    rMat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    rMat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    rMat.SetOverrideTag("RenderType", "Transparent");
+                    rMat.renderQueue = 3001;
+                }
             }
 
             Color crabEyesMaterialColor = crabEyesMaterial.color;
@@ -415,6 +429,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Heat >= 100.0f) {
             //Crab death sequence
+            Deaths = Deaths + 1;
             SceneManager.LoadScene("MainScene"); // TODO Handle death logic better.
         }
 

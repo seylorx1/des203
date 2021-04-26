@@ -1,10 +1,6 @@
-﻿// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
-
-// Upgrade NOTE: commented out 'float4 unity_LightmapST', a built-in variable
-// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
-
-Shader "FlexibleCelShader/Cel Outline"
+﻿Shader "FlexibleCelShader/Cel Outline"
 {
+
 	Properties
 	{
 		_SrcBlend("__src", Float) = 1.0
@@ -51,18 +47,21 @@ Shader "FlexibleCelShader/Cel Outline"
 		_FresnelPower("Soft Edge Light Size", Range(0, 1)) = 0
 		_FresnelShadowDropoff("Soft Edge Light Dropoff", range(0, 1)) = 0
 	}
-
+		Fallback "Diffuse" 
 		SubShader
 		{
+			LOD 100
+			UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 
-			// This pass renders the object
-			Cull back
+			Tags {"RenderType" = "Opaque" }
+
 			Pass
 			{
-				Tags{ "LightMode" = "ForwardBase" }
+				Tags{"LightMode" = "ForwardBase"  }
 				
 				Blend [_SrcBlend] [_DstBlend]
-				//ZWrite [_ZWrite]
+				Cull Back
+
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
@@ -345,9 +344,6 @@ Shader "FlexibleCelShader/Cel Outline"
 
 				ENDCG
 			}// End Outline Pass
-
-			// Shadow casting
-			UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 		}
 
 			CustomEditor "CelCustomEditor"

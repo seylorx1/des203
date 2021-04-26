@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
-public class TextureArrayGenerator : EditorWindow {
 #if UNITY_EDITOR
+public class TextureArrayGenerator : EditorWindow {
     public static List<Texture2D> frames = new List<Texture2D>();
 
     private static bool sequenceFoldout = true;
@@ -243,6 +243,5 @@ public class TextureArrayGenerator : EditorWindow {
         }
         ObjectHelper.CreateAsset(tex2Darr, sequenceName != null && sequenceName.Length > 0 ? sequenceName : "New 2DTextureArray");
     }
-
-#endif
 }
+#endif

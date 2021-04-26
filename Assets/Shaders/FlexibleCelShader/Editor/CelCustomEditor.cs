@@ -38,28 +38,14 @@ public class CelCustomEditor : MaterialEditor {
             showProperty("_EmmisTex");
             showProperty("_Color");
 
-            MaterialProperty srcBlend = GetMaterialProperty(targets, "_SrcBlend");
-            MaterialProperty dstBlend = GetMaterialProperty(targets, "_DstBlend");
-            Material targetMat = (Material)target;
-
             //MaterialProperty zWrite = GetMaterialProperty(targets, "_ZWrite");
-            if (EditorGUILayout.Toggle("Transparent Blending", isTransparent())) {
-                srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.SrcAlpha;
-                dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
-                if(targetMat.renderQueue == 2000) {
-                    targetMat.renderQueue = 2001;
-                }
-
+            if(UpdateTransparencySettings(EditorGUILayout.Toggle("Transparent Blending", isTransparent()))) { 
+                //Set Render Queue
                 string newRenderQueue = EditorGUILayout.TextField(new GUIContent("Render Queue"), ((Material)target).renderQueue.ToString());
                 int newRenderQueueValue = 0;
-                targetMat.renderQueue = int.TryParse(newRenderQueue, out newRenderQueueValue) ? newRenderQueueValue : targetMat.renderQueue;
+                ((Material)target).renderQueue = int.TryParse(newRenderQueue, out newRenderQueueValue) ? newRenderQueueValue : ((Material)target).renderQueue;
             }
-            else {
-                srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.One;
-                dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.Zero;
-                targetMat.renderQueue = 2000;
 
-            }
             GUILayout.Space(spacing);
 
             EditorGUILayout.LabelField("Realtime Lighting", EditorStyles.boldLabel);
@@ -118,6 +104,47 @@ public class CelCustomEditor : MaterialEditor {
             showProperty("_FresnelPower");
             showProperty("_FresnelShadowDropoff");
         }
+    }
+
+    private void RefreshTransparencySettings() {
+        UpdateTransparencySettings(isTransparent());
+    }
+
+
+    /// <param name="transparent"></param>
+    /// <returns>transparent param</returns>
+    private bool UpdateTransparencySettings(bool transparent) {
+        MaterialProperty srcBlend = GetMaterialProperty(targets, "_SrcBlend");
+        MaterialProperty dstBlend = GetMaterialProperty(targets, "_DstBlend");
+        Material targetMat = (Material)target;
+
+        if (transparent) {
+            srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.SrcAlpha;
+            dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+
+            //Update Material Tags
+            targetMat.SetOverrideTag("RenderType", "Transparent");
+            targetMat.SetInt("_ZWrite", 0);
+
+            //Set Render Queue
+            if (targetMat.renderQueue < 3000) {
+                targetMat.renderQueue = 3001;
+            }
+
+        }
+        else {
+            srcBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.One;
+            dstBlend.floatValue = (float)UnityEngine.Rendering.BlendMode.Zero;
+
+            //Update Material Tags
+            targetMat.SetOverrideTag("RenderType", "Opaque");
+            targetMat.SetInt("_ZWrite", 1);
+
+            //Set Render Queue
+            targetMat.renderQueue = 2000;
+        }
+
+        return transparent;
     }
 }
 

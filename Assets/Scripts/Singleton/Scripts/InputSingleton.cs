@@ -26,8 +26,11 @@ public class InputSingleton : SingletonScriptableObject {
         camToggle.Enable();
     }
 
+#if UNITY_EDITOR
     [MenuItem("Assets/Create/Singleton/InputSingleton")]
     public static void CreateAsset() {
         ObjectHelper.CreateAsset<InputSingleton>();
     }
+#endif
+
 }
