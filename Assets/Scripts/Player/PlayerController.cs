@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour {
         rightClaw,
         lClawIKTarget,
         rClawIKTarget;
-        
+
+    public Transform leftEar, rightEar;
 
     public float
         Acceleration = 5,
@@ -182,7 +183,6 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
         if (anyKeyPress) {
             startCam.gameObject.SetActive(false);
         }
