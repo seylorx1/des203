@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour {
         rightClaw,
         lClawIKTarget,
         rClawIKTarget;
-        
+
+    public Transform leftEar, rightEar;
 
     public float
         Acceleration = 5,
@@ -182,7 +183,6 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
         if (anyKeyPress) {
             startCam.gameObject.SetActive(false);
         }
@@ -296,12 +296,34 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate() {
         //Shoot a very short spehere cast from the centre of the collider to just outside the collider's bounds to test if the crab is on a surface.
-        onGround = Physics.SphereCast(
+        bool onGroundCentre =
+            //Center
+            Physics.SphereCast(
             new Ray(crabCollider.bounds.center, Vector3.down),
             0.1f,
-            crabCollider.bounds.extents.y + 0.1f,
+            crabCollider.bounds.extents.y + 0.2f,
             ~layerMask_Player //The tilde inverts the integer bits, meaning that it will collide against everything BUT the player character :)
             );
+
+        bool onGroundLeft =
+            //Left
+            Physics.SphereCast(
+            new Ray(crabCollider.bounds.center + Vector3.left * crabCollider.bounds.extents.x, Vector3.down),
+            0.1f,
+            crabCollider.bounds.extents.y + 0.2f,
+            ~layerMask_Player //The tilde inverts the integer bits, meaning that it will collide against everything BUT the player character :)
+            );
+
+        bool onGroundRight =
+            //Right
+            Physics.SphereCast(
+            new Ray(crabCollider.bounds.center + Vector3.right * crabCollider.bounds.extents.x, Vector3.down),
+            0.1f,
+            crabCollider.bounds.extents.y + 0.2f,
+            ~layerMask_Player //The tilde inverts the integer bits, meaning that it will collide against everything BUT the player character :)
+            );
+
+        onGround = onGroundCentre || onGroundLeft || onGroundRight;
 
         float crabVerticalDot = Vector3.Dot(Vector3.up, transform.up); //Provides information about the orientation of the crab.
 
@@ -310,6 +332,7 @@ public class PlayerController : MonoBehaviour {
         if (CrabFlipped && anyKeyPress) {
             //Reset the camera if flipped.
             CurrentCam = 0;
+            Snip = false;
         }
 
         //Detect if the crab is lying on their side.

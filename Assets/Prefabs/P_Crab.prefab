@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.005446799, y: 0.9714793, z: -0.022421464, w: 0.23599929}
+  m_LocalRotation: {x: 0.0011047942, y: 0.97372425, z: -0.004724928, w: 0.22767851}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.009727274, y: 0.97091264, z: -0.040041827, w: 0.23586169}
+  m_LocalRotation: {x: 0.036542308, y: 0.9611125, z: -0.1562823, w: 0.22472966}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.75, z: -2}
+  m_FollowOffset: {x: 0, y: 0.1, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -396,7 +396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.014015874, y: 0.9700237, z: -0.057695616, w: 0.23564571}
+  m_LocalRotation: {x: 0.040623974, y: 0.9581107, z: -0.1737386, w: 0.22402778}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -965,6 +965,52 @@ Transform:
   m_Father: {fileID: 7425326059393137150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1474465924391235307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6455153550203695357}
+  - component: {fileID: 1868837737}
+  m_Layer: 0
+  m_Name: EarController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6455153550203695357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474465924391235307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4944652955821889018}
+  - {fileID: 8260013871377541549}
+  m_Father: {fileID: 3361389924063898658}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1868837737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474465924391235307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d1527fd185e2f44932e904d63039ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawOffset: 180
 --- !u!1 &1797088025235173248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1498,7 @@ Transform:
   - {fileID: 7709064875299506518}
   - {fileID: 892357623}
   - {fileID: 1373687427}
+  - {fileID: 6455153550203695357}
   m_Father: {fileID: 4925275509737903978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1475,6 +1522,8 @@ MonoBehaviour:
   - {fileID: 683903901955541144}
   - {fileID: 4378176491694701428}
   crabEyes: {fileID: 2708288310397727832}
+  flipindicator: {fileID: 0}
+  modeindicator: {fileID: 0}
   secondPersonCamera: {fileID: 892357622}
   firstPersonCamera: {fileID: 7709064875299506516}
   thirdPersonCamera: {fileID: 7709064874209760523}
@@ -1483,6 +1532,8 @@ MonoBehaviour:
   rightClaw: {fileID: 159455554046159493}
   lClawIKTarget: {fileID: 7709064875642990524}
   rClawIKTarget: {fileID: 7709064874459285450}
+  leftEar: {fileID: 0}
+  rightEar: {fileID: 0}
   Acceleration: 1.5
   MaxVelocity: 2
   rotateSpeed: 75
@@ -1490,6 +1541,7 @@ MonoBehaviour:
   flipTorque: 0.5
   lTrigger: 0
   rTrigger: 0
+  Deaths: 0
   inputLS: {x: 0, y: 0}
   inputRS: {x: 0, y: 0}
   camToggle: 0
@@ -1535,8 +1587,10 @@ MonoBehaviour:
   SmashWindowInfoText: {fileID: 0}
   SmashWindowNotifierText: {fileID: 0}
   NumberOfPearls: 11
+  CollectedPearls: 0
   PearlsText: {fileID: 0}
   NumberOfCrabs: 1
+  CollectedCrabs: 0
   CrabsText: {fileID: 0}
   CPauseNotifier: {fileID: 0}
   RPauseNotifier: {fileID: 0}
@@ -1869,6 +1923,36 @@ MonoBehaviour:
   Iterations: 10
   Delta: 0.001
   SnapBackStrength: 1
+--- !u!1 &5010595507993742980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4944652955821889018}
+  m_Layer: 6
+  m_Name: Left Ear
+  m_TagString: Left Ear
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4944652955821889018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010595507993742980}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.40000117, y: 0.29999995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6455153550203695357}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5197803692143090833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,7 +3024,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.55191, y: 0.39999998, z: 3.13713}
+  m_LocalPosition: {x: -0.8868057, y: 0.75, z: 1.7926447}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
@@ -3043,7 +3127,7 @@ MonoBehaviour:
     m_Radius: 5
   - m_Height: 3
     m_Radius: 5
-  - m_Height: 0.75
+  - m_Height: 0.1
     m_Radius: 2
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
@@ -3437,7 +3521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.75, z: -2}
+  m_FollowOffset: {x: 0, y: 0.1, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3497,7 +3581,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.6
+  m_ScreenY: 1
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -3660,7 +3744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.75, z: -2}
+  m_FollowOffset: {x: 0, y: 0.1, z: -2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3937,6 +4021,36 @@ MonoBehaviour:
   Iterations: 10
   Delta: 0.001
   SnapBackStrength: 1
+--- !u!1 &8823042868101425512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8260013871377541549}
+  m_Layer: 6
+  m_Name: Right Ear
+  m_TagString: Right Ear
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8260013871377541549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8823042868101425512}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.40000117, y: 0.29999995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6455153550203695357}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8850450728372490258
 GameObject:
   m_ObjectHideFlags: 0

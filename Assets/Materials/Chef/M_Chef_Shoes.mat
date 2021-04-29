@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8d011a3ec6d19364cabe19555206b97a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 111e82a34bba98c4ab0e43bf92110292, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: 5a616bcf849e6e34fb31d67b5d376376, type: 3}
+        m_Texture: {fileID: 2800000, guid: 235d90c377f7b28449d7b448c0d09da1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -80,9 +80,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighIntensity: 1.5
-    - _LightScalar: 1
-    - _LowIntensity: 1
+    - _HighIntensity: 7.16
+    - _LightScalar: 2.1
+    - _LowIntensity: 4.2
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -91,9 +91,9 @@ Material:
     - _Parallax: 0.02
     - _PointLightBanding: 0
     - _PointLightBlendMode: 0
-    - _PointLightSaturation: 0.5
-    - _PointLightScalar: 0.5
-    - _RampLevels: 2
+    - _PointLightSaturation: 0.523
+    - _PointLightScalar: 0.68
+    - _RampLevels: 5
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimPower: 0
@@ -103,7 +103,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.21698111, g: 0.103168376, b: 0.103168376, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CrackStartEndThickness: {r: 0.8, g: 0.9, b: 0.1, a: 0.2}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
