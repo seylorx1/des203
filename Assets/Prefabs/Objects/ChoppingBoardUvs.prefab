@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4376685743096855682}
   - component: {fileID: 1013473896860278210}
   - component: {fileID: 5927900620443337737}
+  - component: {fileID: 7863860401517991864}
   m_Layer: 0
   m_Name: ChoppingBoardUvs
-  m_TagString: Untagged
+  m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2863691291301141847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -26.697, y: 0.89294, z: -5.517}
-  m_LocalScale: {x: 119.04467, y: 119.04467, z: 119.04467}
+  m_LocalScale: {x: 55.919277, y: 55.919277, z: 55.919277}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,3 +114,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -298796995190690707, guid: d8bf45f8a5a1a8f41b933e56371ac607, type: 3}
+--- !u!114 &7863860401517991864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863691291301141847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcb238ad87731b43be41425c4bed215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verbose: 0
+  gibID: 
+  health: 10
+  healthMax: 10
+  spin: 0
