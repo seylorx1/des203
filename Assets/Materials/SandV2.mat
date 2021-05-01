@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: SandV2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF
-  m_LightmapFlags: 0
+  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -73,6 +73,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.91891336, b: 0.76792455, a: 1}
+    - _Color: {r: 0.9528302, g: 0.7941369, b: 0.50697756, a: 1}
     - _EmissionColor: {r: 0.3160377, g: 0.22778144, b: 0.096600205, a: 1}
   m_BuildTextureStacks: []
