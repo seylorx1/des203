@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Ben's Test Space");
     }
 
     public void QuitGame()
