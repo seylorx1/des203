@@ -453,7 +453,7 @@ public class PlayerController : MonoBehaviour {
         if (Heat >= 100.0f) {
             //Crab death sequence
             Deaths = Deaths + 1;
-            SceneManager.LoadScene("MainScene"); // TODO Handle death logic better.
+            SceneManager.LoadScene("Ben's Test Space"); // TODO Handle death logic better.
         }
 
         float clampedHeat = Mathf.Clamp01(Heat * 0.01f);

@@ -223,6 +223,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
         if (collision.collider.tag == "Hazard") {
             playerController.TakeHeat(5.0f * Time.deltaTime);
         }
+
+        if (collision.collider.tag == "Freezer")
+        {
+            playerController.TakeHeat(-5.0f * Time.deltaTime);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -232,5 +237,11 @@ public class PlayerWorldInteraction : MonoBehaviour {
             playerController.TakeHeat(5.0f * Time.deltaTime);
 
         }
+
+        if (other.tag == "Freezer")
+        {
+            playerController.TakeHeat(-5.0f * Time.deltaTime);
+        }
+
     }
 }
