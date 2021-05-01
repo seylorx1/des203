@@ -51,6 +51,7 @@ public class ResultsScreen : MonoBehaviour
 
         BonusesNamesTMP.text = "" + "Escaped";
         BonusesValuesTMP.text = "" + "100";
+        FinalScore = FinalScore + 100;
 
         if (FinalDeaths == 0)
         {
