@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class PauseMenu : MonoBehaviour {
@@ -66,6 +67,9 @@ public class PauseMenu : MonoBehaviour {
         RightLevelInfo.SetActive(false);
         RightMap.SetActive(true);
 
+        EventSystem.current.SetSelectedGameObject(RightMap);
+
+
         SelectedScreen.text = "Settings";
     }
 
@@ -83,6 +87,8 @@ public class PauseMenu : MonoBehaviour {
         RightMap.SetActive(false);
         RightLevelInfo.SetActive(true);
 
+        EventSystem.current.SetSelectedGameObject(RightLevelInfo);
+
         SelectedScreen.text = "Map";
     }
 
@@ -99,6 +105,8 @@ public class PauseMenu : MonoBehaviour {
         RightMap.SetActive(false);
         RightLevelInfo.SetActive(false);
         RightSettings.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(RightSettings);
 
         SelectedScreen.text = "Level Info";
     }

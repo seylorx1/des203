@@ -155,6 +155,8 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         RegisterInputEvents();
 
+        Time.timeScale = 1f;
+
         #region Obtain Material Instance References
         foreach (SkinnedMeshRenderer r in crabMeshRenderers) {
             Material rMat = r.material;
