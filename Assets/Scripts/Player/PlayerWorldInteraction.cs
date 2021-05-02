@@ -100,7 +100,7 @@ public class PlayerWorldInteraction : MonoBehaviour {
 
         if (other.tag == "TankObjective")
         {
-            SmashWindowInfoText.text = "Open Castle Gate";
+            SmashWindowInfoText.text = "Smash The Window";
             SmashWindowNotifierText.text = SmashWindowInfoText.text;
             ObjectNotifierAnim.Play("PopUpEscapeTank");
             EscapeTankTick.SetActive(true);
