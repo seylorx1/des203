@@ -159,13 +159,6 @@ public class PlayerWorldInteraction : MonoBehaviour {
             Destroy(other.gameObject);
         }
 
-        if (other.tag == "SaveCrab")
-        {
-            CollectedCrabs = CollectedCrabs + 1;
-            CrabsText.text = CollectedCrabs + " / " + NumberOfCrabs;
-            Score += 50;
-            Destroy(other.gameObject);
-        }
 
         if (other.tag == "Button")
         {

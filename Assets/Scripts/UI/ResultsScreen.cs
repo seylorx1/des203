@@ -131,7 +131,7 @@ public class ResultsScreen : MonoBehaviour
 
     public void Continue()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Main Menu");
     }
 
 }
