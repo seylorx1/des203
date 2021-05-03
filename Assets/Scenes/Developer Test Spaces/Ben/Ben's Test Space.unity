@@ -2206,7 +2206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 777811fd7cf6dcf40a8fdd6082c3a1b7, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 777811fd7cf6dcf40a8fdd6082c3a1b7, type: 3}
       propertyPath: m_LocalScale.x
@@ -32288,11 +32288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.9110001
+      value: 2.5402637
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.46
+      value: -12.216
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39149,7 +39149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.901594
+      value: 2.5827854
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalScale.z
@@ -39157,7 +39157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.67
+      value: -8.5248
       objectReference: {fileID: 0}
     - target: {fileID: 5068293984133252776, guid: da0705843c4503842839d9e93f879d58, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41196,7 +41196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 369750059363970567, guid: 8b0fb164bb32a1c408d279b49fc51e89, type: 3}
       propertyPath: m_Constraints
-      value: 32
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 711837475955053365, guid: 8b0fb164bb32a1c408d279b49fc51e89, type: 3}
       propertyPath: m_Name
@@ -55953,6 +55953,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1851378306}
     m_Modifications:
+    - target: {fileID: 1504237980, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504237980, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.35134554
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504237980, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715434332, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715434332, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.48795986
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715434332, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3476904775325102923, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -56001,6 +56025,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Light_Flourescent
       objectReference: {fileID: 0}
+    - target: {fileID: 6006894620796020277, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 308d8083f9efd2f45ad2d6f285d0a235, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 101062a17d84b8a499bc179887511fa0, type: 3}
 --- !u!4 &8515903628578900144 stripped
