@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1901ff4d34d2c047a2941d64fe9e02f, type: 3}
+  m_Name: MusicSingleton
+  m_EditorClassIdentifier: 
+  maximumVolume: 0.5
+  musicTracks:
+  - trackClip: {fileID: 8300000, guid: ebcc241ff2beb1d4b9da12172da23942, type: 3}
+    priority: 1
+  - trackClip: {fileID: 8300000, guid: ba3a6fa203e597645bb2befcf0e8668b, type: 3}
+    priority: 0
+  - trackClip: {fileID: 8300000, guid: 90c92ad579571754ca0b2ee7a05cde0c, type: 3}
+    priority: 1
