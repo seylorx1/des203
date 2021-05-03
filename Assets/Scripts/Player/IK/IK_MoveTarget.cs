@@ -5,6 +5,7 @@ using UnityEngine;
 public class IK_MoveTarget : MonoBehaviour {
 
     public float
+        startHeightOffset = 0.5f,
         rayLength = 1f,
         MaxDistance,
         speed = 5f,
@@ -88,7 +89,7 @@ public class IK_MoveTarget : MonoBehaviour {
 
             RaycastHit hit;
             if (Physics.Raycast(
-                    targetTransform.position + Vector3.up,
+                    targetTransform.position + (Vector3.up * startHeightOffset),
                     Vector3.down,
                     out hit,
                     rayLength,
