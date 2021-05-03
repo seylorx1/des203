@@ -29,6 +29,7 @@ TagManager:
   - Left Ear
   - Right Ear
   - Freezer
+  - IgnoreCamera
   layers:
   - Default
   - TransparentFX
@@ -42,9 +43,9 @@ TagManager:
   - IgnoreOutlineTrigger
   - OutlineTrigger
   - CameraCollider
-  - 
+  - PlayerCharacter (No Collisions)
   - IgnoreDirectionalLight
-  - 
+  - AlwaysCollide
   - 
   - 
   - 

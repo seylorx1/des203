@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 27137
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   MaxVelocity: 2
   rotateSpeed: 75
   jumpForce: 4
-  flipTorque: 0.5
+  flipTorque: 30
   lTrigger: 0
   rTrigger: 0
   Deaths: 0
@@ -1571,6 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreNotifier: {fileID: 0}
   objectiveHandler: {fileID: 0}
+  chuteDoorOpen: {fileID: 0}
   chuteDoor: {fileID: 0}
   RClight: {fileID: 0}
   Buttonlight: {fileID: 0}
@@ -1614,7 +1615,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.1
-  m_AngularDrag: 3
+  m_AngularDrag: 3.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -1630,8 +1631,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.18216133
-  m_Height: 0.77243805
+  m_Radius: 0.2
+  m_Height: 0.8
   m_Direction: 0
   m_Center: {x: -0.007144928, y: 0.26556587, z: 0.016815186}
 --- !u!114 &1363735990
@@ -2676,6 +2677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.15
   speed: 2
@@ -2767,6 +2769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.13
   speed: 2
@@ -2858,6 +2861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.2
   speed: 2
@@ -2949,6 +2953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.13
   speed: 2
@@ -3148,8 +3153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 2049
-  m_IgnoreTag: 
+    m_Bits: 27137
+  m_IgnoreTag: IgnoreCamera
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3292,6 +3297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.2
   speed: 2
@@ -3383,6 +3389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe4af09a9bd8a649b810bb0d9ed1c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHeightOffset: 0.3
   rayLength: 1
   MaxDistance: 0.15
   speed: 2
