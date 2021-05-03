@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{D299C4C4-C9EB-45FF-910C-EA27DA99489F}" SchemaVersion="103">
+	<AudioObjects>
+		<WorkUnit Name="Music" ID="{D299C4C4-C9EB-45FF-910C-EA27DA99489F}" PersistMode="Standalone">
+			<ChildrenList>
+				<BlendContainer Name="Game_R" ID="{0C0269C6-5F2D-4F33-BFC8-CBE1D990E796}" ShortID="326030330">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Restaurant" ID="{F363C5C7-67AE-400A-84A1-DDC08F73301F}" ShortID="135835953">
+							<PropertyList>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="BOSSA NOVA BOP for gang activity only" ID="{D5EF5594-19AD-4CAE-8F86-3CD34D091D1C}" ShortID="571286314">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="BOSSA NOVA BOP for gang activity only" ID="{A609086E-E0B5-4DDB-8933-0FCBD473F786}">
+											<Language>SFX</Language>
+											<AudioFile>BOSSA NOVA BOP for gang activity only.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="148422833"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="BOSSA NOVA BOP for gang activity only" ID="{A609086E-E0B5-4DDB-8933-0FCBD473F786}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists/>
+						</RandomSequenceContainer>
+					</ChildrenList>
+					<ObjectLists/>
+					<BlendTrackList>
+						<BlendTrack Name="Switch" ID="{3C970A18-1C8C-4A6B-9A7D-AC7DD3C2E792}" ShortID="498967890">
+							<PropertyList>
+								<Property Name="EnableCrossFading" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="LayerCrossFadeControlInput">
+									<ObjectRef Name="Switch" ID="{711D2679-DD01-4EA0-9699-EE4B9A938755}" WorkUnitID="{C235967D-801D-4351-A1A6-6CBE6DD251BF}"/>
+								</Reference>
+							</ReferenceList>
+							<BlendTrackAssocList>
+								<BlendTrackAssoc>
+									<ItemRef Name="Restaurant" ID="{F363C5C7-67AE-400A-84A1-DDC08F73301F}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>36.8968017241379</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<RightEdgePos>100</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+							</BlendTrackAssocList>
+						</BlendTrack>
+					</BlendTrackList>
+				</BlendContainer>
+				<BlendContainer Name="Menu" ID="{1FBB06DD-2126-43A7-8E10-5B37FE785C86}" ShortID="580564949">
+					<PropertyList>
+						<Property Name="BlendBehavior" Type="int16" Value="1"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Menu" ID="{A5D1EFBD-565F-4974-8E88-0A3893151F6D}" ShortID="209609611">
+							<PropertyList>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Orchestral main menu kinda ;)" ID="{FE310BFE-824F-486C-8C98-3F3FA8DA177A}" ShortID="471944404">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Orchestral main menu kinda ;)" ID="{16B30183-9E10-4E36-A1EC-85E223F7AD3E}">
+											<Language>SFX</Language>
+											<AudioFile>Orchestral main menu kinda ;).wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="898031902"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="Orchestral main menu kinda ;)" ID="{16B30183-9E10-4E36-A1EC-85E223F7AD3E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists/>
+						</RandomSequenceContainer>
+					</ChildrenList>
+					<ObjectLists/>
+				</BlendContainer>
+				<BlendContainer Name="Game_T" ID="{2859807E-DC69-437F-B1F0-3E2C8E53AA6A}" ShortID="437474461">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Tutorial" ID="{4125DD5F-9AB3-4916-99BE-FEDCA3FA7E5E}" ShortID="668532889">
+							<PropertyList>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="NEW CRAB SONG" ID="{4D34DAF2-859D-465A-B50E-074905A72FD6}" ShortID="730715541">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NEW CRAB SONG" ID="{01B4CD84-06EF-4423-AE4B-B09819512FCA}">
+											<Language>SFX</Language>
+											<AudioFile>NEW CRAB SONG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="470637333"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="NEW CRAB SONG" ID="{01B4CD84-06EF-4423-AE4B-B09819512FCA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="BOSSA NOVA BOP for gang activity only" ID="{CBB1EF0A-B712-42A6-B3CE-B2EB21D04DCA}" ShortID="95692298">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="BOSSA NOVA BOP for gang activity only" ID="{6ADEC34A-7FFE-438D-BB48-9C59A58BA5FF}">
+											<Language>SFX</Language>
+											<AudioFile>BOSSA NOVA BOP for gang activity only.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1014851161"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="BOSSA NOVA BOP for gang activity only" ID="{6ADEC34A-7FFE-438D-BB48-9C59A58BA5FF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists/>
+						</RandomSequenceContainer>
+					</ChildrenList>
+					<ObjectLists/>
+					<BlendTrackList>
+						<BlendTrack Name="New Blend Track" ID="{95EFF5A9-9299-4F6A-B591-1A399C011815}" ShortID="743346574">
+							<PropertyList>
+								<Property Name="EnableCrossFading" Type="bool" Value="True"/>
+							</PropertyList>
+						</BlendTrack>
+					</BlendTrackList>
+				</BlendContainer>
+				<BlendContainer Name="Danger_Zone" ID="{371111E5-0EB9-4EC4-B1AC-F9BB9DF23BDE}" ShortID="479123151">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="Danger" ID="{FBDFD643-5FD2-4973-9BA3-9B452047C4E1}" ShortID="316094234">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="I'm in danger, oh no" ID="{14FF2014-2BF7-448A-B56E-5793DD46F228}" ShortID="302438357">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0A0D69DF-FBC2-45E5-8DC2-AFBB61AF6D67}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{463237F0-F41B-4889-B990-43410EB90BA5}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="I'm in danger, oh no" ID="{1754C3EC-85C3-4120-BE06-E52BBA9A6DCB}">
+											<Language>SFX</Language>
+											<AudioFile>I'm in danger, oh no.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="740231661"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="I'm in danger, oh no" ID="{1754C3EC-85C3-4120-BE06-E52BBA9A6DCB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists/>
+						</RandomSequenceContainer>
+					</ChildrenList>
+					<ObjectLists/>
+				</BlendContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

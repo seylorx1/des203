@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{0730584F-E89B-4B49-BC51-D718B5142954}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="Game" ID="{0730584F-E89B-4B49-BC51-D718B5142954}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Game_Music_R" ID="{80AA50D4-3F8C-40BA-8B51-5DE6FB3B4EC1}">
+					<ChildrenList>
+						<Action Name="" ID="{3DB68049-31EC-46A7-882B-9592B373FE66}" ShortID="109311429">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Game_R" ID="{0C0269C6-5F2D-4F33-BFC8-CBE1D990E796}" WorkUnitID="{D299C4C4-C9EB-45FF-910C-EA27DA99489F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Game_Music_T" ID="{8A90719A-48F6-400B-9306-5E548847CD3B}">
+					<ChildrenList>
+						<Action Name="" ID="{9BC05982-6E1F-48A8-A871-E4B7530DC4CC}" ShortID="851224000">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Game_T" ID="{2859807E-DC69-437F-B1F0-3E2C8E53AA6A}" WorkUnitID="{D299C4C4-C9EB-45FF-910C-EA27DA99489F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Game_Music_D" ID="{4725AE48-A351-4E34-AF2C-DC59C5450139}"/>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
+	<RootPaths>
+		<ProjectRoot>D:\Game Projects\Unity\University\DES203\WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>D:\Game Projects\Unity\University\DES203\WwiseProject\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Game Projects\Unity\University\DES203\WwiseProject\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>D:\Game Projects\Unity\University\DES203\WwiseProject\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="702482391" Language="SFX" Hash="636460752">
+			<ObjectPath>\SoundBanks\Default Work Unit\Game</ObjectPath>
+			<ShortName>Game</ShortName>
+			<Path>Game.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3276221098" Name="Game_Music_D" ObjectPath="\Events\Game\Game_Music_D" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3276221116" Name="Game_Music_R" ObjectPath="\Events\Game\Game_Music_R" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="148422833" Language="SFX">
+							<ShortName>BOSSA NOVA BOP for gang activity only.wav</ShortName>
+							<Path>SFX\BOSSA NOVA BOP for gang activity only_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3276221114" Name="Game_Music_T" ObjectPath="\Events\Game\Game_Music_T" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="470637333" Language="SFX">
+							<ShortName>NEW CRAB SONG.wav</ShortName>
+							<Path>SFX\NEW CRAB SONG_10C4C929.wem</Path>
+						</File>
+						<File Id="1014851161" Language="SFX">
+							<ShortName>BOSSA NOVA BOP for gang activity only.wav</ShortName>
+							<Path>SFX\BOSSA NOVA BOP for gang activity only_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+			<GameParameters>
+				<GameParameter Id="3202316517" Name="Switch" ObjectPath="\Game Parameters\Default Work Unit\Switch"/>
+			</GameParameters>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX" Hash="1419612295">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="2607556080" Language="SFX" Hash="4279596029">
+			<ObjectPath>\SoundBanks\Default Work Unit\Menu</ObjectPath>
+			<ShortName>Menu</ShortName>
+			<Path>Menu.bnk</Path>
+			<IncludedEvents>
+				<Event Id="4055567060" Name="Menu_Music" ObjectPath="\Events\Menu\Menu_Music" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="898031902" Language="SFX">
+							<ShortName>Orchestral main menu kinda ;).wav</ShortName>
+							<Path>SFX\Orchestral main menu kinda ;)_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

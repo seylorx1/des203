@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{C235967D-801D-4351-A1A6-6CBE6DD251BF}" SchemaVersion="103">
+	<GameParameters>
+		<WorkUnit Name="Default Work Unit" ID="{C235967D-801D-4351-A1A6-6CBE6DD251BF}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="Switch" ID="{711D2679-DD01-4EA0-9699-EE4B9A938755}">
+					<PropertyList>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+						<Property Name="SlewRateDown" Type="Real64" Value="35"/>
+						<Property Name="SlewRateUp" Type="Real64" Value="35"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>
