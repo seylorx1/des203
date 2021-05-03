@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: 0.0011047942, y: 0.97372425, z: -0.004724928, w: 0.22767851}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.08686248, y: 0.8034159, z: 0.121057734, w: 0.5764744}
+  m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875134631826}
@@ -98,8 +98,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.036542308, y: 0.9611125, z: -0.1562823, w: 0.22472966}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0039576637, y: 0.8124664, z: -0.005515682, w: 0.5829685}
+  m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7709064875697898574}
@@ -173,8 +173,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892357622}
-  m_LocalRotation: {x: 0.17364816, y: -0, z: -0.0000000074505797, w: 0.9848078}
-  m_LocalPosition: {x: -0.0000006183982, y: 0.71000004, z: -1.0800005}
+  m_LocalRotation: {x: 0.17364822, y: -0, z: -0.00000001862645, w: 0.9848078}
+  m_LocalPosition: {x: -0.0000044703484, y: 0.70999855, z: -1.0800037}
   m_LocalScale: {x: 0.6816, y: 0.9164099, z: 0.69365}
   m_Children:
   - {fileID: 1833212039}
@@ -396,8 +396,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.040623974, y: 0.9581107, z: -0.1737386, w: 0.22402778}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.01456091, y: 0.8122317, z: -0.02029312, w: 0.5828001}
+  m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 896856946}
@@ -1474,6 +1474,7 @@ GameObject:
   - component: {fileID: 4243381668269258104}
   - component: {fileID: 1346958536}
   - component: {fileID: 1363735990}
+  - component: {fileID: 6793639185240598019}
   m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
@@ -1658,6 +1659,19 @@ MonoBehaviour:
   MapScreen: {fileID: 0}
   LevelInfoScreen: {fileID: 0}
   SelectedScreen: {fileID: 0}
+--- !u!114 &6793639185240598019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243381668269258111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4272548759277652361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,7 +2692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.15
   speed: 2
   DistanceSpeedMod: 40
@@ -2770,7 +2784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.13
   speed: 2
   DistanceSpeedMod: 40
@@ -2862,7 +2876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.2
   speed: 2
   DistanceSpeedMod: 40
@@ -2954,7 +2968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.13
   speed: 2
   DistanceSpeedMod: 40
@@ -3029,7 +3043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8868057, y: 0.75, z: 1.7926447}
+  m_LocalPosition: {x: -1.8946569, y: 0.1, z: 0.6405282}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
@@ -3298,7 +3312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.2
   speed: 2
   DistanceSpeedMod: 40
@@ -3390,7 +3404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeightOffset: 0.35
-  rayLength: 1
+  rayLength: 0.3
   MaxDistance: 0.15
   speed: 2
   DistanceSpeedMod: 40

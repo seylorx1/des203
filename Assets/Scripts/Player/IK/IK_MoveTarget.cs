@@ -44,11 +44,6 @@ public class IK_MoveTarget : MonoBehaviour {
         layerMask_OutlineTrigger = LayerMask.GetMask("OutlineTrigger");
     }
 
-
-    //private void UpdateTargetPosition() {
-    //    targetPosition = playerController.transform.position + playerController.transform.TransformDirection(targetOffset);
-    //}
-
     void Update() {
 
         if (playerController.CrabFlipped) {
@@ -77,9 +72,10 @@ public class IK_MoveTarget : MonoBehaviour {
                     walkTarget,
                     Time.deltaTime * Mathf.Max(speed, targetDistance * DistanceSpeedMod));
 
-                if (transform.position == walkTarget) {
+                if (transform.position.Round(2) == walkTarget.Round(2)) {
                     snapLeg = false;
                 }
+
             }
         }
     }
