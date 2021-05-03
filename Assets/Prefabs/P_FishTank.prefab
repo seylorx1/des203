@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!111 &958977971
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148663291423}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 038a3743e89661d4da2b1a1a2855e7d8, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 038a3743e89661d4da2b1a1a2855e7d8, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &611626034
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +509,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 674340280032488212, guid: fd4f76423df18244fbceb75092d70623, type: 3}
+--- !u!111 &958977971
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148663291423}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 038a3743e89661d4da2b1a1a2855e7d8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 038a3743e89661d4da2b1a1a2855e7d8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1464825709464425582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,8 +1343,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 34.966682, y: 14.156355, z: 17.301588}
-  m_Center: {x: -5.926095, y: 4.9414935, z: -6.3589272}
+  m_Size: {x: 36.851902, y: 14.156355, z: 17.822027}
+  m_Center: {x: -6.8687067, y: 4.941515, z: -6.0987062}
 --- !u!114 &3063143591712264933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,6 +3716,7 @@ GameObject:
   - component: {fileID: 3714001880563402477}
   - component: {fileID: 3714001880563402476}
   - component: {fileID: 917132058}
+  - component: {fileID: 917132059}
   m_Layer: 0
   m_Name: Box_UVW (9)
   m_TagString: Untagged
@@ -3831,6 +3832,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &917132059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915903760333746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915903779806525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4037,6 +4051,7 @@ GameObject:
   - component: {fileID: 3714001880714442260}
   - component: {fileID: 3714001880714442263}
   - component: {fileID: 351619615}
+  - component: {fileID: 351619616}
   m_Layer: 0
   m_Name: Box_UVW (2)
   m_TagString: Untagged
@@ -4152,6 +4167,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &351619616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915903911349083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915903955295296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,6 +4431,7 @@ GameObject:
   - component: {fileID: 3714001880990513071}
   - component: {fileID: 3714001880990513070}
   - component: {fileID: 4560915904189123325}
+  - component: {fileID: 29850851}
   m_Layer: 0
   m_Name: Knife_UVW
   m_TagString: Grabbable
@@ -4519,6 +4548,19 @@ MonoBehaviour:
   health: 20
   healthMax: 20
   spin: 1
+--- !u!114 &29850851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915904189123324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915904255584612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4725,6 +4767,7 @@ GameObject:
   - component: {fileID: 3714001880186156794}
   - component: {fileID: 3714001880186156805}
   - component: {fileID: 22198540}
+  - component: {fileID: 22198541}
   m_Layer: 0
   m_Name: Box_UVW (3)
   m_TagString: Untagged
@@ -4840,6 +4883,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &22198541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915904458509225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915904494463326
 GameObject:
   m_ObjectHideFlags: 0
@@ -4854,6 +4910,7 @@ GameObject:
   - component: {fileID: 3714001880358016009}
   - component: {fileID: 3714001880358016008}
   - component: {fileID: 1025995635}
+  - component: {fileID: 1025995636}
   m_Layer: 0
   m_Name: Box_UVW
   m_TagString: Untagged
@@ -4969,6 +5026,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &1025995636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915904494463326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915904581276666
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,6 +5535,7 @@ GameObject:
   - component: {fileID: 3714001879678543738}
   - component: {fileID: 3714001879678543749}
   - component: {fileID: 1614648071}
+  - component: {fileID: 1614648072}
   m_Layer: 0
   m_Name: Box_UVW (4)
   m_TagString: Untagged
@@ -5580,6 +5651,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &1614648072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915904888724009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915904961463140
 GameObject:
   m_ObjectHideFlags: 0
@@ -5594,6 +5678,7 @@ GameObject:
   - component: {fileID: 3714001879616028215}
   - component: {fileID: 3714001879616028214}
   - component: {fileID: 2024217664}
+  - component: {fileID: 2024217665}
   m_Layer: 0
   m_Name: Box_UVW (1)
   m_TagString: Untagged
@@ -5709,6 +5794,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &2024217665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915904961463140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915905110325705
 GameObject:
   m_ObjectHideFlags: 0
@@ -5879,6 +5977,7 @@ GameObject:
   - component: {fileID: 3714001879926457546}
   - component: {fileID: 3714001879926457557}
   - component: {fileID: 295383805}
+  - component: {fileID: 295383806}
   m_Layer: 0
   m_Name: Box_UVW (5)
   m_TagString: Untagged
@@ -5994,6 +6093,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &295383806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915905137834393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915905160110419
 GameObject:
   m_ObjectHideFlags: 0
@@ -6200,6 +6312,7 @@ GameObject:
   - component: {fileID: 3714001879005846794}
   - component: {fileID: 3714001879005846805}
   - component: {fileID: 189755317}
+  - component: {fileID: 189755318}
   m_Layer: 0
   m_Name: Box_UVW (7)
   m_TagString: Untagged
@@ -6315,6 +6428,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &189755318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915905290952793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915905291023384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6586,6 +6712,7 @@ GameObject:
   - component: {fileID: 3714001879080967856}
   - component: {fileID: 3714001879080967859}
   - component: {fileID: 409441604}
+  - component: {fileID: 409441605}
   m_Layer: 0
   m_Name: Box_UVW (8)
   m_TagString: Untagged
@@ -6701,6 +6828,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &409441605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915905500685287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915905501739786
 GameObject:
   m_ObjectHideFlags: 0
@@ -6907,6 +7047,7 @@ GameObject:
   - component: {fileID: 3714001879289751801}
   - component: {fileID: 3714001879289751800}
   - component: {fileID: 1177150751}
+  - component: {fileID: 1177150752}
   m_Layer: 0
   m_Name: Box_UVW (10)
   m_TagString: Untagged
@@ -7022,6 +7163,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &1177150752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915905575376302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4560915905712031234
 GameObject:
   m_ObjectHideFlags: 0
@@ -7132,6 +7286,7 @@ GameObject:
   - component: {fileID: 3714001879372140904}
   - component: {fileID: 3714001879372140907}
   - component: {fileID: 1140816993}
+  - component: {fileID: 1140816994}
   m_Layer: 0
   m_Name: Box_UVW (6)
   m_TagString: Untagged
@@ -7247,6 +7402,19 @@ MonoBehaviour:
   gibID: wood
   health: 3
   healthMax: 3
+--- !u!114 &1140816994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560915905790422079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
 --- !u!1 &4652507279286656296
 GameObject:
   m_ObjectHideFlags: 0
@@ -10007,14 +10175,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a51413cb661ee49a1ef258deeb5de1, type: 3}
---- !u!4 &3245056438307974606 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a6a51413cb661ee49a1ef258deeb5de1, type: 3}
-  m_PrefabInstance: {fileID: 3063143592648084005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2757066155750373236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a6a51413cb661ee49a1ef258deeb5de1, type: 3}
+  m_PrefabInstance: {fileID: 3063143592648084005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3245056438307974606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a6a51413cb661ee49a1ef258deeb5de1, type: 3}
   m_PrefabInstance: {fileID: 3063143592648084005}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6803778167084020786
