@@ -48,6 +48,8 @@ public class MusicSingleton : SingletonScriptableObject
     }
 
     public bool Unregister(MusicSource musicSource) {
+        musicSource.audioSource.volume = 0;
+        musicSource.audioSource.Stop();
         return allMusicSources.Remove(musicSource);
     }
 

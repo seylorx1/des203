@@ -6,13 +6,14 @@ public class ChefController : CrabButtonActor
 {
     public GameObject standard, dance;
     public Transform teleportTo;
-    public AudioSource audioSource;
+    public MusicSource musicSource;
 
     private Transform lastColliderTransform = null;
     private bool teleported = false;    
     public void Awake() {
         standard.SetActive(true);
         dance.SetActive(false);
+        musicSource.gameObject.SetActive(false);
     }
 
     public override void Pressed(Collider other) {
@@ -31,6 +32,6 @@ public class ChefController : CrabButtonActor
         yield return new WaitForSeconds(0.25f);
         lastColliderTransform.SetPositionAndRotation(teleportTo.position, teleportTo.rotation);
         teleported = false;
-        audioSource.Play();
+        musicSource.gameObject.SetActive(true);
     }
 }

@@ -592,7 +592,7 @@ MonoBehaviour:
   standard: {fileID: 4648191021053717694}
   dance: {fileID: 4648191020653189834}
   teleportTo: {fileID: 2904936602945210120}
-  audioSource: {fileID: 9188688654157871810}
+  musicSource: {fileID: 6264001842777329988}
 --- !u!1 &3180752259606017564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2335,6 +2335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_MusicZone
       objectReference: {fileID: 0}
+    - target: {fileID: 3060277499989183664, guid: 53309a16a93e012499b813e08b87f8b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3060277499989183668, guid: 53309a16a93e012499b813e08b87f8b8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2426,8 +2430,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3060277499989183668, guid: 53309a16a93e012499b813e08b87f8b8, type: 3}
   m_PrefabInstance: {fileID: 6450268748828309795}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &9188688654157871810 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2740214858095723489, guid: 53309a16a93e012499b813e08b87f8b8, type: 3}
+--- !u!114 &6264001842777329988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1111757148092917863, guid: 53309a16a93e012499b813e08b87f8b8, type: 3}
   m_PrefabInstance: {fileID: 6450268748828309795}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad0e8aff4fdadeb44b3faed87e9439ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class KillFloor : MonoBehaviour {
     private Vector3 startPosition;
     private Quaternion startRotation;
@@ -28,6 +29,12 @@ public class KillFloor : MonoBehaviour {
                     break;
                 case Mode.Reset:
                     transform.SetPositionAndRotation(startPosition, startRotation);
+
+                    //Should stop shit flying about after getting reset.
+                    Rigidbody rb = GetComponent<Rigidbody>();
+                    if (rb != null) {
+                        rb.velocity = Vector3.zero;
+                    }
                     break;
             }
         }
