@@ -6,7 +6,7 @@ using TMPro;
 public class Savecrab : MonoBehaviour
 {
     public int NumberOfCrabs;
-    private int CollectedCrabs = 0;
+    public int CollectedCrabs = 0;
     public TextMeshProUGUI CrabsText;
     public string gibID = "";
     private MeshFilter meshFilter;
@@ -42,7 +42,7 @@ public class Savecrab : MonoBehaviour
             gib?.SpawnParticlesAtPosition(transform.position);
             CollectedCrabs = CollectedCrabs + 1;
             CrabsText.text = CollectedCrabs + " / " + NumberOfCrabs;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
 
         }
     }

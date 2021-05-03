@@ -18,6 +18,7 @@ public class ResultsScreen : MonoBehaviour
 
     public GameObject TimerUI;
     public GameObject CrabController;
+    public GameObject SaveCrabPrefab;
 
     private int FinalScore;
     private string FinalGrade;
@@ -29,6 +30,7 @@ public class ResultsScreen : MonoBehaviour
     private Timer TimerScript;
     private PlayerWorldInteraction WorldScript;
     private PlayerController playerController;
+    private Savecrab SaveCrabScript;
     
 
     // Start is called before the first frame update
@@ -39,9 +41,10 @@ public class ResultsScreen : MonoBehaviour
         TimerScript = TimerUI.GetComponent<Timer>();
         WorldScript = CrabController.GetComponent<PlayerWorldInteraction>();
         playerController = CrabController.GetComponent<PlayerController>();
+        SaveCrabScript = SaveCrabPrefab.GetComponent<Savecrab>();
 
         FinalDeaths = playerController.Deaths;
-        FinalCrabs = WorldScript.CollectedCrabs;
+        FinalCrabs = SaveCrabScript.CollectedCrabs;
         FinalPearls = WorldScript.CollectedPearls;
         FinalTime = TimerScript.seconds;
 
@@ -79,14 +82,14 @@ public class ResultsScreen : MonoBehaviour
             FinalScore = FinalScore + 200;
         }
 
-        if (FinalCrabs == 1)
+        if (FinalCrabs >= 1)
         {
             BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "All Crabs Saved";
             BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "100";
             FinalScore = FinalScore + 100;
         }
 
-        if (FinalPearls == 11)
+        if (FinalPearls >= 12)
         {
             BonusesNamesTMP.text = BonusesNamesTMP.text + "" + "\n" + "All Pearls Collected";
             BonusesValuesTMP.text = BonusesValuesTMP.text + "" + "\n" + "200";
