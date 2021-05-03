@@ -72,7 +72,7 @@ public class IK_MoveTarget : MonoBehaviour {
                     walkTarget,
                     Time.deltaTime * Mathf.Max(speed, targetDistance * DistanceSpeedMod));
 
-                if (transform.position.Round(2) == walkTarget.Round(2)) {
+                if (transform.position.Round(3) == walkTarget.Round(3)) {
                     snapLeg = false;
                 }
 
