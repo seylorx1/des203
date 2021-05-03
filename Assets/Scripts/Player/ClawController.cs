@@ -66,6 +66,17 @@ public class ClawController : MonoBehaviour {
                     HeldTransform = other.transform;
                     HeldTransform.GetComponent<MeshRenderer>()?.material?.SetFloat("_OutlineHighlight", 0.0f);
                 }
+
+                if (other.CompareTag("Lever") && ClawStick.x < -0.3)
+                {
+                    Debug.Log("Lever rotate");
+                    other.transform.Rotate(step, 0, 0 * Time.deltaTime, Space.Self);
+                }
+
+                else if (other.CompareTag("Lever") && ClawStick.x > 0.3)
+                {
+                    other.transform.Rotate(-step, 0, 0 * Time.deltaTime, Space.Self);
+                }
             }
         }
     }

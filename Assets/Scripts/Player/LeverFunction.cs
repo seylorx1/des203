@@ -6,6 +6,7 @@ public class LeverFunction : MonoBehaviour
 {
     public float rotation;
     public float speed = 1f;
+    public float rotMin = -90f, rotMax = 90f;
     public bool openGate;
     public GameObject gate;
     public Transform target;
@@ -14,7 +15,8 @@ public class LeverFunction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotation = transform.rotation.x;
+        transform.rotation.SetEulerAngle = Mathf.Clamp(transform.rotation.x, rotMin, rotMax);
+
 
         if (rotation >= -0.3f ) 
         {
@@ -25,7 +27,7 @@ public class LeverFunction : MonoBehaviour
         if (openGate == true)
         {
             gate.transform.position = Vector3.Lerp(gate.transform.position, target.transform.position, speed * Time.deltaTime);
-            objectiveHandler.openGate = true;
+            //objectiveHandler.openGate = true;
         }
     }
 
