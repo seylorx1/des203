@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: 837f13c975eba3a40a1607276c5e6e8f
+guid: da188a959ec9b7f4db1ec6fdc30242a6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Walls_Frames
+    second: {fileID: 2100000, guid: aa8258a5af1d932409ba85d9e53661ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Walls_Kitchen
+    second: {fileID: 2100000, guid: 58199f9fd6da39840b735f402585c227, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Walls_Outside
+    second: {fileID: 2100000, guid: ebcfbc829b73a804c82dda6f620275fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Walls_SeatingArea
+    second: {fileID: 2100000, guid: 299d8b37a2d54b84ba61f3c076ab4d51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Walls_VentFrames
+    second: {fileID: 2100000, guid: 8ed2e110c6e0ec34e8af8db361e63719, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,7 +59,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.4
+    globalScale: 3.8
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -45,7 +70,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -65,10 +90,10 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 0
   tangentSpace:
-    normalSmoothAngle: 43
-    normalImportMode: 1
-    tangentImportMode: 2
-    normalCalculationMode: 2
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
@@ -85,7 +110,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.4
+    globalScale: 3.8
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
