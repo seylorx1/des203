@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154298325}
-  m_LocalRotation: {x: -0.08686248, y: 0.8034159, z: 0.121057734, w: 0.5764744}
+  m_LocalRotation: {x: -0.08686249, y: 0.80341595, z: 0.12105775, w: 0.5764745}
   m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280312912}
-  m_LocalRotation: {x: 0.0039576637, y: 0.8124664, z: -0.005515682, w: 0.5829685}
+  m_LocalRotation: {x: 0.0039576627, y: 0.8124664, z: -0.0055156806, w: 0.5829685}
   m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -174,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892357622}
   m_LocalRotation: {x: 0.17364822, y: -0, z: -0.00000001862645, w: 0.9848078}
-  m_LocalPosition: {x: -0.0000044703484, y: 0.70999855, z: -1.0800037}
+  m_LocalPosition: {x: -0.0000044703484, y: 0.7099985, z: -1.0800037}
   m_LocalScale: {x: 0.6816, y: 0.9164099, z: 0.69365}
   m_Children:
   - {fileID: 1833212039}
@@ -396,7 +396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900109727}
-  m_LocalRotation: {x: 0.01456091, y: 0.8122317, z: -0.02029312, w: 0.5828001}
+  m_LocalRotation: {x: 0.01652439, y: 0.8121587, z: -0.023029564, w: 0.5827477}
   m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 1346958536}
   - component: {fileID: 1363735990}
   - component: {fileID: 6793639185240598019}
+  - component: {fileID: 1351275494}
   m_Layer: 6
   m_Name: Crab Controller
   m_TagString: Player
@@ -1660,6 +1661,19 @@ MonoBehaviour:
   LevelInfoScreen: {fileID: 0}
   SelectedScreen: {fileID: 0}
 --- !u!114 &6793639185240598019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243381668269258111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe24d264b1f3c4e8c87f5ac9dce415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killFloorMode: 1
+--- !u!114 &1351275494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3043,7 +3057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7709064874209760523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8946569, y: 0.1, z: 0.6405282}
+  m_LocalPosition: {x: -1.8946569, y: 0.099999994, z: 0.6405282}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 900109729}
