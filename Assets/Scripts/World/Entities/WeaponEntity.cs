@@ -107,4 +107,8 @@ public class WeaponEntity : WorldEntity {
     public void OnTriggerExit(Collider other) {
         weaponSwung = false; // Have to take the weapon away in order to deal damage again!
     }
+
+    public override IInteractable.Type GetInteractableType() {
+        return IInteractable.Type.Interactable;
+    }
 }

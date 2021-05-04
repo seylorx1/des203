@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverFunction : MonoBehaviour {
+public class LeverFunction : MonoBehaviour, IInteractable {
     public float angleCentre = 90.0f;
     public float angleStart = 80.0f;
 
@@ -20,8 +20,6 @@ public class LeverFunction : MonoBehaviour {
     }
 
     void Update() {
-        //SetLeverRotation(transform.localRotation.eulerAngles.x);
-
         if (angleRotation > 100.0f) {
             openGate = true;
         }
@@ -38,15 +36,10 @@ public class LeverFunction : MonoBehaviour {
     public void SetLeverAngle(float angle) {
 
         angleRotation = Mathf.Clamp(angle, angleCentre - range, angleCentre + range);
-        //transform.localEulerAngles = new Vector3(swing, transform.localEulerAngles.y, transform.localEulerAngles.z);
-
-        /*transform.localRotation = Quaternion.Euler(
-            swing,
-            //Mathf.Clamp(swing, rotationUp - range, rotationUp + range),
-            transform.localEulerAngles.y,
-            transform.localEulerAngles.z);*/
-
         transform.localRotation = Quaternion.AngleAxis(angleRotation, Vector3.left);
     }
 
+    public IInteractable.Type GetInteractableType() {
+        return IInteractable.Type.Interactable;
+    }
 }

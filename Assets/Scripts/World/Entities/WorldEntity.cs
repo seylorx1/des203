@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldEntity : MonoBehaviour {
+public class WorldEntity : MonoBehaviour, IInteractable {
     public bool verbose = false;
     public string gibID = "";
 
@@ -82,5 +82,9 @@ public class WorldEntity : MonoBehaviour {
     /// </summary>
     public virtual void Die() {
         Destroy(gameObject);
+    }
+
+    public virtual IInteractable.Type GetInteractableType() {
+        return IInteractable.Type.Breakable;
     }
 }

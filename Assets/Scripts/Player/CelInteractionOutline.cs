@@ -13,16 +13,56 @@ public class CelInteractionOutline : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.GetComponentInChildren<WeaponEntity>() != null && !TransformHeld(other.transform)) {
-            Renderer rend = other.GetComponent<Renderer>();
-            rend.material.SetFloat("_OutlineHighlight", 1.0f);
+        if (!TransformHeld(other.transform)) {
+
+            IInteractable.Type interactableType = GetInteractableType(other);
+            if (interactableType == IInteractable.Type.Uninteractable) {
+                return;
+            }
+
+            Renderer[] rends = other.GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in rends) {
+                switch(interactableType) {
+                    case IInteractable.Type.Interactable:
+                        rend.material.SetFloat("_OutlineInteractableHighlight", 1.0f);
+                        break;
+                    case IInteractable.Type.Breakable:
+                        rend.material.SetFloat("_OutlineBreakableHighlight", 1.0f);
+                        break;
+                }
+            }
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (other.gameObject.GetComponentInChildren<WeaponEntity>() != null && !TransformHeld(other.transform)) {
-            Renderer rend = other.GetComponent<Renderer>();
-            rend.material.SetFloat("_OutlineHighlight", 0.0f);
+        if (!TransformHeld(other.transform)) {
+            IInteractable.Type interactableType = GetInteractableType(other);
+            if(interactableType == IInteractable.Type.Uninteractable) {
+                return;
+            }
+
+            Renderer[] rends = other.GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in rends) {
+                rend.material.SetFloat("_OutlineInteractableHighlight", 0.0f);
+                rend.material.SetFloat("_OutlineBreakableHighlight", 0.0f);
+            }
         }
+    }
+
+    private static IInteractable.Type GetInteractableType(Collider other) {
+        
+        //Check to see if the collider (or its children) has a component interfacing IInteractable.
+        IInteractable interactable = other.gameObject.GetComponentInChildren<IInteractable>();
+        if(interactable != null) {
+            return interactable.GetInteractableType();
+        }
+
+        //Failing that, check the collider's tag.
+        switch (other.tag) {
+            case "Button":
+                return IInteractable.Type.Interactable;
+            default:
+                return IInteractable.Type.Uninteractable;
+        }   
     }
 }

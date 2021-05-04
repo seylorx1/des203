@@ -35,7 +35,8 @@
 
 		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
 		_OutlineSize("Outline Size", float) = 10
-		_OutlineHighlight("Outline Highlight", float) = 0.0
+		_OutlineInteractableHighlight("Outline Interactable Highlight", float) = 0.0
+		_OutlineBreakableHighlight("Outline Breakable Highlight", float) = 0.0
 
 		_RimColor("Hard Edge Light Color", Color) = (1, 1, 1, 1)
 		_RimAlpha("Hard Edge Light Brightness", Range(0, 1)) = 0
@@ -336,10 +337,17 @@
 
 				float4 _Color;
 				float4 _OutlineColor;
-				float _OutlineHighlight;
+				float _OutlineInteractableHighlight;
+				float _OutlineBreakableHighlight;
 				fixed4 frag(v2f i) : SV_Target
-				{					
-					return _OutlineHighlight == 1.0 ? float4(1.0, 1.0, 0.0, 1.0) : float4(_OutlineColor.rgb, _Color.a);
+				{
+					if (_OutlineInteractableHighlight == 1.0) {
+						return float4(1.0, 1.0, 0.0, 1.0);
+					}
+					if (_OutlineBreakableHighlight == 1.0) {
+						return float4(0.9, 0.1, 0.1, 1.0);
+					}
+					return float4(_OutlineColor.rgb, _Color.a);
 				}
 
 				ENDCG
