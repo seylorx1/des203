@@ -32125,6 +32125,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 849574293}
     - target: {fileID: 1363735991, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
+      propertyPath: NumberOfPearls
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363735991, guid: 1660bf95cc02eee4a8fd2e912bb6e876, type: 3}
       propertyPath: RPauseNotifier
       value: 
       objectReference: {fileID: 1117809020}
@@ -48694,7 +48698,7 @@ MonoBehaviour:
   BonusesValuesTMP: {fileID: 4021234192610476463}
   TimerUI: {fileID: 7292840933531905125}
   CrabController: {fileID: 1351275488}
-  SaveCrabPrefab: {fileID: 0}
+  SaveCrabPrefab: {fileID: 523486881}
 --- !u!1 &4021234191988842798
 GameObject:
   m_ObjectHideFlags: 0

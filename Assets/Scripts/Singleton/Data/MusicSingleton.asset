@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1901ff4d34d2c047a2941d64fe9e02f, type: 3}
   m_Name: MusicSingleton
   m_EditorClassIdentifier: 
-  maximumVolume: 0.5
+  maximumVolume: 0.3
   musicTracks:
   - trackClip: {fileID: 8300000, guid: ebcc241ff2beb1d4b9da12172da23942, type: 3}
     priority: 2
