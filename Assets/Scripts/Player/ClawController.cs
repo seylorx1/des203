@@ -44,7 +44,6 @@ public class ClawController : MonoBehaviour {
         HandleHeldItems();
 
         if (lastLeverFunction != null && ClawTrigger > 0.2f && Mathf.Abs(ClawStick.x) > 0.1f ) {
-
             lastLeverFunction.SetLeverAngle(
                 lastLeverFunction.GetLeverAngle() +
                 (Mathf.Sign(ClawStick.x) * leverSpeed * Time.deltaTime));

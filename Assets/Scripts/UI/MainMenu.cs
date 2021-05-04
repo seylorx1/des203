@@ -2,28 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject loadingScreen;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Awake() {
+        //loadingScreen.SetActive(false);
     }
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Ben's Test Space");
+        loadingScreen.SetActive(true);
+        StartCoroutine(LoadMainScene());
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadMainScene() {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Ben's Test Space");
+
+        while(!asyncLoad.isDone) {
+            yield return null;
+        }
+
+        SceneManager.UnloadSceneAsync("Main Menu");
     }
 }
