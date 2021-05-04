@@ -2,33 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverFunction : MonoBehaviour
-{
-    public float rotation;
-    public float speed = 1f;
-    public float rotMin = -90f, rotMax = 90f;
-    public bool openGate;
-    public GameObject gate;
-    public Transform target;
-    public ObjectiveHandler objectiveHandler;
+public class LeverFunction : MonoBehaviour {
+    public float angleCentre = 90.0f;
+    public float angleStart = 80.0f;
+
+    public float gateSpeed = 1f;
+    public float range = 30.0f;
+
+    public Transform gate, target;
+
+    private float angleRotation = 0.0f;
+    private bool openGate = false;
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.rotation.SetEulerAngle = Mathf.Clamp(transform.rotation.x, rotMin, rotMax);
+    void Start() {
+        SetLeverAngle(angleStart);
+    }
 
+    void Update() {
+        //SetLeverRotation(transform.localRotation.eulerAngles.x);
 
-        if (rotation >= -0.3f ) 
-        {
-            //Debug.Log("open");
-            openGate = true;            
+        if (angleRotation > 100.0f) {
+            openGate = true;
         }
 
-        if (openGate == true)
-        {
-            gate.transform.position = Vector3.Lerp(gate.transform.position, target.transform.position, speed * Time.deltaTime);
-            //objectiveHandler.openGate = true;
+        if(openGate) {
+            gate.position = Vector3.Lerp(gate.position, target.position, gateSpeed * Time.deltaTime);
         }
+    }
+
+    public float GetLeverAngle() {
+        return angleRotation;
+    }
+
+    public void SetLeverAngle(float angle) {
+
+        angleRotation = Mathf.Clamp(angle, angleCentre - range, angleCentre + range);
+        //transform.localEulerAngles = new Vector3(swing, transform.localEulerAngles.y, transform.localEulerAngles.z);
+
+        /*transform.localRotation = Quaternion.Euler(
+            swing,
+            //Mathf.Clamp(swing, rotationUp - range, rotationUp + range),
+            transform.localEulerAngles.y,
+            transform.localEulerAngles.z);*/
+
+        transform.localRotation = Quaternion.AngleAxis(angleRotation, Vector3.left);
     }
 
 }

@@ -667,12 +667,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d6144b9f9a6d5489737069982f7eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: 0
-  speed: 1
-  openGate: 0
-  gate: {fileID: 5275976600055652348}
+  angleCentre: 90
+  angleStart: 80
+  gateSpeed: 1
+  range: 30
+  gate: {fileID: 1117129940445709054}
   target: {fileID: 3063143591833989143}
-  objectiveHandler: {fileID: 0}
 --- !u!1 &1968976355426821909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3063143591833989143}
   m_Layer: 2
-  m_Name: GateTarget
+  m_Name: CastleGateTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1382,12 +1382,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3063143591833989142}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.973, z: 35.19}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.288002, y: 5.807001, z: 4.682001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3747118539778811858}
-  m_RootOrder: 2
+  m_Father: {fileID: 3714001881031656954}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3063143592025704311
 GameObject:
@@ -2810,6 +2810,8 @@ Transform:
   - {fileID: 3747118539078141647}
   - {fileID: 3714001879219516195}
   - {fileID: 3714001879551667700}
+  - {fileID: 1117129940445709054}
+  - {fileID: 3063143591833989143}
   m_Father: {fileID: 6223321022795116408}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6693,8 +6695,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3177661667859713884}
-  - {fileID: 7628137445610447977}
-  - {fileID: 3063143591833989143}
   m_Father: {fileID: 3714001879551667700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7521,12 +7521,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5275976600055652348}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.29, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.07744408, y: -2.7984686, z: -136.30954}
+  m_LocalScale: {x: 3.86424, y: 3.8642404, z: 3.3154018}
   m_Children: []
-  m_Father: {fileID: 3747118539778811858}
-  m_RootOrder: 1
+  m_Father: {fileID: 1117129940445709054}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2255976797897456629
 MeshFilter:
@@ -8760,6 +8760,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7599064567516485003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1117129940445709054}
+  m_Layer: 0
+  m_Name: CastleGate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1117129940445709054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599064567516485003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.288, y: 4.216, z: 4.682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7628137445610447977}
+  m_Father: {fileID: 3714001881031656954}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7645115867281796953
 GameObject:
   m_ObjectHideFlags: 0

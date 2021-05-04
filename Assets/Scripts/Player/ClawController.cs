@@ -13,9 +13,11 @@ public class ClawController : MonoBehaviour {
     public Transform pivotTarget;
 
     public float
-        step = 4,
+        leverSpeed = 4,
         swingValue = 0.5f,
         pivotSpeed = 20.0f;
+
+    private LeverFunction lastLeverFunction;
 
     public WeaponEntity HeldWeapon { get; private set; } = null;
     public Transform HeldTransform { get; private set; } = null;
@@ -40,6 +42,13 @@ public class ClawController : MonoBehaviour {
 
     void Update() {
         HandleHeldItems();
+
+        if (lastLeverFunction != null && ClawTrigger > 0.2f && Mathf.Abs(ClawStick.x) > 0.1f ) {
+
+            lastLeverFunction.SetLeverAngle(
+                lastLeverFunction.GetLeverAngle() +
+                (Mathf.Sign(ClawStick.x) * leverSpeed * Time.deltaTime));
+        }
     }
 
     void OnTriggerStay(Collider other) {
@@ -49,7 +58,7 @@ public class ClawController : MonoBehaviour {
                 if (other.CompareTag("Grabbable")) {
 
                     //If the other held transform is the same as the current other.transform, drop it.
-                    if(otherClawController.HeldTransform == other.transform) {
+                    if (otherClawController.HeldTransform == other.transform) {
                         otherClawController.HeldWeapon.Drop();
                         otherClawController.HeldWeapon = null;
                         otherClawController.HeldTransform = null;
@@ -66,19 +75,21 @@ public class ClawController : MonoBehaviour {
                     HeldTransform = other.transform;
                     HeldTransform.GetComponent<MeshRenderer>()?.material?.SetFloat("_OutlineHighlight", 0.0f);
                 }
+            }
 
-                if (other.CompareTag("Lever") && ClawStick.x < -0.3)
-                {
-                    Debug.Log("Lever rotate");
-                    other.transform.Rotate(step, 0, 0 * Time.deltaTime, Space.Self);
-                }
 
-                else if (other.CompareTag("Lever") && ClawStick.x > 0.3)
-                {
-                    other.transform.Rotate(-step, 0, 0 * Time.deltaTime, Space.Self);
-                }
+            if (other.CompareTag("Lever")) {
+                lastLeverFunction = other.GetComponent<LeverFunction>();
+            }
+            else {
+                lastLeverFunction = null;
             }
         }
+
+    }
+
+    void OnTriggerExit(Collider other) {
+        lastLeverFunction = null;
     }
 
     void HandleHeldItems() {
