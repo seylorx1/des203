@@ -98,6 +98,14 @@ public class PlayerWorldInteraction : MonoBehaviour {
             Destroy(other.gameObject);
         }
 
+        if (other.tag == "GateObjectiveOpened")
+        {
+
+            ObjectNotifierAnim.Play("PopUpOpenGate");
+            OpenGateTick.SetActive(true);
+            Destroy(other.gameObject);
+        }
+
         if (other.tag == "TankObjective")
         {
             SmashWindowInfoText.text = "Smash The Window";
