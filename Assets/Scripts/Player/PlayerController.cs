@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour {
     private Collider crabCollider;
     private Rigidbody crabRigidbody;
 
-    private Animation modeindicatoranim;
-
     private Quaternion
     lClawQuatStart,
     rClawQuatStart,
@@ -176,7 +174,7 @@ public class PlayerController : MonoBehaviour {
 
         crabCollider = GetComponent<Collider>();
         crabRigidbody = GetComponent<Rigidbody>();
-        modeindicatoranim = modeindicator.GetComponent<Animation>();
+        //modeindicatoranim = modeindicator.GetComponent<Animation>();
 
         layerMask_Player = LayerMask.GetMask("PlayerCharacter");
 
@@ -549,13 +547,15 @@ public class PlayerController : MonoBehaviour {
                     //Set snip camera to first person.
                     //(This will not prevent the player from switching to a different camera view should they wish to.)
                     CurrentCam = 1;
-                    modeindicatoranim.Play("SnipFade");
+                    
+                    //modeindicatoranim.Play("SnipFade");
                 }
                 else {
                     //Resets the camera to third person.
                     //(This will not prevent the player from switching to a different camera view should they wish to.)
                     CurrentCam = 0;
-                    modeindicatoranim.Play("MoveFade");
+                    
+                    //modeindicatoranim.Play("MoveFade");
                 }
             }
         }
